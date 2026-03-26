@@ -129,11 +129,8 @@ export default function Values() {
       id="valeurs"
       className="bg-noir-profond py-24 md:py-32 lg:py-40 px-6"
     >
-      <div className="max-w-5xl mx-auto">
-        {/* Consistent section heading pattern: label + title.
-            w-full ensures the text-center container spans the full column width
-            on all viewports rather than collapsing to content width. */}
-        <div className="w-full text-center mb-20 md:mb-28">
+      <div className="w-full">
+        <div className="text-center mb-20 md:mb-28">
           <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
             Ce qui nous définit
           </p>
@@ -142,7 +139,7 @@ export default function Values() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14 md:gap-10 lg:gap-8">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14 md:gap-10 lg:gap-8">
           {VALUES.map((value, i) => (
             <div
               key={value.name}
