@@ -705,7 +705,7 @@ export default function CinematicScroll() {
             left: "62%",
             top: "50%",
             transform: "translate(calc(-50% + 120px), -50%) scale(0.82)",
-            width: "clamp(160px, 22vw, 310px)",
+            width: "clamp(200px, 30vw, 420px)",
             aspectRatio: "904 / 1400",
             opacity: 0,
             zIndex: 5,
@@ -777,7 +777,7 @@ export default function CinematicScroll() {
             left: "50%",
             top: "50%",
             transform: "translate(-50%, calc(-50% + 60px)) scale(0.72)",
-            width: "clamp(200px, 32vw, 440px)",
+            width: "clamp(260px, 42vw, 580px)",
             aspectRatio: "947 / 1200",
             opacity: 0,
             zIndex: 6, // above glow
