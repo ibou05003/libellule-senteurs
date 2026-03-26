@@ -36,7 +36,7 @@ const ACTS = [
     start: 0.15,
     end: 0.30,
     background: "/images/experience/hotel.webp",
-    product: "/images/products/diffuseur-batonnets-detour.webp",
+    product: "/images/products/diffuseur-baguettes-v2.png",
     productAlt: "Diffuseur à bâtonnets Libellule Senteurs",
     productSide: "right" as const,
     label: "Le Diffuseur",
@@ -100,7 +100,7 @@ const ACTS = [
 
 // Thumbnails shown flying into the coffret during Act 6
 const THUMBNAIL_PRODUCTS = [
-  { src: "/images/products/diffuseur-batonnets-detour.webp", alt: "Diffuseur" },
+  { src: "/images/products/diffuseur-baguettes-v2.png", alt: "Diffuseur" },
   { src: "/images/products/flacon-huile-essentielle-detour.webp", alt: "Huile essentielle" },
   { src: "/images/products/parfum-noir-boite-detour.webp", alt: "Parfum noir" },
   { src: "/images/products/parfum-cristal-detour.webp", alt: "Cristal" },
@@ -687,7 +687,7 @@ export default function CinematicScroll() {
           }}
         >
           <Image
-            src="/images/products/collection-complete-v2.webp"
+            src="/images/products/collection-complete-v2.png"
             alt="Collection complète Libellule Senteurs"
             fill
             sizes="(max-width: 1024px) 80vw, 680px"
@@ -712,7 +712,7 @@ export default function CinematicScroll() {
           }}
         >
           <Image
-            src="/images/products/diffuseur-baguettes-v2.webp"
+            src="/images/products/diffuseur-baguettes-v2.png"
             alt="Diffuseur à bâtonnets Libellule Senteurs"
             fill
             sizes="(max-width: 1024px) 40vw, 310px"
