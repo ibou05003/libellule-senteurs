@@ -10,8 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Lifestyle panels showing the product in its natural habitat.
- * The variety of environments (hotel → salon → spa → boutique) moves
- * the narrative from aspirational to intimate to restorative to accessible.
+ * The sequence (hotel → salon → spa → boutique) moves the narrative from
+ * aspirational to intimate to restorative to accessible.
  */
 const EXPERIENCES = [
   {
@@ -42,22 +42,20 @@ export default function Experience() {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    // Skip the pinned horizontal scroll for users who prefer reduced motion —
-    // they get the standard vertical stack (handled by the flex-wrap CSS).
+    // Skip pinned horizontal scroll for reduced-motion users — they get the
+    // standard vertical stack defined by the flex-wrap CSS below.
     if (reduced) return;
 
     const section = sectionRef.current;
     const track = trackRef.current;
     if (!section || !track) return;
 
-    // gsap.matchMedia ensures the horizontal-scroll pin only activates on
-    // desktop. On mobile the panels stack vertically and scroll normally,
-    // which is both a11y-friendlier and avoids iOS Safari pin quirks.
+    // gsap.matchMedia confines the horizontal-scroll pin to desktop.
+    // On mobile the panels stack vertically and scroll normally, which is
+    // both more accessible and avoids iOS Safari pin quirks.
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      // scrollWidth minus the viewport width gives the exact distance we need
-      // to translate so the last panel lands at the right edge.
       const scrollWidth = track.scrollWidth - window.innerWidth;
 
       gsap.to(track, {
@@ -66,8 +64,8 @@ export default function Experience() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          // end() is a function so ScrollTrigger recalculates it on refresh
-          // (e.g., after a font-load reflow or orientation change).
+          // end() is a function so ScrollTrigger recalculates it after
+          // font-load reflows or orientation changes.
           end: () => `+=${scrollWidth}`,
           pin: true,
           scrub: 1,
@@ -85,31 +83,31 @@ export default function Experience() {
       id="experience"
       className="bg-noir-profond overflow-hidden"
     >
-      {/* On desktop: flex-nowrap so all panels line up horizontally for GSAP
-          to translate. On mobile: flex-wrap so they stack into a vertical list.
-          The heading is the first panel in the track so it stays visible while
-          the section is pinned — on desktop it occupies one full screen width
-          before the image panels begin. */}
-      <div
-        ref={trackRef}
-        className="flex md:flex-nowrap flex-wrap"
-      >
-        {/* Title panel — first screen on desktop, stacked above images on mobile */}
-        <div className="relative flex-shrink-0 w-full md:w-screen h-[60vh] md:h-[80vh] flex items-center justify-center">
-          <div className="text-center px-8">
-            <h2 className="font-heading text-3xl md:text-5xl text-or-luxe mb-4">
-              L&apos;Expérience
-            </h2>
-            <p className="font-body text-blanc-casse/50 text-sm tracking-widest uppercase">
+      {/*
+       * Desktop: flex-nowrap so all panels line up horizontally for GSAP.
+       * Mobile: flex-wrap so they stack into a vertical list.
+       * The title panel is the first element in the track — on desktop it
+       * occupies one full viewport width before the image panels begin.
+       */}
+      <div ref={trackRef} className="flex md:flex-nowrap flex-wrap">
+
+        {/* Title panel */}
+        <div className="relative flex-shrink-0 w-full md:w-screen h-[60vh] md:h-[85vh] flex items-center justify-center">
+          <div className="text-center px-8 max-w-4xl mx-auto">
+            <p className="font-body text-[10px] text-or-luxe/40 tracking-[0.3em] uppercase mb-6">
               Nos parfums dans leur élément
             </p>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-or-luxe">
+              L&apos;Expérience
+            </h2>
           </div>
         </div>
 
+        {/* Image panels */}
         {EXPERIENCES.map((exp) => (
           <div
             key={exp.title}
-            className="relative flex-shrink-0 w-full md:w-screen h-[60vh] md:h-[80vh]"
+            className="relative flex-shrink-0 w-full md:w-screen h-[60vh] md:h-[85vh]"
           >
             <Image
               src={exp.image}
@@ -118,14 +116,14 @@ export default function Experience() {
               className="object-cover"
             />
             {/* Bottom-to-top gradient ensures copy legibility against any
-                image regardless of its dominant tone. */}
+                image regardless of its dominant tone */}
             <div className="absolute inset-0 bg-gradient-to-t from-noir-profond/80 via-noir-profond/20 to-transparent" />
 
-            <div className="absolute bottom-12 left-8 md:left-16 z-10 max-w-md">
-              <h3 className="font-heading text-2xl md:text-4xl text-blanc-casse mb-2">
+            <div className="absolute bottom-12 left-8 md:left-16 z-10 max-w-sm">
+              <h3 className="font-heading text-2xl md:text-3xl text-blanc-casse mb-3">
                 {exp.title}
               </h3>
-              <p className="font-body text-blanc-casse/70 text-sm md:text-base">
+              <p className="font-body text-sm text-blanc-casse/60 leading-relaxed">
                 {exp.description}
               </p>
             </div>

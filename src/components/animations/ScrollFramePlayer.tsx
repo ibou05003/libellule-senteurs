@@ -17,35 +17,28 @@ type ScrollFramePlayerProps = {
  *
  * Architecture
  * ───────────────────────────────────────────────────────────────────────────
- * The component is designed to eventually drive a full image-sequence morph
- * (90 pre-rendered PNG frames exported by Remotion stored at /public/frames/).
- * While those frames are not yet available it falls back to a CSS cross-fade
- * between the unbranded candle and the finished Libellule Senteurs product,
- * giving stakeholders a representative preview of the final effect.
- *
- * When the actual frames land, swap the cross-fade block for a canvas element
- * that draws `images[currentFrame]` — the GSAP ScrollTrigger wiring below is
- * already correct and does not need to change.
+ * Designed to eventually drive a full image-sequence morph (90 pre-rendered
+ * PNG frames stored at /public/frames/). While those frames are not available
+ * it falls back to a CSS cross-fade between the unbranded candle and the
+ * finished collection, giving a representative preview of the final effect.
  *
  * Scroll behaviour
  * ───────────────────────────────────────────────────────────────────────────
- * The outer container is 300 vh tall. The inner viewport-height div is
- * `position: sticky` so it stays on screen while the user scrolls through the
- * full 300 vh of scroll distance. GSAP maps that scroll distance to a
- * `progressRef` value of 0 → 1, which drives:
- *   - Background color: off-white (#F8F8F8) → true black (#000)
- *   - Image cross-fade: unbranded → branded
+ * The outer container is 180vh tall. The inner viewport-height div is
+ * `position: sticky` so it stays on screen while the outer scrolls.
+ * GSAP maps that distance to a `progressRef` value of 0 → 1, which drives:
+ *   - Background: off-white (#F8F8F8) → true black (#000)
+ *   - Image cross-fade: unbranded → branded collection
  *   - Gold radial glow: fades in after 40% progress
- *   - Phase copy: teaser text fades out; brand reveal fades in
+ *   - Phase copy: teaser fades out; brand reveal fades in
  *
  * Reduced motion
  * ───────────────────────────────────────────────────────────────────────────
- * When `prefers-reduced-motion` is set the component renders only the final
- * branded image on a dark background — no scroll animation, no sticky section.
+ * Renders only the final branded image on a dark background — no animation.
  */
 export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  // progressRef stores the raw value mutated by GSAP (avoids closure stale-state)
+  // Mutated directly by GSAP to avoid stale closure issues with setState
   const progressRef = useRef({ value: 0 });
   const [progress, setProgress] = useState(0);
   const reduced = useReducedMotion();
@@ -55,9 +48,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
     const container = containerRef.current;
     if (!container) return;
 
-    // Animate a plain object property (not a DOM node) so GSAP can use its
-    // internal ticker rather than a JS requestAnimationFrame loop for scrubbing.
-    // `scrub: 0.5` adds a subtle lag that makes the transition feel more physical.
+    // `scrub: 0.5` adds a subtle lag that makes the transition feel physical
     const tween = gsap.to(progressRef.current, {
       value: 1,
       ease: "none",
@@ -68,43 +59,32 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
         scrub: 0.5,
       },
       onUpdate: () => {
-        // Propagate the mutated value into React state so the JSX re-renders
         setProgress(progressRef.current.value);
       },
     });
 
     return () => {
       tween.kill();
-      // Kill only the ScrollTrigger(s) attached to this container to avoid
-      // interfering with triggers registered by other sections on the page
       ScrollTrigger.getAll().forEach((t) => {
         if (t.trigger === container) t.kill();
       });
     };
   }, [reduced]);
 
-  // ─── Derived visual values ────────────────────────────────────────────────
-
-  // Background interpolates from blanc-cassé (#F8F8F8 = 248,248,248) to noir (#000)
+  // Background interpolates from blanc-cassé (#F8F8F8 = 248,248,248) → noir (#000)
   const channel = Math.round(248 - 248 * progress);
   const bgColor = `rgb(${channel}, ${channel}, ${channel})`;
 
-  // Gold glow only becomes visible after 40% scroll progress to avoid clashing
-  // with the light background in the first half of the transition
+  // Gold glow only appears after 40% to avoid clashing with the light background
   const glowOpacity = progress > 0.4 ? (progress - 0.4) / 0.6 : 0;
 
-  // ─── Reduced-motion fallback ──────────────────────────────────────────────
+  // Shared container dimensions for both morph layers — ensures a clean overlap
+  const imageContainer = "relative mx-auto w-[80vw] max-w-[600px] aspect-[3/2]";
 
   if (reduced) {
     return (
-      <div
-        className={`relative min-h-screen flex items-center justify-center bg-noir-profond ${className ?? ""}`}
-      >
-        {/*
-         * Reduced-motion fallback: show the final branded state statically.
-         * Container matches the 16:9 ratio of the landscape packagings image.
-         */}
-        <div className="relative w-[90vw] max-w-[700px] aspect-[16/9]">
+      <div className={`relative min-h-screen flex items-center justify-center bg-noir-profond ${className ?? ""}`}>
+        <div className={imageContainer}>
           <Image
             src="/images/mockups/collection-complete-packagings.webp"
             alt="Collection complète Libellule Senteurs"
@@ -116,52 +96,38 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
     );
   }
 
-  // ─── Full animated version ────────────────────────────────────────────────
-
   return (
-    <div ref={containerRef} className={`relative ${className ?? ""}`} style={{ height: "200vh" }}>
+    <div ref={containerRef} className={`relative ${className ?? ""}`} style={{ height: "180vh" }}>
       {/*
-       * Sticky viewport: stays fixed on screen while the outer container scrolls.
-       * All visual layers are absolutely positioned inside this box so they
-       * overlap rather than stack vertically.
+       * Sticky viewport: locks to screen while outer scrolls through 180vh.
+       * All layers are absolute so they overlap, never stack vertically.
        */}
       <div
         className="sticky top-0 h-screen flex items-center justify-center overflow-hidden transition-none"
         style={{ backgroundColor: bgColor }}
       >
-        {/* ── Layer 1: Unbranded candle (fades out as progress increases) ── */}
+        {/* Layer 1: Unbranded candle — fades out as progress increases */}
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{ opacity: 1 - progress }}
         >
-          {/*
-           * Both morph layers share the same 16:9 container dimensions so the
-           * cross-fade is a true overlap with no layout shift mid-transition.
-           * `bougie-sans-marque` is landscape (2000×1090) — a good fit for 16:9.
-           */}
-          <div className="relative w-[90vw] max-w-[700px] aspect-[16/9]">
+          <div className={imageContainer}>
             <Image
               src="/images/products/bougie-sans-marque.webp"
               alt=""
               fill
               className="object-contain"
-              // Decorative — the branded image below carries the accessible name
               aria-hidden="true"
             />
           </div>
         </div>
 
-        {/* ── Layer 2: Full branded collection (fades in) ── */}
+        {/* Layer 2: Branded collection reveal — fades in as progress increases */}
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{ opacity: progress }}
         >
-          {/*
-           * `collection-complete-packagings` shows all 4 products with the
-           * Libellule Senteurs branding — the ideal "reveal" end state.
-           * Same container dimensions as Layer 1 for a clean cross-fade.
-           */}
-          <div className="relative w-[90vw] max-w-[700px] aspect-[16/9]">
+          <div className={imageContainer}>
             <Image
               src="/images/mockups/collection-complete-packagings.webp"
               alt="Collection complète Libellule Senteurs"
@@ -171,7 +137,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           </div>
         </div>
 
-        {/* ── Layer 3: Radial gold glow — amplifies luxury feel in the second half ── */}
+        {/* Layer 3: Gold radial glow — amplifies luxury in the second half */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -179,14 +145,12 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           }}
         />
 
-        {/* ── Layer 4: Phase copy ── */}
+        {/* Layer 4: Phase copy */}
         <div className="absolute inset-0 flex items-end justify-center pb-24 pointer-events-none">
-          {/* Teaser line — visible in the first 30% of scroll, then fades out.
-              blanc-cassé base with a dark text-shadow makes it legible against
-              both the light (#F8F8F8) start state and the dark end state. */}
+          {/* Teaser — visible in the first 30% of scroll, then fades out */}
           {progress < 0.3 && (
             <p
-              className="font-heading text-xl md:text-3xl text-blanc-casse/70 text-center px-8"
+              className="max-w-lg mx-auto text-center font-heading text-xl md:text-3xl text-blanc-casse/70 px-8"
               style={{
                 opacity: 1 - progress / 0.3,
                 textShadow: "0 0 20px rgba(0,0,0,0.5)",
@@ -199,7 +163,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           {/* Brand reveal — visible after 70% scroll */}
           {progress > 0.7 && (
             <div
-              className="text-center space-y-3"
+              className="max-w-lg mx-auto text-center space-y-3"
               style={{ opacity: (progress - 0.7) / 0.3 }}
             >
               <p className="font-body text-xs md:text-sm text-blanc-casse/50 tracking-[0.3em] uppercase">
@@ -208,7 +172,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
               <p className="font-heading text-3xl md:text-5xl text-or-luxe">
                 Une Âme
               </p>
-              <p className="font-body text-sm md:text-base text-blanc-casse/50 tracking-widest mt-2">
+              <p className="font-body text-sm md:text-base text-blanc-casse/50 tracking-widest">
                 — Parfums d&apos;intérieur Haut de Gamme —
               </p>
             </div>

@@ -2,19 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-/**
- * Top navigation bar with responsive mobile menu.
- *
- * Desktop (md+): horizontal link row + CTA button.
- * Mobile (<md):  hamburger button that opens a fullscreen overlay containing
- *                the same links stacked vertically. The overlay uses a CSS
- *                opacity/pointer-events transition rather than Framer Motion to
- *                keep the bundle minimal — the hamburger icon itself is pure SVG.
- *
- * Gold colour (#C99700) is used for the hamburger lines and active overlay links
- * to stay consistent with the brand token `or-luxe`.
- */
-
 const NAV_LINKS = [
   { href: "#histoire", label: "Notre Histoire" },
   { href: "#collection", label: "Collection" },
@@ -45,121 +32,100 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 lg:px-16 py-5 md:py-6 transition-all duration-500 ${
-          scrolled ? "bg-noir-profond/80 backdrop-blur-md py-3 md:py-4" : ""
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? "bg-noir-profond/90 backdrop-blur-md" : ""
         }`}
       >
-        <a href="#" className="flex items-center gap-3">
-          {/* Dragonfly icon */}
-          <svg
-            viewBox="0 0 40 40"
-            className="w-8 h-8"
-            fill="none"
-            stroke="#C99700"
-            strokeWidth="1.2"
-          >
-            <circle cx="20" cy="20" r="16" />
-            <path d="M20 20 Q12 12 16 6 Q20 10 20 20" fill="#C99700" opacity="0.8" />
-            <path d="M20 20 Q28 12 24 6 Q20 10 20 20" fill="#C99700" opacity="0.6" />
-            <path d="M20 20 L20 32" strokeLinecap="round" />
-          </svg>
-          <div className="flex flex-col">
-            <span className="font-heading text-xl text-or-luxe leading-tight">
-              Libellule Senteurs
-            </span>
-            <span className="hidden sm:block font-body text-[10px] text-blanc-casse/40 tracking-[0.2em] uppercase leading-tight">
-              Parfums d&apos;intérieur Haut de Gamme
-            </span>
-          </div>
-        </a>
-
-        {/* Desktop navigation links */}
-        <div className="hidden md:flex items-center gap-8 font-body text-sm tracking-widest uppercase text-blanc-casse/80">
-          {NAV_LINKS.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              className="hover:text-or-luxe transition-colors duration-300"
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16 py-5 md:py-6">
+          {/* Logo mark + wordmark */}
+          <a href="#" className="flex items-center gap-3">
+            <svg
+              viewBox="0 0 36 36"
+              className="w-7 h-7 md:w-8 md:h-8 flex-shrink-0"
+              fill="none"
+              stroke="#C99700"
+              strokeWidth="1"
             >
-              {label}
-            </a>
-          ))}
+              <circle cx="18" cy="18" r="14" opacity="0.6" />
+              <path d="M18 18 Q10 10 14 4 Q18 10 18 18" fill="#C99700" opacity="0.7" />
+              <path d="M18 18 Q26 10 22 4 Q18 10 18 18" fill="#C99700" opacity="0.5" />
+              <path d="M18 18 L18 28" strokeLinecap="round" opacity="0.6" />
+            </svg>
+            <div>
+              <span className="font-heading text-lg md:text-xl text-or-luxe leading-none block">
+                Libellule Senteurs
+              </span>
+              <span className="font-body text-[9px] md:text-[10px] text-blanc-casse/30 tracking-[0.15em] uppercase leading-none mt-1 hidden sm:block">
+                Parfums d&apos;intérieur Haut de Gamme
+              </span>
+            </div>
+          </a>
+
+          {/* Desktop navigation links */}
+          <div className="hidden md:flex items-center gap-10 font-body text-[11px] tracking-[0.2em] uppercase text-blanc-casse/60">
+            {NAV_LINKS.map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                className="hover:text-or-luxe transition-colors duration-300"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop CTA */}
+          <a
+            href="#contact"
+            className="hidden md:block px-5 py-2 border border-or-luxe/30 text-or-luxe text-[10px] tracking-[0.2em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500"
+          >
+            Nous contacter
+          </a>
+
+          {/* Mobile hamburger — three gold lines that animate to × when open */}
+          <button
+            className="md:hidden flex flex-col justify-center items-center gap-[5px] w-10 h-10"
+            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            <span
+              className="block w-5 h-px bg-or-luxe transition-all duration-300 origin-center"
+              style={{ transform: menuOpen ? "translateY(6px) rotate(45deg)" : "none" }}
+            />
+            <span
+              className="block w-5 h-px bg-or-luxe transition-all duration-300"
+              style={{ opacity: menuOpen ? 0 : 1 }}
+            />
+            <span
+              className="block w-5 h-px bg-or-luxe transition-all duration-300 origin-center"
+              style={{ transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "none" }}
+            />
+          </button>
         </div>
-
-        {/* Desktop CTA */}
-        <a
-          href="#contact"
-          className="hidden md:block px-6 py-2 border border-or-luxe/40 text-or-luxe text-xs tracking-widest uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-300"
-        >
-          Nous contacter
-        </a>
-
-        {/* Mobile hamburger button — visible only below md breakpoint */}
-        <button
-          className="md:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-or-luxe"
-          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          {/* Three horizontal lines rendered in brand gold.
-              The top and bottom lines rotate ±45° when open to form an × — a
-              standard pattern users recognise without needing a label. */}
-          <span
-            className="block w-6 h-px transition-all duration-300 origin-center"
-            style={{
-              backgroundColor: "#C99700",
-              transform: menuOpen ? "translateY(6px) rotate(45deg)" : "none",
-            }}
-          />
-          <span
-            className="block w-6 h-px transition-all duration-300"
-            style={{
-              backgroundColor: "#C99700",
-              opacity: menuOpen ? 0 : 1,
-            }}
-          />
-          <span
-            className="block w-6 h-px transition-all duration-300 origin-center"
-            style={{
-              backgroundColor: "#C99700",
-              transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "none",
-            }}
-          />
-        </button>
       </nav>
 
-      {/* Mobile fullscreen overlay
-          Uses pointer-events to block interactions while closed so keyboard
-          focus cannot reach hidden links. The opacity transition gives a simple,
-          accessible fade without the weight of an animation library. */}
+      {/* Mobile fullscreen overlay */}
       <div
-        id="mobile-menu"
         role="dialog"
         aria-modal="true"
-        aria-label="Menu de navigation"
-        className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-noir-profond transition-opacity duration-300 md:hidden"
-        style={{
-          opacity: menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "auto" : "none",
-        }}
+        className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-noir-profond transition-opacity duration-300 md:hidden"
+        style={{ opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "auto" : "none" }}
       >
         {NAV_LINKS.map(({ href, label }) => (
           <a
             key={href}
             href={href}
             onClick={closeMenu}
-            className="font-heading text-2xl text-blanc-casse/80 hover:text-or-luxe tracking-widest uppercase transition-colors duration-300"
+            className="font-heading text-2xl text-blanc-casse/70 hover:text-or-luxe tracking-[0.15em] uppercase transition-colors"
           >
             {label}
           </a>
         ))}
-
-        {/* CTA also present in mobile overlay for discoverability */}
         <a
           href="#contact"
           onClick={closeMenu}
-          className="mt-4 px-8 py-3 border border-or-luxe/40 text-or-luxe text-sm tracking-widest uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-300"
+          className="mt-6 px-8 py-3 border border-or-luxe/30 text-or-luxe text-xs tracking-[0.2em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500"
         >
           Nous contacter
         </a>

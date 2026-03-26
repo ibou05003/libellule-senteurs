@@ -18,29 +18,24 @@ export default function Storytelling() {
   useEffect(() => {
     if (reduced || !sectionRef.current) return;
 
-    const words = wordsRef.current;
-
-    // Animate each word's color from dark gray to blanc-cassé as the user
-    // scrolls through the section. The scrub ties playback directly to scroll
-    // position, giving a smooth "ink appearing" effect.
+    // Each word tweens from near-invisible dark gray to blanc-cassé as the
+    // user scrolls through the section — a progressive "ink appearing" effect.
     gsap.fromTo(
-      words,
-      { color: "#333333" },
+      wordsRef.current,
+      { color: "#222222" },
       {
         color: "#F8F8F8",
         stagger: 0.05,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 60%",
-          end: "bottom 40%",
+          start: "top 40%",
+          end: "bottom 60%",
           scrub: 1,
         },
       }
     );
 
     return () => {
-      // Only kill triggers that belong to this section to avoid disturbing
-      // other components' ScrollTrigger instances on unmount.
       ScrollTrigger.getAll().forEach((t) => {
         if (t.trigger === sectionRef.current) t.kill();
       });
@@ -53,52 +48,47 @@ export default function Storytelling() {
     <section
       ref={sectionRef}
       id="histoire"
-      className="relative min-h-[200vh] bg-noir-profond py-section px-8"
+      className="relative bg-noir-profond"
+      style={{ minHeight: "200vh" }}
     >
-      {/* Dragonfly filigree — sticky so it stays centred as the user scrolls.
-          Purely decorative, hidden from assistive technology. */}
-      <svg
-        viewBox="0 0 200 200"
-        className="sticky top-1/2 -translate-y-1/2 mx-auto w-[500px] h-[500px] opacity-[0.03] pointer-events-none"
-        fill="none"
-        stroke="#C99700"
-        strokeWidth="0.5"
-        aria-hidden="true"
-      >
-        {/* Body */}
-        <circle cx="100" cy="100" r="80" />
-        {/* Left wing */}
-        <path d="M100 100 Q60 60 80 30 Q100 50 100 100" />
-        {/* Right wing */}
-        <path d="M100 100 Q140 60 120 30 Q100 50 100 100" />
-        {/* Tail */}
-        <path d="M100 100 L100 150" />
-      </svg>
+      {/*
+       * Decorative filigree: absolutely positioned so it scrolls naturally with
+       * the section rather than interfering with the sticky text layer.
+       * Kept at very low opacity so it reads as texture, not content.
+       */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <svg
+          viewBox="0 0 200 200"
+          className="w-[400px] h-[400px] md:w-[500px] md:h-[500px] opacity-[0.025]"
+          fill="none"
+          stroke="#C99700"
+          strokeWidth="0.5"
+          aria-hidden="true"
+        >
+          <circle cx="100" cy="100" r="80" />
+          <path d="M100 100 Q60 60 80 30 Q100 50 100 100" />
+          <path d="M100 100 Q140 60 120 30 Q100 50 100 100" />
+          <path d="M100 100 L100 150" />
+        </svg>
+      </div>
 
-      {/* Brand story — sticky so the text block remains in the viewport centre
-          for the entire scroll distance of the 200 vh section. The negative
-          margin pulls the text up to overlap with the already-rendered filigree
-          rather than pushing it below it. Each word is an independent span so
-          GSAP can tween individual word colours as the user scrolls. */}
-      <div className="sticky top-1/2 -translate-y-1/2 z-10 max-w-3xl mx-auto -mt-[500px]">
-        {/* Section label — gold, always visible, anchors the reader before the
-            scroll-reveal text begins to animate in. Kept deliberately small so
-            it doesn't compete with the headline-scale story copy below. */}
-        <p className="font-body text-xs text-or-luxe/60 tracking-[0.3em] uppercase text-center mb-8">
+      {/*
+       * Sticky text block: stays centered in the viewport for the full scroll
+       * distance of the section, giving GSAP time to animate all the words in.
+       */}
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-6">
+        <p className="font-body text-[10px] text-or-luxe/40 tracking-[0.3em] uppercase mb-8 md:mb-12">
           Notre Histoire
         </p>
-        <p className="font-heading text-2xl md:text-4xl lg:text-5xl leading-relaxed md:leading-relaxed lg:leading-relaxed text-center">
+        <p className="max-w-2xl md:max-w-3xl font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-[1.6] md:leading-[1.6] lg:leading-[1.5] text-center">
           {words.map((word, i) => (
             <span
               key={i}
-              ref={(el) => {
-                if (el) wordsRef.current[i] = el;
-              }}
+              ref={(el) => { if (el) wordsRef.current[i] = el; }}
               className="inline-block mr-[0.3em]"
               // Start dark so GSAP has a visible state to tween from.
-              // When the user prefers reduced motion we show full brightness
-              // immediately without any animation.
-              style={{ color: reduced ? "#F8F8F8" : "#333333" }}
+              // Reduced-motion skips the animation and shows full brightness.
+              style={{ color: reduced ? "#F8F8F8" : "#222222" }}
             >
               {word}
             </span>

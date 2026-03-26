@@ -4,20 +4,12 @@ import { useRef } from "react";
 import ProductCard from "@/components/ui/ProductCard";
 
 /**
- * Product catalogue data.
- * Descriptions are concise sensory cues — they help the user imagine handling
- * the object without requiring them to read long copy.
- */
-/**
  * Product catalogue entries.
  *
  * Image selection rationale:
- * - `bougie-sans-marque` replaces the technical-drawing candle image that had
- *   visible "7.1cm × 8cm" dimension annotations — not suitable for display.
- * - `parfum-noir-boite` replaces the dramatic fire/embers shot which felt
- *   tonally inconsistent with the rest of the collection grid.
- * - `coffret-cadeau-bordeaux` adds a fifth product slot using the branded
- *   gift-box mockup — rounds out the lineup with a gifting option.
+ * - `bougie-sans-marque` replaces a technical-drawing candle with dimension
+ *   annotations that are not suitable for display.
+ * - `coffret-cadeau-bordeaux` rounds out the lineup with a gifting option.
  */
 const PRODUCTS = [
   {
@@ -48,46 +40,43 @@ const PRODUCTS = [
 ];
 
 export default function Collection() {
-  // Native horizontal overflow scroll — no JS library needed.
-  // CSS scroll-snap gives the tactile "card click" feel on both touch and
-  // desktop, while the cursor change (grab → grabbing) signals interactivity.
+  // Native horizontal overflow scroll with CSS scroll-snap.
+  // No JS library needed — the cursor change (grab → grabbing) signals
+  // interactivity on desktop; touch devices get native momentum scrolling.
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="collection" className="py-section bg-noir-profond">
-      <div className="px-8 mb-16">
-        <h2 className="font-heading text-3xl md:text-5xl text-or-luxe text-center">
+    <section id="collection" className="bg-noir-profond py-24 md:py-32 lg:py-40">
+      {/* Heading block — consistent max-width container */}
+      <div className="max-w-4xl mx-auto px-6 text-center mb-16 md:mb-20">
+        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-or-luxe">
           Notre Collection
         </h2>
-        <p className="font-body text-blanc-casse/50 text-center mt-4 text-sm tracking-widest uppercase">
+        <p className="font-body text-blanc-casse/40 mt-4 text-[10px] tracking-[0.3em] uppercase">
           Glissez pour découvrir
         </p>
       </div>
 
+      {/* Horizontal scroll track */}
       <div
         ref={scrollRef}
-        className="flex gap-8 overflow-x-auto px-8 pb-8 snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing"
-        style={{
-          // Belt-and-suspenders: Tailwind utility class handles Firefox + modern
-          // browsers; the inline style is for legacy IE (msOverflowStyle) and
-          // direct style attribute for scrollbarWidth on non-Tailwind browsers.
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
+        className="flex gap-6 md:gap-8 overflow-x-auto px-6 md:px-8 pb-8 snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {/* Leading spacer — on large screens this centers the first card in the
-            viewport without requiring flexbox justify-center (which would break
-            the overflow scroll behaviour). */}
+        {/*
+         * Leading spacer: on large screens this optically centers the first
+         * card without using justify-center, which would break the overflow
+         * scroll behaviour.
+         */}
         <div className="flex-shrink-0 w-[calc((100vw-320px)/2)] hidden lg:block" />
 
         {PRODUCTS.map((product) => (
-          <div key={product.name} className="snap-center">
+          <div key={product.name} className="snap-center flex-shrink-0">
             <ProductCard {...product} />
           </div>
         ))}
 
-        {/* Trailing spacer — mirrors the leading spacer so the last card
-            can also be scrolled to the visual center. */}
+        {/* Trailing spacer mirrors the leading one so the last card centers */}
         <div className="flex-shrink-0 w-[calc((100vw-320px)/2)] hidden lg:block" />
       </div>
     </section>

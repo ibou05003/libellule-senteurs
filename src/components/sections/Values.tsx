@@ -7,9 +7,8 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Each value carries its own inline SVG icon so no external asset requests
-// are needed. The icons use the brand gold (#C99700) stroke with no fill,
-// keeping them lightweight and consistent with the site's aesthetic.
+// Each value carries its own inline SVG icon — no external asset requests.
+// Stroked in brand gold with no fill, lightweight and visually consistent.
 const VALUES = [
   {
     name: "Élégance",
@@ -21,7 +20,7 @@ const VALUES = [
         fill="none"
         stroke="#C99700"
         strokeWidth="1.5"
-        className="w-12 h-12"
+        className="w-10 h-10"
         aria-hidden="true"
       >
         <path d="M24 4 L28 18 L24 44" strokeLinecap="round" />
@@ -40,7 +39,7 @@ const VALUES = [
         fill="none"
         stroke="#C99700"
         strokeWidth="1.5"
-        className="w-12 h-12"
+        className="w-10 h-10"
         aria-hidden="true"
       >
         <circle cx="24" cy="24" r="18" />
@@ -58,7 +57,7 @@ const VALUES = [
         fill="none"
         stroke="#C99700"
         strokeWidth="1.5"
-        className="w-12 h-12"
+        className="w-10 h-10"
         aria-hidden="true"
       >
         <path d="M24 44 L24 20" strokeLinecap="round" />
@@ -78,7 +77,7 @@ const VALUES = [
         fill="none"
         stroke="#C99700"
         strokeWidth="1.5"
-        className="w-12 h-12"
+        className="w-10 h-10"
         aria-hidden="true"
       >
         <path d="M4 30 Q12 22 24 26 Q36 30 44 22" />
@@ -97,10 +96,9 @@ export default function Values() {
   useEffect(() => {
     if (reduced || !sectionRef.current) return;
 
-    // Cards start invisible (set via inline style below) and slide up into
-    // view with a stagger once the section enters the viewport. toggleActions
-    // "play none none none" means the animation only fires once — there is no
-    // reverse on scroll-up, which suits a luxury reveal aesthetic.
+    // Cards reveal once with a stagger as the section enters the viewport.
+    // `toggleActions: "play none none none"` means no reverse on scroll-up —
+    // suits a luxury one-shot reveal aesthetic.
     gsap.fromTo(
       cardsRef.current,
       { opacity: 0, y: 60 },
@@ -129,31 +127,28 @@ export default function Values() {
     <section
       ref={sectionRef}
       id="valeurs"
-      className="min-h-screen flex items-center bg-noir-profond py-section px-8"
+      className="bg-noir-profond py-24 md:py-32 lg:py-40"
     >
-      <div className="max-w-5xl mx-auto w-full">
-        <h2 className="font-heading text-3xl md:text-5xl text-or-luxe text-center mb-20">
+      <div className="max-w-5xl mx-auto px-6">
+        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-or-luxe text-center mb-20 md:mb-24">
           Nos Valeurs
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-12">
           {VALUES.map((value, i) => (
             <div
               key={value.name}
-              ref={(el) => {
-                if (el) cardsRef.current[i] = el;
-              }}
-              className="flex flex-col items-center text-center gap-4"
-              // Cards are hidden by default so GSAP can reveal them. When the
-              // user prefers reduced motion we skip the animation entirely and
-              // display the cards fully visible from the start.
+              ref={(el) => { if (el) cardsRef.current[i] = el; }}
+              className="flex flex-col items-center text-center gap-6"
+              // Hidden initially so GSAP can animate in. Reduced motion skips
+              // the animation and shows cards fully visible from the start.
               style={{ opacity: reduced ? 1 : 0 }}
             >
               {value.icon}
-              <h3 className="font-heading text-xl text-blanc-casse mt-2">
+              <h3 className="font-heading text-xl text-blanc-casse">
                 {value.name}
               </h3>
-              <p className="font-body text-sm text-blanc-casse/60 leading-relaxed">
+              <p className="font-body text-sm text-blanc-casse/50 leading-relaxed">
                 {value.description}
               </p>
             </div>
