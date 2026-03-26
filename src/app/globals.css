@@ -68,3 +68,10 @@ body {
   from { width: 0; }
   to { width: 100%; }
 }
+
+/* Hide scrollbar for carousel — keeps the UI clean while preserving
+   scroll behaviour. Both properties needed for cross-browser coverage:
+   -webkit-scrollbar for Chrome/Safari, scrollbarWidth (set inline) for Firefox. */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
