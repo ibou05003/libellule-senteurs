@@ -8,6 +8,8 @@ import CustomCursor from "@/components/layout/CustomCursor";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import ProductMorph from "@/components/sections/ProductMorph";
+import Storytelling from "@/components/sections/Storytelling";
+import Values from "@/components/sections/Values";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -30,13 +32,9 @@ export default function Home() {
           <ProductMorph />
         </section>
 
-        <section id="histoire" className="min-h-screen bg-noir-profond flex items-center justify-center">
-          <p className="text-or-luxe font-heading text-3xl">Notre Histoire — à venir</p>
-        </section>
+        <Storytelling />
 
-        <section id="valeurs" className="min-h-screen bg-noir-profond flex items-center justify-center">
-          <p className="text-or-luxe font-heading text-3xl">Valeurs — à venir</p>
-        </section>
+        <Values />
 
         <section id="collection" className="min-h-screen bg-noir-profond flex items-center justify-center">
           <p className="text-or-luxe font-heading text-3xl">Collection — à venir</p>
