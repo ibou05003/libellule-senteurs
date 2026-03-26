@@ -94,10 +94,10 @@ export default function Experience() {
         {/* Title panel */}
         <div className="relative flex-shrink-0 w-full md:w-screen h-[60vh] md:h-[85vh] flex items-center justify-center">
           <div className="text-center px-8 max-w-4xl mx-auto">
-            <p className="font-body text-[10px] text-or-luxe/40 tracking-[0.3em] uppercase mb-6">
+            <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-5">
               Nos parfums dans leur élément
             </p>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-or-luxe">
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse">
               L&apos;Expérience
             </h2>
           </div>
@@ -117,13 +117,16 @@ export default function Experience() {
             />
             {/* Bottom-to-top gradient ensures copy legibility against any
                 image regardless of its dominant tone */}
-            <div className="absolute inset-0 bg-gradient-to-t from-noir-profond/80 via-noir-profond/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-noir-profond/85 via-noir-profond/25 to-transparent" />
 
-            <div className="absolute bottom-12 left-8 md:left-16 z-10 max-w-sm">
-              <h3 className="font-heading text-2xl md:text-3xl text-blanc-casse mb-3">
+            <div className="absolute bottom-14 left-8 md:left-16 z-10 max-w-xs md:max-w-sm">
+              <p className="font-body text-[8px] text-or-luxe/60 tracking-[0.3em] uppercase mb-3">
+                Expérience
+              </p>
+              <h3 className="font-heading text-2xl md:text-3xl text-blanc-casse mb-3 leading-tight">
                 {exp.title}
               </h3>
-              <p className="font-body text-sm text-blanc-casse/60 leading-relaxed">
+              <p className="font-body text-sm text-blanc-casse/65 leading-[1.75]">
                 {exp.description}
               </p>
             </div>

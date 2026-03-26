@@ -76,19 +76,20 @@ export default function Storytelling() {
        * Sticky text block: stays centered in the viewport for the full scroll
        * distance of the section, giving GSAP time to animate all the words in.
        */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-6">
-        <p className="font-body text-[10px] text-or-luxe/40 tracking-[0.3em] uppercase mb-8 md:mb-12">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-8">
+        {/* Section label — consistent pattern with other sections */}
+        <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-10 md:mb-14">
           Notre Histoire
         </p>
-        <p className="max-w-2xl md:max-w-3xl font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-[1.6] md:leading-[1.6] lg:leading-[1.5] text-center">
+        <p className="max-w-2xl md:max-w-3xl lg:max-w-4xl font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.5] md:leading-[1.45] text-center">
           {words.map((word, i) => (
             <span
               key={i}
               ref={(el) => { if (el) wordsRef.current[i] = el; }}
-              className="inline-block mr-[0.3em]"
+              className="inline-block mr-[0.28em]"
               // Start dark so GSAP has a visible state to tween from.
               // Reduced-motion skips the animation and shows full brightness.
-              style={{ color: reduced ? "#F8F8F8" : "#222222" }}
+              style={{ color: reduced ? "#F8F8F8" : "#1a1a1a" }}
             >
               {word}
             </span>

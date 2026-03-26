@@ -14,7 +14,7 @@ export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -32,44 +32,63 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-noir-profond/90 backdrop-blur-md [&>div]:min-h-[60px] [&>div]:md:min-h-[68px] [&>div]:lg:min-h-[72px]" : ""
+        aria-label="Navigation principale"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+          scrolled
+            ? "bg-noir-profond/95 backdrop-blur-sm border-b border-blanc-casse/[0.06]"
+            : ""
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16 min-h-[72px] md:min-h-[88px] lg:min-h-[100px] py-4">
+        <div
+          className={`max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16 transition-all duration-700 ${
+            scrolled
+              ? "min-h-[64px] md:min-h-[68px]"
+              : "min-h-[80px] md:min-h-[96px] lg:min-h-[108px]"
+          }`}
+        >
           {/* Logo mark + wordmark */}
-          <a href="#" className="flex items-center gap-4 md:gap-5">
+          <a
+            href="#"
+            className="flex items-center gap-4 group"
+            aria-label="Libellule Senteurs — accueil"
+          >
             <svg
               viewBox="0 0 36 36"
-              className="w-8 h-8 md:w-9 md:h-9 flex-shrink-0"
+              className={`flex-shrink-0 transition-all duration-700 ${scrolled ? "w-7 h-7" : "w-8 h-8 md:w-9 md:h-9"}`}
               fill="none"
               stroke="#C99700"
-              strokeWidth="1"
+              strokeWidth="1.2"
+              aria-hidden="true"
             >
-              <circle cx="18" cy="18" r="14" opacity="0.6" />
-              <path d="M18 18 Q10 10 14 4 Q18 10 18 18" fill="#C99700" opacity="0.7" />
-              <path d="M18 18 Q26 10 22 4 Q18 10 18 18" fill="#C99700" opacity="0.5" />
-              <path d="M18 18 L18 28" strokeLinecap="round" opacity="0.6" />
+              <circle cx="18" cy="18" r="14" opacity="0.5" />
+              <path d="M18 18 Q10 10 14 4 Q18 10 18 18" fill="#C99700" opacity="0.65" />
+              <path d="M18 18 Q26 10 22 4 Q18 10 18 18" fill="#C99700" opacity="0.45" />
+              <path d="M18 18 L18 28" strokeLinecap="round" opacity="0.5" />
             </svg>
-            <div className="flex flex-col gap-1.5">
-              <span className="font-heading text-lg md:text-xl text-or-luxe leading-none">
+            <div className="flex flex-col gap-1">
+              <span
+                className={`font-heading text-or-luxe leading-none tracking-wide transition-all duration-700 ${
+                  scrolled ? "text-base md:text-lg" : "text-lg md:text-xl"
+                }`}
+              >
                 Libellule Senteurs
               </span>
-              <span className="font-body text-[8px] md:text-[9px] text-blanc-casse/25 tracking-[0.2em] uppercase leading-none hidden sm:block">
+              <span className="font-body text-[8px] text-blanc-casse/30 tracking-[0.22em] uppercase leading-none hidden sm:block">
                 Parfums d&apos;intérieur Haut de Gamme
               </span>
             </div>
           </a>
 
           {/* Desktop navigation links */}
-          <div className="hidden md:flex items-center gap-10 font-body text-[11px] tracking-[0.2em] uppercase text-blanc-casse/60">
+          <div className="hidden md:flex items-center gap-10 font-body text-[10px] tracking-[0.22em] uppercase">
             {NAV_LINKS.map(({ href, label }) => (
               <a
                 key={href}
                 href={href}
-                className="hover:text-or-luxe transition-colors duration-300"
+                className="relative text-blanc-casse/50 hover:text-blanc-casse transition-colors duration-400 py-1 group"
               >
                 {label}
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-or-luxe group-hover:w-full transition-all duration-400" />
               </a>
             ))}
           </div>
@@ -77,31 +96,39 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center gap-2 px-10 py-4 bg-or-luxe/10 border border-or-luxe/20 text-or-luxe text-[10px] tracking-[0.25em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 group"
+            className="hidden md:inline-flex items-center gap-2.5 px-8 py-3 border border-or-luxe/30 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer group"
           >
             <span>Nous contacter</span>
-            <svg className="w-3 h-3 opacity-40 group-hover:opacity-70 group-hover:translate-x-0.5 transition-all duration-500" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="1.5">
-              <path d="M4 2 L8 6 L4 10" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              className="w-2.5 h-2.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-500"
+              fill="none"
+              viewBox="0 0 10 10"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              aria-hidden="true"
+            >
+              <path d="M3 2 L7 5 L3 8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
 
-          {/* Mobile hamburger — three gold lines that animate to × when open */}
+          {/* Mobile hamburger — three lines animate to × when open */}
           <button
-            className="md:hidden flex flex-col justify-center items-center gap-[5px] w-10 h-10"
+            className="md:hidden flex flex-col justify-center items-center gap-[5px] w-11 h-11 cursor-pointer"
             aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             onClick={() => setMenuOpen((prev) => !prev)}
           >
             <span
-              className="block w-5 h-px bg-or-luxe transition-all duration-300 origin-center"
+              className="block w-5 h-px bg-or-luxe transition-all duration-350 origin-center"
               style={{ transform: menuOpen ? "translateY(6px) rotate(45deg)" : "none" }}
             />
             <span
-              className="block w-5 h-px bg-or-luxe transition-all duration-300"
-              style={{ opacity: menuOpen ? 0 : 1 }}
+              className="block w-5 h-px bg-or-luxe transition-all duration-350"
+              style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "scaleX(0)" : "none" }}
             />
             <span
-              className="block w-5 h-px bg-or-luxe transition-all duration-300 origin-center"
+              className="block w-5 h-px bg-or-luxe transition-all duration-350 origin-center"
               style={{ transform: menuOpen ? "translateY(-6px) rotate(-45deg)" : "none" }}
             />
           </button>
@@ -110,28 +137,54 @@ export default function Navigation() {
 
       {/* Mobile fullscreen overlay */}
       <div
+        id="mobile-menu"
         role="dialog"
         aria-modal="true"
-        className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-noir-profond transition-opacity duration-300 md:hidden"
-        style={{ opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "auto" : "none" }}
+        aria-label="Menu de navigation"
+        className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-noir-profond md:hidden"
+        style={{
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "auto" : "none",
+          transition: "opacity 0.4s ease-in-out",
+        }}
       >
-        {NAV_LINKS.map(({ href, label }) => (
+        {/* Subtle decorative element */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 pointer-events-none">
+          <svg viewBox="0 0 200 200" fill="none" stroke="#C99700" strokeWidth="0.4" opacity="0.06" aria-hidden="true">
+            <circle cx="100" cy="100" r="80" />
+            <circle cx="100" cy="100" r="50" />
+          </svg>
+        </div>
+
+        <nav className="flex flex-col items-center gap-7 relative z-10">
+          {NAV_LINKS.map(({ href, label }, i) => (
+            <a
+              key={href}
+              href={href}
+              onClick={closeMenu}
+              className="font-heading text-2xl text-blanc-casse/60 hover:text-blanc-casse tracking-[0.12em] uppercase transition-colors duration-300"
+              style={{
+                opacity: menuOpen ? 1 : 0,
+                transform: menuOpen ? "translateY(0)" : "translateY(12px)",
+                transition: `opacity 0.4s ease ${0.08 * i + 0.1}s, transform 0.4s ease ${0.08 * i + 0.1}s, color 0.3s ease`,
+              }}
+            >
+              {label}
+            </a>
+          ))}
           <a
-            key={href}
-            href={href}
+            href="#contact"
             onClick={closeMenu}
-            className="font-heading text-2xl text-blanc-casse/70 hover:text-or-luxe tracking-[0.15em] uppercase transition-colors"
+            className="mt-4 px-10 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer"
+            style={{
+              opacity: menuOpen ? 1 : 0,
+              transform: menuOpen ? "translateY(0)" : "translateY(12px)",
+              transition: `opacity 0.4s ease 0.42s, transform 0.4s ease 0.42s`,
+            }}
           >
-            {label}
+            Nous contacter
           </a>
-        ))}
-        <a
-          href="#contact"
-          onClick={closeMenu}
-          className="mt-6 px-8 py-3 border border-or-luxe/30 text-or-luxe text-xs tracking-[0.2em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500"
-        >
-          Nous contacter
-        </a>
+        </nav>
       </div>
     </>
   );

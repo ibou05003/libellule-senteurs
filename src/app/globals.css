@@ -46,12 +46,31 @@ body {
   font-family: var(--font-jost), "Jost", sans-serif;
   line-height: 1.7;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Gold text highlight on selection — reinforces luxury brand feel */
 ::selection {
   background-color: var(--color-or-luxe);
   color: var(--color-noir-profond);
+}
+
+/* Accessible focus ring — gold outline, visible without being garish */
+:focus-visible {
+  outline: 1px solid rgba(201, 151, 0, 0.6);
+  outline-offset: 3px;
+}
+
+/* Remove default focus ring for mouse/touch users (focus-visible handles a11y) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Headings use slightly tighter line-height by default */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
 }
 
 /* Loading screen SVG draw animation */

@@ -130,25 +130,31 @@ export default function Values() {
       className="bg-noir-profond py-24 md:py-32 lg:py-40"
     >
       <div className="max-w-5xl mx-auto px-6">
-        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-or-luxe text-center mb-20 md:mb-24">
-          Nos Valeurs
-        </h2>
+        {/* Consistent section heading pattern: label + title */}
+        <div className="text-center mb-20 md:mb-28">
+          <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-5">
+            Ce qui nous définit
+          </p>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse">
+            Nos Valeurs
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14 md:gap-10 lg:gap-8">
           {VALUES.map((value, i) => (
             <div
               key={value.name}
               ref={(el) => { if (el) cardsRef.current[i] = el; }}
-              className="flex flex-col items-center text-center gap-6"
+              className="flex flex-col items-center text-center gap-7"
               // Hidden initially so GSAP can animate in. Reduced motion skips
               // the animation and shows cards fully visible from the start.
               style={{ opacity: reduced ? 1 : 0 }}
             >
-              {value.icon}
-              <h3 className="font-heading text-xl text-blanc-casse">
+              <div className="mb-1">{value.icon}</div>
+              <h3 className="font-heading text-xl text-blanc-casse tracking-wide">
                 {value.name}
               </h3>
-              <p className="font-body text-sm text-blanc-casse/50 leading-relaxed">
+              <p className="font-body text-sm text-blanc-casse/55 leading-[1.75]">
                 {value.description}
               </p>
             </div>

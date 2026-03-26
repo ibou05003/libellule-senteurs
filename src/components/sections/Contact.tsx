@@ -19,7 +19,7 @@ export default function Contact() {
 
   // Shared input className — bottom-border-only keeps the form airy
   const inputClass =
-    "w-full bg-transparent border-b border-blanc-casse/20 py-4 font-body text-sm text-blanc-casse placeholder:text-blanc-casse/30 focus:outline-none focus:border-or-luxe transition-colors duration-500";
+    "w-full bg-transparent border-b border-blanc-casse/15 py-4 font-body text-sm text-blanc-casse placeholder:text-blanc-casse/25 focus:outline-none focus:border-or-luxe/70 transition-colors duration-500 leading-relaxed";
 
   return (
     <section
@@ -27,48 +27,65 @@ export default function Contact() {
       className="bg-noir-profond py-24 md:py-32 lg:py-40"
     >
       <div className="max-w-xl mx-auto px-6">
-        {/* Section heading */}
+        {/* Section heading — consistent two-line pattern */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-or-luxe mb-4">
+          <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-5">
+            Nous écrire
+          </p>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse mb-5">
             Échangeons
           </h2>
-          <p className="font-body text-blanc-casse/40 text-[10px] tracking-[0.3em] uppercase">
+          <p className="font-body text-blanc-casse/35 text-[10px] tracking-[0.25em] uppercase">
             Un espace à sublimer ? Écrivez-nous.
           </p>
         </div>
 
         {submitted ? (
           /* Confirmation — warm, on-brand, unhurried */
-          <div className="text-center space-y-4 py-16">
-            <p className="font-heading text-2xl text-or-luxe">Message envoyé</p>
-            <p className="font-body text-sm text-blanc-casse/60 leading-relaxed">
+          <div className="text-center space-y-5 py-20">
+            <div className="flex justify-center mb-6">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#C99700" strokeWidth="1" className="w-10 h-10" aria-hidden="true">
+                <circle cx="20" cy="20" r="16" opacity="0.4" />
+                <path d="M13 20 L18 25 L27 15" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <p className="font-heading text-2xl text-blanc-casse">Message envoyé</p>
+            <p className="font-body text-sm text-blanc-casse/50 leading-[1.8] max-w-xs mx-auto">
               Notre équipe vous répondra avec le soin que mérite chaque détail.
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-10">
+          <form onSubmit={handleSubmit} className="space-y-10" noValidate>
             <div>
+              <label htmlFor="contact-name" className="sr-only">Votre nom</label>
               <input
+                id="contact-name"
                 type="text"
                 name="name"
                 required
                 placeholder="Votre nom"
                 className={inputClass}
+                autoComplete="name"
               />
             </div>
 
             <div>
+              <label htmlFor="contact-email" className="sr-only">Votre email</label>
               <input
+                id="contact-email"
                 type="email"
                 name="email"
                 required
                 placeholder="Votre email"
                 className={inputClass}
+                autoComplete="email"
               />
             </div>
 
             <div>
+              <label htmlFor="contact-message" className="sr-only">Votre message</label>
               <textarea
+                id="contact-message"
                 name="message"
                 required
                 rows={4}
@@ -81,7 +98,7 @@ export default function Contact() {
               {/* Ghost button: border-only at rest, fills with gold on hover */}
               <button
                 type="submit"
-                className="px-12 py-3 border border-or-luxe/40 text-or-luxe text-[10px] tracking-[0.25em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500"
+                className="px-12 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer min-w-[180px]"
               >
                 Envoyer
               </button>
@@ -90,16 +107,16 @@ export default function Contact() {
         )}
 
         {/* Secondary contact details — low prominence, always findable */}
-        <div className="mt-20 md:mt-24 flex flex-col md:flex-row justify-center items-center gap-6 text-blanc-casse/30 text-[11px] font-body tracking-wide">
+        <div className="mt-20 md:mt-24 flex flex-col md:flex-row justify-center items-center gap-5 text-blanc-casse/30 text-[10px] font-body tracking-wide">
           <a
             href="mailto:contacts@libellulessenteurs.com"
-            className="hover:text-or-luxe transition-colors duration-300"
+            className="hover:text-or-luxe/70 transition-colors duration-400"
           >
             contacts@libellulessenteurs.com
           </a>
-          <span className="hidden md:inline opacity-40">·</span>
+          <span className="hidden md:inline text-blanc-casse/15">·</span>
           <span>(+221) 77 000 00 00</span>
-          <span className="hidden md:inline opacity-40">·</span>
+          <span className="hidden md:inline text-blanc-casse/15">·</span>
           <span>Dakar, Sénégal</span>
         </div>
       </div>

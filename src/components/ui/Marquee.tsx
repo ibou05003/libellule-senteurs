@@ -49,18 +49,18 @@ export default function Marquee({
 
   return (
     <div
-      className={`overflow-hidden py-10 md:py-12 ${className}`}
+      className={`overflow-hidden py-8 md:py-10 border-y border-blanc-casse/[0.05] ${className}`}
       aria-hidden="true"
     >
       <div ref={trackRef} className="flex whitespace-nowrap">
         {/* Three copies ensure the track is always wider than the viewport */}
-        <span className="font-body text-[11px] md:text-sm text-blanc-casse/20 tracking-[0.3em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/18 tracking-[0.32em] uppercase px-4">
           {text}
         </span>
-        <span className="font-body text-[11px] md:text-sm text-blanc-casse/20 tracking-[0.3em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/18 tracking-[0.32em] uppercase px-4">
           {text}
         </span>
-        <span className="font-body text-[11px] md:text-sm text-blanc-casse/20 tracking-[0.3em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/18 tracking-[0.32em] uppercase px-4">
           {text}
         </span>
       </div>

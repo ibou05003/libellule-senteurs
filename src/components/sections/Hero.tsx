@@ -34,7 +34,7 @@ export default function Hero() {
       // Product: slow upward drift keeps it in frame longer
       if (productWrapRef.current) {
         gsap.to(productWrapRef.current, {
-          y: -100,
+          y: -80,
           ease: "none",
           scrollTrigger: {
             trigger: section,
@@ -48,13 +48,13 @@ export default function Hero() {
       // Text: faster drift + fade out so it clears before the next section
       if (textWrapRef.current) {
         gsap.to(textWrapRef.current, {
-          y: -200,
+          y: -160,
           opacity: 0,
           ease: "none",
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: "70% top",
+            end: "65% top",
             scrub: true,
           },
         });
@@ -63,8 +63,8 @@ export default function Hero() {
       // Glow: slowest drift + slight scale growth for depth
       if (glowRef.current) {
         gsap.to(glowRef.current, {
-          y: -40,
-          scale: 1.3,
+          y: -30,
+          scale: 1.2,
           ease: "none",
           scrollTrigger: {
             trigger: section,
@@ -80,8 +80,8 @@ export default function Hero() {
   }, [reduced]);
 
   return (
-    <section ref={sectionRef} id="hero" className="relative bg-noir-profond" style={{ height: "180vh" }}>
-      {/* Sticky viewport — content locks to screen while outer 180vh scrolls */}
+    <section ref={sectionRef} id="hero" className="relative bg-noir-profond" style={{ height: "185vh" }}>
+      {/* Sticky viewport — content locks to screen while outer 185vh scrolls */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
 
         {/* Ambient gold particles */}
@@ -92,7 +92,7 @@ export default function Hero() {
           ref={glowRef}
           className="absolute inset-0 flex items-center justify-center pointer-events-none z-[2]"
         >
-          <div className="w-[350px] h-[500px] md:w-[400px] md:h-[650px] bg-or-luxe/[0.06] rounded-full blur-[100px]" />
+          <div className="w-[300px] h-[480px] md:w-[420px] md:h-[640px] lg:w-[480px] lg:h-[720px] bg-or-luxe/[0.07] rounded-full blur-[120px]" />
         </div>
 
         {/* Product composition — CSS entrance (scale + fade), then GSAP parallax */}
@@ -101,22 +101,22 @@ export default function Hero() {
           className="relative z-10"
           style={{
             opacity: visible ? 1 : 0,
-            transform: visible ? "scale(1) translateY(0)" : "scale(1.08) translateY(30px)",
-            transition: "opacity 1.2s ease-out, transform 1.2s ease-out",
+            transform: visible ? "scale(1) translateY(0)" : "scale(1.06) translateY(24px)",
+            transition: "opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         >
           <div
             className="relative mx-auto"
-            style={{ width: "min(50vw, 420px)", aspectRatio: "904/1200" }}
+            style={{ width: "min(55vw, 460px)", aspectRatio: "904/1200" }}
           >
             <Image
               src="/images/products/diffuseur-hero-portrait.webp"
               alt="Diffuseur Libellule Senteurs"
               fill
               className="object-contain"
-              style={{ filter: "drop-shadow(0 30px 60px rgba(201,151,0,0.08))" }}
+              style={{ filter: "drop-shadow(0 40px 80px rgba(201,151,0,0.10))" }}
               priority
-              sizes="(max-width: 768px) 50vw, 420px"
+              sizes="(max-width: 768px) 55vw, 460px"
             />
 
             {/* Small brand mark centered on the bottle body */}
@@ -124,36 +124,35 @@ export default function Hero() {
               className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
               style={{
                 top: "57%",
-                opacity: visible ? 0.7 : 0,
-                transition: "opacity 1.5s ease-out 1.8s",
+                opacity: visible ? 0.6 : 0,
+                transition: "opacity 1.2s ease-out 2.0s",
               }}
             >
               <svg
                 viewBox="0 0 60 60"
-                className="w-8 h-8 md:w-11 md:h-11 lg:w-12 lg:h-12 mx-auto"
+                className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 mx-auto"
                 fill="none"
                 stroke="#C99700"
-                strokeWidth="0.7"
+                strokeWidth="0.8"
+                aria-hidden="true"
               >
-                <circle cx="30" cy="30" r="22" opacity="0.4" />
-                <path d="M30 30 Q22 22 26 14 Q30 20 30 30" fill="#C99700" opacity="0.5" />
-                <path d="M30 30 Q38 22 34 14 Q30 20 30 30" fill="#C99700" opacity="0.35" />
-                <path d="M30 30 L30 42" strokeLinecap="round" opacity="0.4" />
+                <circle cx="30" cy="30" r="22" opacity="0.35" />
+                <path d="M30 30 Q22 22 26 14 Q30 20 30 30" fill="#C99700" opacity="0.45" />
+                <path d="M30 30 Q38 22 34 14 Q30 20 30 30" fill="#C99700" opacity="0.30" />
+                <path d="M30 30 L30 42" strokeLinecap="round" opacity="0.35" />
               </svg>
-              <p className="font-heading text-[6px] md:text-[8px] text-or-luxe/50 tracking-[0.1em] text-center whitespace-nowrap">
-                Libellule Senteurs
-              </p>
             </div>
 
-            {/* "SENTEURS" ghost text visible between the diffuser sticks */}
+            {/* "SENTEURS" ghost text — atmospheric depth layer */}
             <div
-              className="absolute top-[4%] left-1/2 -translate-x-1/2 pointer-events-none"
+              className="absolute top-[3%] left-1/2 -translate-x-1/2 pointer-events-none select-none"
               style={{
                 opacity: visible ? 1 : 0,
-                transition: "opacity 1s ease-out 2s",
+                transition: "opacity 1.0s ease-out 2.2s",
               }}
+              aria-hidden="true"
             >
-              <p className="font-heading text-blanc-casse/[0.06] text-4xl md:text-5xl lg:text-6xl tracking-[0.25em] whitespace-nowrap select-none">
+              <p className="font-heading text-blanc-casse/[0.04] text-5xl md:text-6xl lg:text-7xl tracking-[0.28em] whitespace-nowrap">
                 SENTEURS
               </p>
             </div>
@@ -163,31 +162,36 @@ export default function Hero() {
         {/* Headline — appears after product, scrolls out faster via GSAP */}
         <div
           ref={textWrapRef}
-          className="relative z-10 text-center mt-8 md:mt-12 px-6"
+          className="relative z-10 text-center mt-10 md:mt-14 px-8"
           style={{
             opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0)" : "translateY(25px)",
-            transition: "opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s",
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.7s, transform 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.7s",
           }}
         >
-          <h1 className="font-heading text-xl sm:text-2xl md:text-4xl lg:text-5xl text-blanc-casse leading-[1.3]">
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-blanc-casse leading-[1.25] tracking-wide">
             L&apos;essence du raffinement
-            <span className="text-or-luxe"> invisible</span>
+            <br />
+            <em className="text-or-luxe not-italic">invisible</em>
           </h1>
-          <p className="font-body text-[10px] md:text-xs text-blanc-casse/20 tracking-[0.3em] uppercase mt-4 md:mt-6">
+          <p className="font-body text-[9px] md:text-[10px] text-blanc-casse/30 tracking-[0.35em] uppercase mt-5 md:mt-7">
             Parfums d&apos;intérieur Haut de Gamme
           </p>
         </div>
 
         {/* Gradient fade at the bottom eases into the next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-noir-profond to-transparent z-[15] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-noir-profond to-transparent z-[15] pointer-events-none" />
 
-        {/* Scroll cue — subtle animated line, appears last */}
+        {/* Scroll cue — animated line + label */}
         <div
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20"
-          style={{ opacity: visible ? 1 : 0, transition: "opacity 0.5s ease-out 3s" }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3"
+          style={{ opacity: visible ? 1 : 0, transition: "opacity 0.6s ease-out 3.4s" }}
+          aria-hidden="true"
         >
-          <div className="w-px h-8 bg-or-luxe/20 animate-pulse mx-auto" />
+          <span className="font-body text-[8px] text-blanc-casse/20 tracking-[0.3em] uppercase">
+            Découvrir
+          </span>
+          <div className="w-px h-8 bg-gradient-to-b from-or-luxe/40 to-transparent animate-pulse" />
         </div>
       </div>
     </section>

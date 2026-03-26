@@ -146,14 +146,16 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
         />
 
         {/* Layer 4: Phase copy */}
-        <div className="absolute inset-0 flex items-end justify-center pb-24 pointer-events-none">
-          {/* Teaser — visible in the first 30% of scroll, then fades out */}
+        <div className="absolute inset-0 flex items-end justify-center pb-24 md:pb-28 pointer-events-none">
+          {/* Teaser — visible in the first 30% of scroll, then fades out.
+              Text shadow ensures legibility against the off-white background */}
           {progress < 0.3 && (
             <p
-              className="max-w-lg mx-auto text-center font-heading text-xl md:text-3xl text-blanc-casse/70 px-8"
+              className="max-w-lg mx-auto text-center font-heading text-xl md:text-3xl px-8 leading-[1.4]"
               style={{
                 opacity: 1 - progress / 0.3,
-                textShadow: "0 0 20px rgba(0,0,0,0.5)",
+                color: `rgb(${Math.round(channel * 0.1)}, ${Math.round(channel * 0.1)}, ${Math.round(channel * 0.1)})`,
+                textShadow: progress < 0.15 ? "0 2px 20px rgba(0,0,0,0.12)" : "none",
               }}
             >
               Un simple objet blanc. Sans nom. Sans histoire.
@@ -163,17 +165,17 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           {/* Brand reveal — visible after 70% scroll */}
           {progress > 0.7 && (
             <div
-              className="max-w-lg mx-auto text-center space-y-3"
+              className="max-w-lg mx-auto text-center space-y-3 px-8"
               style={{ opacity: (progress - 0.7) / 0.3 }}
             >
-              <p className="font-body text-xs md:text-sm text-blanc-casse/50 tracking-[0.3em] uppercase">
+              <p className="font-body text-[9px] md:text-[10px] text-blanc-casse/40 tracking-[0.35em] uppercase">
                 Libellule Senteurs lui donne
               </p>
-              <p className="font-heading text-3xl md:text-5xl text-or-luxe">
+              <p className="font-heading text-4xl md:text-6xl text-or-luxe leading-none">
                 Une Âme
               </p>
-              <p className="font-body text-sm md:text-base text-blanc-casse/50 tracking-widest">
-                — Parfums d&apos;intérieur Haut de Gamme —
+              <p className="font-body text-[10px] md:text-xs text-blanc-casse/40 tracking-[0.25em] uppercase mt-4">
+                Parfums d&apos;intérieur Haut de Gamme
               </p>
             </div>
           )}
