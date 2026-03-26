@@ -38,10 +38,10 @@ export default function Navigation() {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16 min-h-[72px] md:min-h-[88px] lg:min-h-[100px] py-4">
           {/* Logo mark + wordmark */}
-          <a href="#" className="flex items-center gap-3">
+          <a href="#" className="flex items-center gap-4 md:gap-5">
             <svg
               viewBox="0 0 36 36"
-              className="w-7 h-7 md:w-8 md:h-8 flex-shrink-0"
+              className="w-8 h-8 md:w-9 md:h-9 flex-shrink-0"
               fill="none"
               stroke="#C99700"
               strokeWidth="1"
@@ -51,11 +51,11 @@ export default function Navigation() {
               <path d="M18 18 Q26 10 22 4 Q18 10 18 18" fill="#C99700" opacity="0.5" />
               <path d="M18 18 L18 28" strokeLinecap="round" opacity="0.6" />
             </svg>
-            <div>
-              <span className="font-heading text-lg md:text-xl text-or-luxe leading-none block">
+            <div className="flex flex-col gap-1.5">
+              <span className="font-heading text-lg md:text-xl text-or-luxe leading-none">
                 Libellule Senteurs
               </span>
-              <span className="font-body text-[9px] md:text-[10px] text-blanc-casse/30 tracking-[0.15em] uppercase leading-none mt-1 hidden sm:block">
+              <span className="font-body text-[8px] md:text-[9px] text-blanc-casse/25 tracking-[0.2em] uppercase leading-none hidden sm:block">
                 Parfums d&apos;intérieur Haut de Gamme
               </span>
             </div>
@@ -77,9 +77,12 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <a
             href="#contact"
-            className="hidden md:block px-5 py-2 border border-or-luxe/30 text-or-luxe text-[10px] tracking-[0.2em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500"
+            className="hidden md:inline-flex items-center gap-2 px-7 py-2.5 border border-or-luxe/25 text-or-luxe text-[10px] tracking-[0.25em] uppercase font-body hover:bg-or-luxe/10 hover:border-or-luxe/50 transition-all duration-500 group"
           >
-            Nous contacter
+            <span>Nous contacter</span>
+            <svg className="w-3 h-3 opacity-40 group-hover:opacity-70 group-hover:translate-x-0.5 transition-all duration-500" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth="1.5">
+              <path d="M4 2 L8 6 L4 10" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </a>
 
           {/* Mobile hamburger — three gold lines that animate to × when open */}
