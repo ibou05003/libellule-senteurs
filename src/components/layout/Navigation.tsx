@@ -96,19 +96,9 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center gap-2.5 px-12 py-5 bg-or-luxe/10 border border-or-luxe/25 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer group"
+            className="hidden md:inline-flex items-center justify-center min-w-[180px] px-8 py-3.5 bg-or-luxe text-noir-profond text-[10px] tracking-[0.25em] uppercase font-body font-medium hover:bg-or-luxe/90 active:bg-or-luxe/80 transition-all duration-500 cursor-pointer"
           >
-            <span>Nous contacter</span>
-            <svg
-              className="w-2.5 h-2.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-500"
-              fill="none"
-              viewBox="0 0 10 10"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              aria-hidden="true"
-            >
-              <path d="M3 2 L7 5 L3 8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            Nous contacter
           </a>
 
           {/* Mobile hamburger — three lines animate to × when open */}
