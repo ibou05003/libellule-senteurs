@@ -10,6 +10,9 @@ import Hero from "@/components/sections/Hero";
 import ProductMorph from "@/components/sections/ProductMorph";
 import Storytelling from "@/components/sections/Storytelling";
 import Values from "@/components/sections/Values";
+import Collection from "@/components/sections/Collection";
+import Experience from "@/components/sections/Experience";
+import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -36,17 +39,11 @@ export default function Home() {
 
         <Values />
 
-        <section id="collection" className="min-h-screen bg-noir-profond flex items-center justify-center">
-          <p className="text-or-luxe font-heading text-3xl">Collection — à venir</p>
-        </section>
+        <Collection />
 
-        <section id="experience" className="min-h-screen bg-noir-profond flex items-center justify-center">
-          <p className="text-or-luxe font-heading text-3xl">Expérience — à venir</p>
-        </section>
+        <Experience />
 
-        <section id="contact" className="min-h-screen bg-noir-profond flex items-center justify-center">
-          <p className="text-or-luxe font-heading text-3xl">Contact — à venir</p>
-        </section>
+        <Contact />
       </main>
 
       <Footer />
