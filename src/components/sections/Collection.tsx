@@ -1,16 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import ProductCard from "@/components/ui/ProductCard";
 
-/**
- * Product catalogue entries.
- *
- * Image selection rationale:
- * - `bougie-sans-marque` replaces a technical-drawing candle with dimension
- *   annotations that are not suitable for display.
- * - `coffret-cadeau-bordeaux` rounds out the lineup with a gifting option.
- */
 const PRODUCTS = [
   {
     name: "Diffuseur à Bâtonnets",
@@ -34,52 +25,45 @@ const PRODUCTS = [
   },
   {
     name: "La Collection",
-    description: "L'ensemble de nos créations réunies",
+    description: "L'ensemble de nos créations",
     image: "/images/mockups/collection-complete-packagings.webp",
   },
 ];
 
 export default function Collection() {
-  // Native horizontal overflow scroll with CSS scroll-snap.
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   return (
-    <section id="collection" className="bg-noir-profond py-24 md:py-32 lg:py-40">
-      {/* Heading block — consistent two-line pattern */}
-      <div className="max-w-4xl mx-auto px-6 text-center mb-16 md:mb-20">
-        <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
-          Nos créations
-        </p>
-        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse">
-          Notre Collection
-        </h2>
-        {/* /40 raises contrast from ~1.7:1 to ~2.8:1 — legible scroll hint */}
-        <p className="font-body text-blanc-casse/40 mt-5 text-[9px] tracking-[0.28em] uppercase">
-          Glissez pour découvrir
-        </p>
-      </div>
+    <section id="collection" className="bg-noir-profond py-24 md:py-32 lg:py-40 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Centered heading */}
+        <div className="w-full text-center mb-16 md:mb-24">
+          <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
+            Nos créations
+          </p>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse">
+            Notre Collection
+          </h2>
+        </div>
 
-      {/* Horizontal scroll track */}
-      <div
-        ref={scrollRef}
-        className="flex gap-6 md:gap-8 overflow-x-auto px-6 md:px-8 pb-10 snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-      >
-        {/*
-         * Leading spacer: on large screens this optically centers the first
-         * card without using justify-center, which would break the overflow
-         * scroll behaviour.
-         */}
-        <div className="flex-shrink-0 w-[calc((100vw-320px)/2)] hidden lg:block" />
+        {/* Grid on desktop, horizontal scroll on mobile */}
+        <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6">
+          {PRODUCTS.map((product) => (
+            <div key={product.name} className="flex justify-center">
+              <ProductCard {...product} />
+            </div>
+          ))}
+        </div>
 
-        {PRODUCTS.map((product) => (
-          <div key={product.name} className="snap-center flex-shrink-0">
-            <ProductCard {...product} />
-          </div>
-        ))}
-
-        {/* Trailing spacer mirrors the leading one so the last card centers */}
-        <div className="flex-shrink-0 w-[calc((100vw-320px)/2)] hidden lg:block" />
+        {/* Mobile: horizontal scroll */}
+        <div
+          className="md:hidden flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {PRODUCTS.map((product) => (
+            <div key={product.name} className="snap-center flex-shrink-0">
+              <ProductCard {...product} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

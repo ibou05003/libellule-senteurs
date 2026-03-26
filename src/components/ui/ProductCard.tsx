@@ -48,7 +48,7 @@ export default function ProductCard({ name, description, image }: ProductCardPro
   return (
     <div
       ref={cardRef}
-      className="group relative flex-shrink-0 w-[280px] md:w-[300px] lg:w-[320px] cursor-pointer"
+      className="group relative flex-shrink-0 w-[280px] md:w-full cursor-pointer"
       style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
       onMouseMove={reduced ? undefined : handleMouseMove}
       onMouseLeave={reduced ? undefined : handleMouseLeave}

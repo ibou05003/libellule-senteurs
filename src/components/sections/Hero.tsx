@@ -82,58 +82,19 @@ export default function Hero() {
               transition: "opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           >
-            {/* Product image — height capped at 45vh to leave room for headline */}
-            <div className="relative mx-auto h-[40vh] md:h-[45vh] aspect-[1052/1400]">
+            {/* Product image — height capped at 45vh to leave room for headline.
+                New image (diffuseur-batonnets-detour) carries the real brand logo,
+                so no SVG overlay or ghost text is needed. */}
+            <div className="relative mx-auto h-[40vh] md:h-[45vh] aspect-[497/1400]">
               <Image
-                src="/images/products/diffuseur-hero-portrait.webp"
+                src="/images/products/diffuseur-batonnets-detour.webp"
                 alt="Diffuseur Libellule Senteurs"
                 fill
                 className="object-contain"
                 style={{ filter: "drop-shadow(0 30px 60px rgba(201,151,0,0.10))" }}
                 priority
-                sizes="(max-width: 768px) 40vh, 45vh"
+                sizes="(max-width: 768px) 14vh, 16vh"
               />
-
-              {/* Logo on bottle body */}
-              <div
-                className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
-                style={{
-                  top: "58%",
-                  opacity: visible ? 0.8 : 0,
-                  transition: "opacity 1.2s ease-out 2s",
-                }}
-              >
-                <svg
-                  viewBox="0 0 60 60"
-                  className="w-7 h-7 md:w-9 md:h-9 lg:w-10 lg:h-10 mx-auto"
-                  fill="none"
-                  stroke="#C99700"
-                  strokeWidth="0.8"
-                  aria-hidden="true"
-                >
-                  <circle cx="30" cy="30" r="22" opacity="0.5" />
-                  <path d="M30 30 Q22 22 26 14 Q30 20 30 30" fill="#C99700" opacity="0.6" />
-                  <path d="M30 30 Q38 22 34 14 Q30 20 30 30" fill="#C99700" opacity="0.45" />
-                  <path d="M30 30 L30 42" strokeLinecap="round" opacity="0.5" />
-                </svg>
-                <p className="font-heading text-[5px] md:text-[7px] text-or-luxe/60 tracking-[0.1em] text-center whitespace-nowrap mt-px">
-                  Libellule Senteurs
-                </p>
-              </div>
-
-              {/* "SENTEURS" ghost text between sticks */}
-              <div
-                className="absolute top-[2%] left-1/2 -translate-x-1/2 pointer-events-none select-none"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transition: "opacity 1s ease-out 2.2s",
-                }}
-                aria-hidden="true"
-              >
-                <p className="font-heading text-blanc-casse/[0.08] text-3xl md:text-4xl lg:text-5xl tracking-[0.3em] whitespace-nowrap">
-                  SENTEURS
-                </p>
-              </div>
             </div>
           </div>
 

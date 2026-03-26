@@ -127,9 +127,9 @@ export default function Values() {
     <section
       ref={sectionRef}
       id="valeurs"
-      className="bg-noir-profond py-24 md:py-32 lg:py-40"
+      className="bg-noir-profond py-24 md:py-32 lg:py-40 px-6"
     >
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto">
         {/* Consistent section heading pattern: label + title.
             w-full ensures the text-center container spans the full column width
             on all viewports rather than collapsing to content width. */}
