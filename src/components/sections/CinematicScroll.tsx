@@ -679,7 +679,7 @@ export default function CinematicScroll() {
             top: "50%",
             transform: "translate(-50%, -50%) scale(1)",
             width: "clamp(280px, 48vw, 680px)",
-            aspectRatio: "1200 / 800",
+            aspectRatio: "1400 / 814",
             opacity: 1,
             filter: "saturate(20%)",
             zIndex: 5,
@@ -687,7 +687,7 @@ export default function CinematicScroll() {
           }}
         >
           <Image
-            src="/images/mockups/collection-complete-packagings.webp"
+            src="/images/mockups/collection-complete-detour.webp"
             alt="Collection complète Libellule Senteurs"
             fill
             sizes="(max-width: 1024px) 80vw, 680px"
