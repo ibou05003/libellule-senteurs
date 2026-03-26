@@ -13,9 +13,13 @@ export default function Home() {
   const [loaded, setLoaded] = useState(false);
   useSmoothScroll();
 
+  const handleLoadingComplete = useCallback(() => {
+    setLoaded(true);
+  }, []);
+
   return (
     <>
-      {!loaded && <LoadingScreen onComplete={useCallback(() => setLoaded(true), [])} />}
+      {!loaded && <LoadingScreen onComplete={handleLoadingComplete} />}
       <CustomCursor />
       <Navigation />
 
