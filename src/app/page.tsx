@@ -6,6 +6,8 @@ import LoadingScreen from "@/components/layout/LoadingScreen";
 import Navigation from "@/components/layout/Navigation";
 import CustomCursor from "@/components/layout/CustomCursor";
 import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
+import ProductMorph from "@/components/sections/ProductMorph";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -22,12 +24,10 @@ export default function Home() {
       <Navigation />
 
       <main>
-        <section id="hero" className="h-screen bg-noir-profond flex items-center justify-center">
-          <p className="text-or-luxe font-heading text-3xl">Hero — à venir</p>
-        </section>
+        <Hero />
 
-        <section id="morph" className="h-[300vh] bg-noir-profond flex items-center justify-center">
-          <p className="text-or-luxe font-heading text-3xl">Product Morph — à venir</p>
+        <section id="morph">
+          <ProductMorph />
         </section>
 
         <section id="histoire" className="min-h-screen bg-noir-profond flex items-center justify-center">
