@@ -679,7 +679,7 @@ export default function CinematicScroll() {
             top: "50%",
             transform: "translate(-50%, -50%) scale(1)",
             width: "clamp(280px, 48vw, 680px)",
-            aspectRatio: "1400 / 814",
+            aspectRatio: "1400 / 848",
             opacity: 1,
             filter: "saturate(20%)",
             zIndex: 5,
@@ -687,7 +687,7 @@ export default function CinematicScroll() {
           }}
         >
           <Image
-            src="/images/mockups/collection-complete-detour.webp"
+            src="/images/products/collection-complete-v2.webp"
             alt="Collection complète Libellule Senteurs"
             fill
             sizes="(max-width: 1024px) 80vw, 680px"
@@ -705,14 +705,14 @@ export default function CinematicScroll() {
             top: "50%",
             transform: "translate(calc(-50% + 120px), -50%) scale(0.82)",
             width: "clamp(160px, 22vw, 310px)",
-            aspectRatio: "497 / 1400",
+            aspectRatio: "981 / 1400",
             opacity: 0,
             zIndex: 5,
             pointerEvents: "none",
           }}
         >
           <Image
-            src="/images/products/diffuseur-batonnets-detour.webp"
+            src="/images/products/diffuseur-baguettes-v2.webp"
             alt="Diffuseur à bâtonnets Libellule Senteurs"
             fill
             sizes="(max-width: 1024px) 40vw, 310px"
