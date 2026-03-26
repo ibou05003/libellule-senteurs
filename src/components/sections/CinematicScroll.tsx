@@ -478,37 +478,36 @@ export default function CinematicScroll() {
           textCristalRef.current.style.transform = `translateY(${ty}px)`;
         }
 
-        // ── Act 6: Coffret ──────────────────────────────────────────────────
-        if (prodCoffretRef.current) {
-          const opacity = Math.min(1, a6in);
-          const tyEnter = lerp(50, 0, a6in);
-          const scale = lerp(0.85, 1, a6in);
-          prodCoffretRef.current.style.opacity = String(opacity);
-          prodCoffretRef.current.style.transform = `translate(-50%, calc(-50% + ${tyEnter}px)) scale(${scale})`;
+        // ── Act 6: Coffret — crossfade from "floating" to "arranged" ────────
+        // Frame start (products floating around box): fades in, then out
+        const coffretStartEl = document.getElementById("coffret-frame-start");
+        const coffretEndEl = document.getElementById("coffret-frame-end");
+        const coffretMidpoint = smoothstep(actProgress(p, 0.84, 0.92)); // 0→1 over the act
+
+        if (coffretStartEl) {
+          const opacity = Math.min(1, a6in) * (1 - coffretMidpoint);
+          const scale = lerp(0.9, 1, a6in);
+          coffretStartEl.style.opacity = String(opacity);
+          coffretStartEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        }
+
+        if (coffretEndEl) {
+          const opacity = coffretMidpoint;
+          const scale = lerp(0.95, 1, coffretMidpoint);
+          coffretEndEl.style.opacity = String(opacity);
+          coffretEndEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
         }
 
         if (textCoffretRef.current) {
-          const opacity = Math.min(1, smoothstep(actProgress(p, 0.85, 0.94)));
-          const ty = lerp(30, 0, smoothstep(actProgress(p, 0.85, 0.94)));
+          const opacity = Math.min(1, smoothstep(actProgress(p, 0.90, 0.96)));
+          const ty = lerp(30, 0, smoothstep(actProgress(p, 0.90, 0.96)));
           textCoffretRef.current.style.opacity = String(opacity);
           textCoffretRef.current.style.transform = `translateY(${ty}px)`;
         }
 
-        // Thumbnails fly towards the coffret center
-        const thumbProgress = smoothstep(actProgress(p, 0.80, 0.92));
-        thumbRefs.current.forEach((el, i) => {
-          if (!el) return;
-          // Each thumbnail starts at a different corner/edge and converges to center
-          const angle = (i / THUMBNAIL_PRODUCTS.length) * Math.PI * 2 - Math.PI / 4;
-          const startDist = 340;
-          const tx = lerp(Math.cos(angle) * startDist, 0, thumbProgress);
-          const ty = lerp(Math.sin(angle) * startDist, 0, thumbProgress);
-          const scale = lerp(0.7, 0.22, thumbProgress);
-          const opacity = thumbProgress < 0.85
-            ? Math.min(1, thumbProgress * 3)
-            : lerp(1, 0, (thumbProgress - 0.85) / 0.15);
-          el.style.opacity = String(opacity);
-          el.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${scale})`;
+        // Hide legacy thumbnails (kept in DOM for mobile fallback)
+        thumbRefs.current.forEach((el) => {
+          if (el) el.style.opacity = "0";
         });
       },
     });
@@ -793,26 +792,51 @@ export default function CinematicScroll() {
           />
         </div>
 
-        {/* Act 6: Coffret — centered */}
+        {/* Act 6: Coffret frame START — products floating around box */}
         <div
-          ref={prodCoffretRef}
+          id="coffret-frame-start"
           style={{
             position: "absolute",
             left: "50%",
-            top: "50%",
-            transform: "translate(-50%, calc(-50% + 50px)) scale(0.85)",
-            width: "clamp(240px, 42vw, 580px)",
-            aspectRatio: "1200 / 887",
+            top: "45%",
+            transform: "translate(-50%, -50%) scale(0.9)",
+            width: "clamp(320px, 65vw, 900px)",
+            aspectRatio: "1400 / 781",
             opacity: 0,
             zIndex: 5,
             pointerEvents: "none",
           }}
         >
           <Image
-            src="/images/products/coffret-ouvert.webp"
-            alt="Coffret cadeau ouvert Libellule Senteurs"
+            src="/images/products/coffret-frame-start.webp"
+            alt=""
             fill
-            sizes="(max-width: 1024px) 70vw, 580px"
+            sizes="(max-width: 1024px) 80vw, 900px"
+            style={{ objectFit: "contain" }}
+            aria-hidden="true"
+          />
+        </div>
+
+        {/* Act 6: Coffret frame END — products arranged in gift box */}
+        <div
+          id="coffret-frame-end"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "45%",
+            transform: "translate(-50%, -50%) scale(0.95)",
+            width: "clamp(320px, 65vw, 900px)",
+            aspectRatio: "1400 / 781",
+            opacity: 0,
+            zIndex: 5,
+            pointerEvents: "none",
+          }}
+        >
+          <Image
+            src="/images/products/coffret-frame-end.webp"
+            alt="Coffret cadeau Libellule Senteurs — presentation complete"
+            fill
+            sizes="(max-width: 1024px) 80vw, 900px"
             style={{ objectFit: "contain" }}
           />
         </div>
