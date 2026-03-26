@@ -92,7 +92,7 @@ const ACTS = [
     productAlt: "Coffret cadeau ouvert Libellule Senteurs",
     productSide: "center" as const,
     label: "Le Coffret",
-    title: "Offrir Libellule Senteurs, c'est offrir une âme",
+    title: "Offrir une âme",
     subtitle: "",
     textSide: "center" as const,
   },
@@ -323,22 +323,23 @@ export default function CinematicScroll() {
 
         // ── Act progress values (smoothstepped for snappier crossfades) ────
 
-        const a1 = smoothstep(actProgress(p, 0, 0.15));         // Hero
-        const a1fade = smoothstep(actProgress(p, 0.10, 0.17));  // Hero fadeout
+        // Acts are spaced evenly with clear gaps between them.
+        // Each act: 3% enter, hold, 3% exit. No overlap between acts.
+        const a1fade = smoothstep(actProgress(p, 0.12, 0.16));  // Hero fadeout
 
-        const a2in  = smoothstep(actProgress(p, 0.13, 0.22));   // Diffuseur enter
-        const a2out = smoothstep(actProgress(p, 0.25, 0.32));   // Diffuseur exit
+        const a2in  = smoothstep(actProgress(p, 0.16, 0.20));   // Diffuseur enter
+        const a2out = smoothstep(actProgress(p, 0.30, 0.34));   // Diffuseur exit
 
-        const a3in  = smoothstep(actProgress(p, 0.28, 0.37));
-        const a3out = smoothstep(actProgress(p, 0.40, 0.47));
+        const a3in  = smoothstep(actProgress(p, 0.34, 0.38));   // Huile enter
+        const a3out = smoothstep(actProgress(p, 0.48, 0.52));   // Huile exit
 
-        const a4in  = smoothstep(actProgress(p, 0.43, 0.52));
-        const a4out = smoothstep(actProgress(p, 0.55, 0.62));
+        const a4in  = smoothstep(actProgress(p, 0.52, 0.56));   // Parfum noir enter
+        const a4out = smoothstep(actProgress(p, 0.62, 0.66));   // Parfum noir exit
 
-        const a5in  = smoothstep(actProgress(p, 0.58, 0.67));
-        const a5out = smoothstep(actProgress(p, 0.75, 0.82));
+        const a5in  = smoothstep(actProgress(p, 0.66, 0.70));   // Cristal enter
+        const a5out = smoothstep(actProgress(p, 0.80, 0.84));   // Cristal exit
 
-        const a6in  = smoothstep(actProgress(p, 0.78, 0.87));
+        const a6in  = smoothstep(actProgress(p, 0.84, 0.90));   // Coffret enter
 
         // ── Backgrounds ────────────────────────────────────────────────────
 
@@ -676,9 +677,9 @@ export default function CinematicScroll() {
           style={{
             position: "absolute",
             left: "50%",
-            top: "50%",
+            top: "42%",
             transform: "translate(-50%, -50%) scale(1)",
-            width: "clamp(280px, 48vw, 680px)",
+            width: "clamp(320px, 60vw, 800px)",
             aspectRatio: "1400 / 943",
             opacity: 1,
             filter: "saturate(20%)",
@@ -1007,7 +1008,7 @@ export default function CinematicScroll() {
         >
           <ActTextBlock
             label="Le Coffret"
-            title="Offrir Libellule Senteurs, c'est offrir une âme"
+            title="Offrir une âme"
             align="center"
             titleSize="clamp(1.4rem, 2.8vw, 2.8rem)"
           />
