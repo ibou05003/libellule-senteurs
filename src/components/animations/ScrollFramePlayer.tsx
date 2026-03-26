@@ -192,21 +192,24 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
                 textShadow: "0 0 20px rgba(0,0,0,0.5)",
               }}
             >
-              Un objet. Un espace. Une attente...
+              Un simple objet blanc. Sans nom. Sans histoire.
             </p>
           )}
 
           {/* Brand reveal — visible after 70% scroll */}
           {progress > 0.7 && (
             <div
-              className="text-center space-y-2"
+              className="text-center space-y-3"
               style={{ opacity: (progress - 0.7) / 0.3 }}
             >
-              <p className="font-heading text-2xl md:text-4xl text-or-luxe">
-                Libellule Senteurs
+              <p className="font-body text-xs md:text-sm text-blanc-casse/50 tracking-[0.3em] uppercase">
+                Libellule Senteurs lui donne
               </p>
-              <p className="font-body text-sm md:text-base text-blanc-casse/70 tracking-widest">
-                C&apos;est lui donner une âme.
+              <p className="font-heading text-3xl md:text-5xl text-or-luxe">
+                Une Âme
+              </p>
+              <p className="font-body text-sm md:text-base text-blanc-casse/50 tracking-widest mt-2">
+                — Parfums d&apos;intérieur Haut de Gamme —
               </p>
             </div>
           )}

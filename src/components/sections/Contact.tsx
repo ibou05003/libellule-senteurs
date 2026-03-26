@@ -21,20 +21,20 @@ export default function Contact() {
     <section id="contact" className="min-h-screen flex items-center bg-noir-profond py-section px-8">
       <div className="max-w-2xl mx-auto w-full">
         <h2 className="font-heading text-3xl md:text-5xl text-or-luxe text-center mb-4">
-          Contact
+          Échangeons
         </h2>
-        <p className="font-body text-blanc-casse/50 text-center mb-16 text-sm tracking-widest">
-          Parlons de votre projet
+        <p className="font-body text-blanc-casse/50 text-center mb-16 text-sm tracking-widest uppercase">
+          Un espace à sublimer ? Écrivez-nous.
         </p>
 
         {submitted ? (
-          /* Confirmation state — intentionally terse. Luxury brands communicate
-             through restraint; a short, warm acknowledgement is more refined than
-             an elaborate "success" panel. */
+          /* Confirmation state — warm and on-brand. The message conveys care
+             and attention to detail, values central to the Libellule Senteurs
+             identity, while keeping the tone unhurried and refined. */
           <div className="text-center space-y-4">
-            <p className="font-heading text-2xl text-or-luxe">Merci</p>
+            <p className="font-heading text-2xl text-or-luxe">Message envoyé</p>
             <p className="font-body text-blanc-casse/70">
-              Nous vous répondrons dans les plus brefs délais.
+              Notre équipe vous répondra avec le soin que mérite chaque détail.
             </p>
           </div>
         ) : (

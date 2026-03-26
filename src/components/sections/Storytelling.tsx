@@ -81,6 +81,12 @@ export default function Storytelling() {
           rather than pushing it below it. Each word is an independent span so
           GSAP can tween individual word colours as the user scrolls. */}
       <div className="sticky top-1/2 -translate-y-1/2 z-10 max-w-3xl mx-auto -mt-[500px]">
+        {/* Section label — gold, always visible, anchors the reader before the
+            scroll-reveal text begins to animate in. Kept deliberately small so
+            it doesn't compete with the headline-scale story copy below. */}
+        <p className="font-body text-xs text-or-luxe/60 tracking-[0.3em] uppercase text-center mb-8">
+          Notre Histoire
+        </p>
         <p className="font-heading text-2xl md:text-4xl lg:text-5xl leading-relaxed md:leading-relaxed lg:leading-relaxed text-center">
           {words.map((word, i) => (
             <span

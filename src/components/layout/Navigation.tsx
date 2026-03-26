@@ -50,9 +50,27 @@ export default function Navigation() {
         }`}
       >
         <a href="#" className="flex items-center gap-3">
-          <span className="font-heading text-xl text-or-luxe">
-            Libellule Senteurs
-          </span>
+          {/* Dragonfly icon */}
+          <svg
+            viewBox="0 0 40 40"
+            className="w-8 h-8"
+            fill="none"
+            stroke="#C99700"
+            strokeWidth="1.2"
+          >
+            <circle cx="20" cy="20" r="16" />
+            <path d="M20 20 Q12 12 16 6 Q20 10 20 20" fill="#C99700" opacity="0.8" />
+            <path d="M20 20 Q28 12 24 6 Q20 10 20 20" fill="#C99700" opacity="0.6" />
+            <path d="M20 20 L20 32" strokeLinecap="round" />
+          </svg>
+          <div className="flex flex-col">
+            <span className="font-heading text-xl text-or-luxe leading-tight">
+              Libellule Senteurs
+            </span>
+            <span className="hidden sm:block font-body text-[10px] text-blanc-casse/40 tracking-[0.2em] uppercase leading-tight">
+              Parfums d&apos;intérieur Haut de Gamme
+            </span>
+          </div>
         </a>
 
         {/* Desktop navigation links */}

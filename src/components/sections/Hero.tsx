@@ -50,7 +50,7 @@ export default function Hero() {
          * Using `object-contain` preserves the full landscape composition
          * (diffuser + golden mist) instead of cropping it into a square.
          */}
-        <div className="relative w-[90vw] max-w-[700px] aspect-[16/9]">
+        <div className="relative w-[90vw] max-w-[800px] aspect-[16/9]">
           <Image
             src="/images/products/diffuseur-hero-fond-noir.webp"
             alt="Diffuseur Libellule Senteurs"

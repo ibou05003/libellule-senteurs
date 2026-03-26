@@ -26,15 +26,6 @@ const PRODUCTS = [
     image: "/images/products/diffuseur-batonnets.webp",
   },
   {
-    // parfum-cristal-hero gives this slot genuine visual variety — the cut-crystal
-    // flacon is tonally distinct from both the diffuser and the dark parfum-noir
-    // shot, while bougie-sans-marque is already the morph start frame and would
-    // read as a duplicate to anyone who scrolled through the ProductMorph section.
-    name: "Parfum Cristal",
-    description: "Cristal taillé, édition prestige",
-    image: "/images/products/parfum-cristal-hero.webp",
-  },
-  {
     name: "Huile Essentielle",
     description: "Flacon givré, bouchon doré",
     image: "/images/products/flacon-huile-essentielle.webp",
@@ -48,6 +39,11 @@ const PRODUCTS = [
     name: "Coffret Cadeau",
     description: "Écrin bordeaux avec logo doré",
     image: "/images/mockups/coffret-cadeau-bordeaux.webp",
+  },
+  {
+    name: "La Collection",
+    description: "L'ensemble de nos créations réunies",
+    image: "/images/mockups/collection-complete-packagings.webp",
   },
 ];
 
