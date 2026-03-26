@@ -366,21 +366,30 @@ export default function CinematicScroll() {
           bgSalonRef.current.style.opacity = String(opacity);
         }
 
+        // ── Golden Mist particles — fade out as backgrounds appear ─────────
+        const mistEl = document.getElementById("golden-mist-wrapper");
+        if (mistEl) {
+          // Fully visible during Act 1, fades out as Act 2 begins
+          const mistOpacity = Math.max(0, 1 - a2in * 2);
+          mistEl.style.opacity = String(mistOpacity);
+        }
+
         // ── Act 1: Hero collection ──────────────────────────────────────────
         if (prodHeroRef.current) {
-          // Fade in + desaturated→color over Act 1; fade out as Act 2 begins
-          const opacity = Math.max(0, a1 - a1fade);
-          const scale = lerp(0.88, 1, a1);
-          // Desaturation: starts at 80% grey, transitions to full color
-          const saturation = lerp(0, 100, a1);
+          // Hero is visible from the start (opacity 1 at p=0), fades out as Act 2 enters
+          const opacity = Math.max(0, 1 - a1fade);
+          const scale = lerp(1, 1.05, a1fade);
+          // Desaturation: starts greyscale at p=0, gains color as user scrolls the first 15%
+          const saturation = lerp(20, 100, Math.min(1, p / 0.10));
           prodHeroRef.current.style.opacity = String(opacity);
           prodHeroRef.current.style.transform = `translate(-50%, -50%) scale(${scale})`;
           prodHeroRef.current.style.filter = `saturate(${saturation}%)`;
         }
 
         if (textHeroRef.current) {
-          const opacity = Math.max(0, a1 - a1fade * 1.5);
-          const ty = lerp(30, 0, a1);
+          // Text visible from start, fades out with hero
+          const opacity = Math.max(0, 1 - a1fade * 1.5);
+          const ty = lerp(0, -20, a1fade);
           textHeroRef.current.style.opacity = String(opacity);
           textHeroRef.current.style.transform = `translateY(${ty}px)`;
         }
@@ -626,8 +635,19 @@ export default function CinematicScroll() {
           />
         </div>
 
-        {/* GoldenMist particles — visible during Act 1 */}
-        <GoldenMist className="absolute inset-0 z-[1]" />
+        {/* GoldenMist particles — visible during Act 1, fades as backgrounds appear */}
+        <div
+          id="golden-mist-wrapper"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            opacity: 1,
+            transition: "none",
+          }}
+        >
+          <GoldenMist />
+        </div>
 
         {/* ── Gold glow for crystal bottle (Act 5) ──────────────────────── */}
         <div
@@ -657,10 +677,11 @@ export default function CinematicScroll() {
             position: "absolute",
             left: "50%",
             top: "50%",
-            transform: "translate(-50%, -50%) scale(0.88)",
+            transform: "translate(-50%, -50%) scale(1)",
             width: "clamp(280px, 48vw, 680px)",
             aspectRatio: "1200 / 800",
-            opacity: 0,
+            opacity: 1,
+            filter: "saturate(20%)",
             zIndex: 5,
             pointerEvents: "none",
           }}
@@ -831,16 +852,16 @@ export default function CinematicScroll() {
 
         {/* ── Text layer ────────────────────────────────────────────────────── */}
 
-        {/* Act 1: Hero — centered */}
+        {/* Act 1: Hero — centered, visible from start */}
         <div
           ref={textHeroRef}
           style={{
             position: "absolute",
             left: "50%",
             bottom: "12%",
-            transform: "translateX(-50%) translateY(30px)",
+            transform: "translateX(-50%) translateY(0)",
             textAlign: "center",
-            opacity: 0,
+            opacity: 1,
             zIndex: 10,
             width: "clamp(280px, 60vw, 720px)",
             pointerEvents: "none",
