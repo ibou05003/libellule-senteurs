@@ -705,7 +705,7 @@ export default function CinematicScroll() {
             top: "50%",
             transform: "translate(calc(-50% + 120px), -50%) scale(0.82)",
             width: "clamp(160px, 22vw, 310px)",
-            aspectRatio: "981 / 1400",
+            aspectRatio: "492 / 1400",
             opacity: 0,
             zIndex: 5,
             pointerEvents: "none",
