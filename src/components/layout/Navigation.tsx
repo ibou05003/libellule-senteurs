@@ -96,7 +96,7 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center gap-2.5 px-10 py-4 border border-or-luxe/30 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer group"
+            className="hidden md:inline-flex items-center gap-2.5 px-12 py-5 bg-or-luxe/10 border border-or-luxe/25 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer group"
           >
             <span>Nous contacter</span>
             <svg
