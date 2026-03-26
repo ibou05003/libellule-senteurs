@@ -75,3 +75,28 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/**
+ * Accessibility: respect the user's motion preference.
+ *
+ * Users who have enabled "Reduce Motion" in their OS settings experience
+ * animations as disorienting or physically uncomfortable. This block:
+ *   1. Disables smooth scroll on <html> so anchor jumps are instant.
+ *   2. Collapses all animation and transition durations to near-zero so
+ *      GSAP, CSS keyframes, and CSS transitions effectively disappear.
+ *      The !important overrides are intentional — they must win over any
+ *      library-injected inline styles or component-level CSS.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

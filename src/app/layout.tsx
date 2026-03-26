@@ -33,6 +33,11 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
+  // theme-color ensures the browser chrome (address bar, status bar on mobile)
+  // matches the site's dark background — important for the immersive feel.
+  other: {
+    "theme-color": "#000000",
+  },
 };
 
 export default function RootLayout({
