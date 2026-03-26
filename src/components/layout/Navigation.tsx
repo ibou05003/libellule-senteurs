@@ -33,10 +33,10 @@ export default function Navigation() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-noir-profond/90 backdrop-blur-md [&>div]:py-4 [&>div]:md:py-5" : ""
+          scrolled ? "bg-noir-profond/90 backdrop-blur-md [&>div]:min-h-[60px] [&>div]:md:min-h-[68px] [&>div]:lg:min-h-[72px]" : ""
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16 py-6 md:py-8 lg:py-10">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16 min-h-[72px] md:min-h-[88px] lg:min-h-[100px] py-4">
           {/* Logo mark + wordmark */}
           <a href="#" className="flex items-center gap-3">
             <svg
