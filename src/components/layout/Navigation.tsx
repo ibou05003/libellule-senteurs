@@ -40,11 +40,12 @@ export default function Navigation() {
         }`}
       >
         <div
-          className={`max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16 transition-all duration-700 ${
+          className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-700 ${
             scrolled
               ? "min-h-[64px] md:min-h-[68px]"
               : "min-h-[80px] md:min-h-[96px] lg:min-h-[108px]"
           }`}
+          style={{ paddingInline: "clamp(1.5rem, 3vw, 4rem)" }}
         >
           {/* Logo mark + wordmark */}
           <a
@@ -99,7 +100,8 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center justify-center min-w-[180px] px-8 py-3.5 bg-or-luxe text-noir-profond text-[10px] tracking-[0.25em] uppercase font-body font-medium hover:bg-or-luxe/90 active:bg-or-luxe/80 transition-all duration-500 cursor-pointer"
+            className="hidden md:inline-flex items-center justify-center min-w-[180px] py-3.5 bg-or-luxe text-noir-profond text-[10px] tracking-[0.25em] uppercase font-body font-medium hover:bg-or-luxe/90 active:bg-or-luxe/80 transition-all duration-500 cursor-pointer"
+            style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
           >
             Nous contacter
           </a>
@@ -168,8 +170,10 @@ export default function Navigation() {
           <a
             href="#contact"
             onClick={closeMenu}
-            className="mt-4 px-10 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer min-h-[44px] flex items-center"
+            className="mt-4 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer min-h-[44px] flex items-center"
             style={{
+              paddingLeft: "2.5rem",
+              paddingRight: "2.5rem",
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? "translateY(0)" : "translateY(12px)",
               transition: `opacity 0.4s ease 0.42s, transform 0.4s ease 0.42s`,

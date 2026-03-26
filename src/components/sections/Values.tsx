@@ -127,7 +127,8 @@ export default function Values() {
     <section
       ref={sectionRef}
       id="valeurs"
-      className="bg-noir-profond py-24 md:py-32 lg:py-40 px-6"
+      className="bg-noir-profond py-24 md:py-32 lg:py-40"
+      style={{ paddingInline: "1.5rem" }}
     >
       <div className="w-full">
         <div className="text-center mb-14 md:mb-20">

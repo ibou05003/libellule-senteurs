@@ -66,13 +66,13 @@ export default function Marquee({
     >
       <div ref={trackRef} className="flex whitespace-nowrap">
         {/* Three copies ensure the track is always wider than the viewport */}
-        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase" style={{ paddingInline: "1rem" }}>
           {text}
         </span>
-        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase" style={{ paddingInline: "1rem" }}>
           {text}
         </span>
-        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase" style={{ paddingInline: "1rem" }}>
           {text}
         </span>
       </div>

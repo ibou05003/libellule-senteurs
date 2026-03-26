@@ -101,8 +101,9 @@ export default function Hero() {
           {/* Headline */}
           <div
             ref={textWrapRef}
-            className="text-center mt-8 md:mt-10 px-6"
+            className="text-center mt-8 md:mt-10"
             style={{
+              paddingInline: "1.5rem",
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(20px)",
               transition: "opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s",

@@ -142,8 +142,9 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
               Text shadow ensures legibility against the off-white background at low progress. */}
           {progress < 0.3 && (
             <p
-              className="max-w-lg mx-auto text-center font-heading text-xl md:text-3xl px-8 leading-[1.4]"
+              className="max-w-lg mx-auto text-center font-heading text-xl md:text-3xl leading-[1.4]"
               style={{
+                paddingInline: "2rem",
                 opacity: 1 - progress / 0.3,
                 color: `rgb(${Math.round(channel * 0.1)}, ${Math.round(channel * 0.1)}, ${Math.round(channel * 0.1)})`,
                 textShadow: progress < 0.15 ? "0 2px 20px rgba(0,0,0,0.12)" : "none",
@@ -156,8 +157,8 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           {/* Brand reveal — visible after 70% scroll */}
           {progress > 0.7 && (
             <div
-              className="max-w-lg mx-auto text-center space-y-3 px-8"
-              style={{ opacity: (progress - 0.7) / 0.3 }}
+              className="max-w-lg mx-auto text-center space-y-3"
+              style={{ paddingInline: "2rem", opacity: (progress - 0.7) / 0.3 }}
             >
               {/* /60 on a near-black background (#000 at this scroll depth) passes
                   the 4.5:1 threshold for body text and 3:1 for large text */}

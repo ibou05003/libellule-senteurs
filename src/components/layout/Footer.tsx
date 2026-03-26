@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="bg-noir-profond border-t border-blanc-casse/[0.06]">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
+      <div className="max-w-7xl mx-auto" style={{ paddingInline: "clamp(1.5rem, 3vw, 4rem)" }}>
 
         {/* Main footer content */}
         <div className="py-16 md:py-20 lg:py-24 flex flex-col items-center text-center gap-10">

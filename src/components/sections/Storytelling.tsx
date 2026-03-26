@@ -78,7 +78,7 @@ export default function Storytelling() {
        * Sticky text block: stays centered in the viewport for the full scroll
        * distance of the section, giving GSAP time to animate all the words in.
        */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-8">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center" style={{ paddingInline: "2rem" }}>
         {/* Section label — consistent pattern with other sections */}
         <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-10 md:mb-14">
           Notre Histoire

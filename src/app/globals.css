@@ -31,9 +31,9 @@
   --color-blanc-casse: #F8F8F8;
 }
 
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 

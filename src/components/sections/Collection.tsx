@@ -32,7 +32,7 @@ const PRODUCTS = [
 
 export default function Collection() {
   return (
-    <section id="collection" className="bg-noir-profond py-24 md:py-32 lg:py-40 px-6">
+    <section id="collection" className="bg-noir-profond py-24 md:py-32 lg:py-40" style={{ paddingInline: "1.5rem" }}>
       <div className="max-w-6xl mx-auto">
         {/* Centered heading */}
         <div className="w-full text-center mb-16 md:mb-24">
