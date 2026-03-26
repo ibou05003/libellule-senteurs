@@ -26,7 +26,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="bg-noir-profond py-24 md:py-32 lg:py-40"
+      className="bg-noir-profond py-24 md:py-32 lg:py-40 px-6"
     >
       <div className="max-w-xl mx-auto px-6">
         {/* Section heading — consistent two-line pattern.

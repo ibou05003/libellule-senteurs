@@ -88,10 +88,13 @@ export default function Storytelling() {
             <span
               key={i}
               ref={(el) => { if (el) wordsRef.current[i] = el; }}
-              className="inline-block mr-[0.28em]"
+              className="inline-block"
               // Start dark so GSAP has a visible state to tween from.
               // Reduced-motion skips the animation and shows full brightness.
-              style={{ color: reduced ? "#F8F8F8" : "#555555" }}
+              // marginRight via inline style instead of Tailwind arbitrary value —
+              // Tailwind v4 does not always generate arbitrary classes at build time,
+              // making inline style the reliable choice for dynamic spacing.
+              style={{ color: reduced ? "#F8F8F8" : "#555555", marginRight: "0.35em" }}
             >
               {word}
             </span>

@@ -130,7 +130,7 @@ export default function Values() {
       className="bg-noir-profond py-24 md:py-32 lg:py-40 px-6"
     >
       <div className="w-full">
-        <div className="text-center mb-20 md:mb-28">
+        <div className="text-center mb-14 md:mb-20">
           <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
             Ce qui nous définit
           </p>
