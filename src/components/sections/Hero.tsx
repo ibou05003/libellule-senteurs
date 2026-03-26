@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,111 +11,203 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
-  const [visible, setVisible] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const productRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const sticksTextRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
-  const taglineRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
 
+  // Loading screen gate
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), LOADING_SCREEN.heroRevealDelay);
+    const timer = setTimeout(() => setLoaded(true), LOADING_SCREEN.heroRevealDelay);
     return () => clearTimeout(timer);
   }, []);
 
-  // Professional multi-layer parallax
+  // Scroll-driven reveal + parallax
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || !loaded) return;
     const section = sectionRef.current;
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      // Layer 1: Product moves up slowly — the anchor
+      // ═══════════════════════════════════════════════════════
+      // PHASE 1: SCROLL REVEAL (0% → 40% of section scroll)
+      // Product rises from below and scales from 1.6x to 1x
+      // ═══════════════════════════════════════════════════════
       if (productRef.current) {
+        // Start state: scaled up, pushed down, slightly transparent
+        gsap.set(productRef.current, {
+          scale: 1.6,
+          y: 200,
+          opacity: 0.3,
+        });
+
+        // Reveal animation
         gsap.to(productRef.current, {
-          y: -60,
-          scale: 0.95,
-          ease: "none",
+          scale: 1,
+          y: 0,
+          opacity: 1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: section,
             start: "top top",
+            end: "40% top",
+            scrub: 0.8,
+          },
+        });
+
+        // After reveal: subtle parallax drift
+        gsap.to(productRef.current, {
+          y: -80,
+          scale: 0.96,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "40% top",
             end: "bottom top",
             scrub: true,
           },
         });
       }
 
-      // Layer 2: Logo on bottle — barely moves (feels painted on)
+      // ═══════════════════════════════════════════════════════
+      // PHASE 2: ELEMENTS APPEAR (staggered after product reveal)
+      // ═══════════════════════════════════════════════════════
+
+      // Logo on bottle — fades in after product is revealed
       if (logoRef.current) {
+        gsap.set(logoRef.current, { opacity: 0, scale: 0.8 });
         gsap.to(logoRef.current, {
-          y: -55,
+          opacity: 1,
+          scale: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "30% top",
+            end: "45% top",
+            scrub: 0.5,
+          },
+        });
+        // Parallax: logo follows product
+        gsap.to(logoRef.current, {
+          y: -75,
           ease: "none",
           scrollTrigger: {
             trigger: section,
-            start: "top top",
+            start: "40% top",
             end: "bottom top",
             scrub: true,
           },
         });
       }
 
-      // Layer 3: Text between sticks — moves faster (closer to viewer)
+      // "SENTEURS" ghost text between sticks
       if (sticksTextRef.current) {
+        gsap.set(sticksTextRef.current, { opacity: 0, y: 30 });
         gsap.to(sticksTextRef.current, {
-          y: -120,
+          opacity: 1,
+          y: 0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "25% top",
+            end: "40% top",
+            scrub: 0.5,
+          },
+        });
+        // Parallax: moves faster than product
+        gsap.to(sticksTextRef.current, {
+          y: -160,
           ease: "none",
           scrollTrigger: {
             trigger: section,
-            start: "top top",
+            start: "40% top",
             end: "bottom top",
             scrub: true,
           },
         });
       }
 
-      // Layer 4: Headline — fastest (foreground)
+      // Headline
       if (headlineRef.current) {
+        gsap.set(headlineRef.current, { opacity: 0, y: 40 });
         gsap.to(headlineRef.current, {
-          y: -180,
+          opacity: 1,
+          y: 0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "35% top",
+            end: "50% top",
+            scrub: 0.5,
+          },
+        });
+        // Parallax: fades and rises out
+        gsap.to(headlineRef.current, {
+          y: -200,
           opacity: 0,
           ease: "none",
           scrollTrigger: {
             trigger: section,
-            start: "top top",
+            start: "55% top",
+            end: "85% top",
+            scrub: true,
+          },
+        });
+      }
+
+      // Subtitle
+      if (subtitleRef.current) {
+        gsap.set(subtitleRef.current, { opacity: 0, y: 30 });
+        gsap.to(subtitleRef.current, {
+          opacity: 1,
+          y: 0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "40% top",
+            end: "55% top",
+            scrub: 0.5,
+          },
+        });
+        gsap.to(subtitleRef.current, {
+          y: -220,
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "55% top",
             end: "80% top",
             scrub: true,
           },
         });
       }
 
-      // Layer 5: Tagline
-      if (taglineRef.current) {
-        gsap.to(taglineRef.current, {
-          y: -200,
-          opacity: 0,
-          ease: "none",
+      // Glow — grows and drifts
+      if (glowRef.current) {
+        gsap.set(glowRef.current, { scale: 0.5, opacity: 0 });
+        gsap.to(glowRef.current, {
+          scale: 1,
+          opacity: 1,
+          ease: "power1.out",
           scrollTrigger: {
             trigger: section,
-            start: "top top",
-            end: "70% top",
-            scrub: true,
+            start: "10% top",
+            end: "40% top",
+            scrub: 0.5,
           },
         });
-      }
-
-      // Layer 6: Glow — drifts and expands
-      if (glowRef.current) {
         gsap.to(glowRef.current, {
-          y: -30,
-          scale: 1.3,
-          opacity: 0.5,
+          y: -50,
+          scale: 1.4,
           ease: "none",
           scrollTrigger: {
             trigger: section,
-            start: "top top",
+            start: "40% top",
             end: "bottom top",
             scrub: true,
           },
@@ -124,140 +216,116 @@ export default function Hero() {
     }, section);
 
     return () => ctx.revert();
-  }, [reduced]);
+  }, [reduced, loaded]);
 
   return (
     <section
       ref={sectionRef}
       id="hero"
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-noir-profond"
+      className="relative bg-noir-profond overflow-hidden"
+      style={{ height: "200vh" }}
     >
-      {/* Layer 0: Ambient particle canvas */}
-      <GoldenMist />
+      {/* Sticky viewport — stays on screen while user scrolls through 200vh */}
+      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
 
-      {/* Layer 1: Glow behind product */}
-      <div
-        ref={glowRef}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none z-[2]"
-      >
-        <div className="w-[400px] h-[600px] md:w-[500px] md:h-[700px] bg-or-luxe/[0.06] rounded-full blur-[120px]" />
-      </div>
+        {/* Layer 0: Ambient particles */}
+        <GoldenMist />
 
-      {/* Product composition — all layers positioned relative to this container */}
-      <div className="relative z-10 flex flex-col items-center">
+        {/* Layer 1: Glow */}
+        <div
+          ref={glowRef}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none z-[2]"
+        >
+          <div className="w-[350px] h-[550px] md:w-[450px] md:h-[700px] bg-or-luxe/[0.07] rounded-full blur-[120px]" />
+        </div>
 
-        {/* The product container — takes up most of the viewport */}
-        <div className="relative">
-          {/* Product image — LARGE */}
-          <div
-            ref={productRef}
-            className="relative w-[55vw] max-w-[400px] md:w-[40vw] md:max-w-[480px] lg:max-w-[520px] aspect-[904/1200]"
-          >
-            <Image
-              src="/images/products/diffuseur-hero-portrait.webp"
-              alt="Diffuseur Libellule Senteurs"
-              fill
-              className="object-contain drop-shadow-[0_20px_60px_rgba(201,151,0,0.12)]"
-              priority
-            />
+        {/* Layer 2: Product composition */}
+        <div className="relative z-10 flex flex-col items-center">
+          <div className="relative">
+            {/* The diffuser — VERY LARGE */}
+            <div
+              ref={productRef}
+              className="relative w-[65vw] max-w-[450px] md:w-[45vw] md:max-w-[550px] lg:max-w-[600px] aspect-[904/1200]"
+            >
+              <Image
+                src="/images/products/diffuseur-hero-portrait.webp"
+                alt="Diffuseur Libellule Senteurs"
+                fill
+                className="object-contain drop-shadow-[0_25px_80px_rgba(201,151,0,0.1)]"
+                priority
+                sizes="(max-width: 768px) 65vw, 550px"
+              />
+            </div>
+
+            {/* Logo on the bottle body */}
+            <div
+              ref={logoRef}
+              className="absolute pointer-events-none"
+              style={{
+                top: "56%",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}
+            >
+              <svg
+                viewBox="0 0 80 80"
+                className="w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 mx-auto"
+                fill="none"
+                stroke="#C99700"
+                strokeWidth="0.8"
+              >
+                <circle cx="40" cy="40" r="28" opacity="0.5" />
+                <path d="M40 40 Q28 28 34 16 Q40 24 40 40" fill="#C99700" opacity="0.6" />
+                <path d="M40 40 Q52 28 46 16 Q40 24 40 40" fill="#C99700" opacity="0.4" />
+                <path d="M40 40 L40 56" strokeLinecap="round" opacity="0.5" />
+              </svg>
+              <p className="font-heading text-[7px] md:text-[9px] lg:text-[10px] text-or-luxe/60 tracking-[0.12em] text-center mt-px whitespace-nowrap">
+                Libellule Senteurs
+              </p>
+            </div>
+
+            {/* Ghost text floating between sticks */}
+            <div
+              ref={sticksTextRef}
+              className="absolute pointer-events-none text-center w-full"
+              style={{ top: "5%", left: 0 }}
+            >
+              <p className="font-heading text-blanc-casse/[0.08] text-5xl md:text-6xl lg:text-7xl tracking-[0.2em] whitespace-nowrap select-none">
+                SENTEURS
+              </p>
+            </div>
           </div>
 
-          {/* Logo overlay on the bottle body */}
-          <div
-            ref={logoRef}
-            className="absolute pointer-events-none"
-            style={{
-              top: "58%",
-              left: "50%",
-              transform: "translateX(-50%)",
-              opacity: visible ? 1 : 0,
-              transition: "opacity 1.5s ease-out 2s",
-            }}
-          >
-            <svg
-              viewBox="0 0 80 80"
-              className="w-12 h-12 md:w-16 md:h-16"
-              fill="none"
-              stroke="#C99700"
-              strokeWidth="1"
-            >
-              <circle cx="40" cy="40" r="30" opacity="0.6" />
-              <path d="M40 40 Q28 28 34 16 Q40 24 40 40" fill="#C99700" opacity="0.7" />
-              <path d="M40 40 Q52 28 46 16 Q40 24 40 40" fill="#C99700" opacity="0.5" />
-              <path d="M40 40 L40 58" strokeLinecap="round" opacity="0.6" />
-            </svg>
-            <p
-              className="font-heading text-[8px] md:text-[10px] text-or-luxe/70 tracking-[0.15em] text-center mt-0.5 whitespace-nowrap"
-            >
-              Libellule Senteurs
+          {/* Headline */}
+          <div ref={headlineRef} className="text-center mt-6 md:mt-10">
+            <h1 className="font-heading text-xl md:text-3xl lg:text-5xl text-blanc-casse leading-tight">
+              L&apos;essence du raffinement
+              <br />
+              <span className="text-or-luxe">invisible</span>
+            </h1>
+          </div>
+
+          {/* Subtitle */}
+          <div ref={subtitleRef} className="text-center mt-3 md:mt-5">
+            <p className="font-body text-[10px] md:text-xs text-blanc-casse/25 tracking-[0.3em] uppercase">
+              Parfums d&apos;intérieur Haut de Gamme — Dakar
             </p>
           </div>
-
-          {/* Text floating between the sticks */}
-          <div
-            ref={sticksTextRef}
-            className="absolute pointer-events-none text-center"
-            style={{
-              top: "8%",
-              left: "50%",
-              transform: "translateX(-50%)",
-              opacity: visible ? 1 : 0,
-              transition: "opacity 1.2s ease-out 1.8s",
-            }}
-          >
-            <p className="font-heading text-blanc-casse/[0.12] text-4xl md:text-5xl lg:text-6xl tracking-[0.15em] whitespace-nowrap select-none">
-              SENTEURS
-            </p>
-          </div>
         </div>
 
-        {/* Headline below the product */}
-        <div ref={headlineRef} className="text-center mt-6 md:mt-8 space-y-3">
-          <h1
-            className="font-heading text-2xl md:text-4xl lg:text-5xl text-blanc-casse"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(20px)",
-              transition: "opacity 0.8s ease-out 0.5s, transform 0.8s ease-out 0.5s",
-            }}
-          >
-            L&apos;essence du raffinement invisible
-          </h1>
-          <p
-            className="font-heading text-lg md:text-xl text-or-luxe tracking-[0.2em]"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(15px)",
-              transition: "opacity 0.8s ease-out 1.2s, transform 0.8s ease-out 1.2s",
-            }}
-          >
-            Libellule Senteurs
-          </p>
+        {/* Bottom gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-noir-profond via-noir-profond/60 to-transparent z-[15] pointer-events-none" />
+
+        {/* Scroll cue — only visible at the very start */}
+        <div
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+          style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.5s ease-out 3s" }}
+        >
+          <span className="text-blanc-casse/25 text-[10px] font-body tracking-[0.3em] uppercase">
+            Scroll
+          </span>
+          <div className="w-px h-6 bg-or-luxe/25 animate-pulse" />
         </div>
-
-        {/* Tagline */}
-        <div ref={taglineRef}>
-          <p
-            className="font-body text-[10px] md:text-xs text-blanc-casse/25 tracking-[0.3em] uppercase mt-4"
-            style={{
-              opacity: visible ? 1 : 0,
-              transition: "opacity 1s ease-out 2.5s",
-            }}
-          >
-            Parfums d&apos;intérieur Haut de Gamme — Dakar
-          </p>
-        </div>
-      </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-noir-profond via-noir-profond/50 to-transparent z-10 pointer-events-none" />
-
-      {/* Scroll cue */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
-        <span className="text-blanc-casse/30 text-[10px] font-body tracking-[0.3em] uppercase">
-          Découvrir
-        </span>
-        <div className="w-px h-6 bg-or-luxe/30 animate-pulse" />
       </div>
     </section>
   );
