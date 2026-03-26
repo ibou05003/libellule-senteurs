@@ -37,7 +37,14 @@ export default function Hero() {
 
       {/* Central product image + text block */}
       <div className="relative z-10 flex flex-col items-center gap-8">
-        <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
+        {/*
+         * Container sized to the image's native 16:9 ratio.
+         * `90vw` width keeps the image fluid on narrow viewports while
+         * `max-w-[700px]` prevents it from dominating large screens.
+         * Using `object-contain` preserves the full landscape composition
+         * (diffuser + golden mist) instead of cropping it into a square.
+         */}
+        <div className="relative w-[90vw] max-w-[700px] aspect-[16/9]">
           <Image
             src="/images/products/diffuseur-hero-fond-noir.webp"
             alt="Diffuseur Libellule Senteurs"

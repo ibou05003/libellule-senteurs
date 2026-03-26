@@ -53,12 +53,18 @@ export default function ProductCard({ name, description, image }: ProductCardPro
       onMouseMove={reduced ? undefined : handleMouseMove}
       onMouseLeave={reduced ? undefined : handleMouseLeave}
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-blanc-casse/5 rounded-sm">
+      {/*
+       * `aspect-square` is the most neutral container for a mixed set of
+       * portrait, landscape, and square product images. `object-contain`
+       * ensures no image is cropped regardless of its native ratio, while
+       * `p-4` gives every product breathing room inside the card boundary.
+       */}
+      <div className="relative aspect-square overflow-hidden bg-blanc-casse/5 rounded-sm">
         <Image
           src={image}
           alt={name}
           fill
-          className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+          className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
         />
         {/* Gold light reflection overlay — simulates a specular highlight that
             shifts with the tilt, reinforcing the 3D illusion */}

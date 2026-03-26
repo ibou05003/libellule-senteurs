@@ -100,10 +100,14 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
       <div
         className={`relative min-h-screen flex items-center justify-center bg-noir-profond ${className ?? ""}`}
       >
-        <div className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
+        {/*
+         * Reduced-motion fallback: show the final branded state statically.
+         * Container matches the 16:9 ratio of the landscape packagings image.
+         */}
+        <div className="relative w-[90vw] max-w-[700px] aspect-[16/9]">
           <Image
-            src="/images/products/bougie-parfumee-dimensions.webp"
-            alt="Bougie Libellule Senteurs"
+            src="/images/mockups/collection-complete-packagings.webp"
+            alt="Collection complète Libellule Senteurs"
             fill
             className="object-contain"
           />
@@ -130,7 +134,12 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           className="absolute inset-0 flex items-center justify-center"
           style={{ opacity: 1 - progress }}
         >
-          <div className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
+          {/*
+           * Both morph layers share the same 16:9 container dimensions so the
+           * cross-fade is a true overlap with no layout shift mid-transition.
+           * `bougie-sans-marque` is landscape (2000×1090) — a good fit for 16:9.
+           */}
+          <div className="relative w-[90vw] max-w-[700px] aspect-[16/9]">
             <Image
               src="/images/products/bougie-sans-marque.webp"
               alt=""
@@ -142,15 +151,20 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           </div>
         </div>
 
-        {/* ── Layer 2: Branded product (fades in) ── */}
+        {/* ── Layer 2: Full branded collection (fades in) ── */}
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{ opacity: progress }}
         >
-          <div className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
+          {/*
+           * `collection-complete-packagings` shows all 4 products with the
+           * Libellule Senteurs branding — the ideal "reveal" end state.
+           * Same container dimensions as Layer 1 for a clean cross-fade.
+           */}
+          <div className="relative w-[90vw] max-w-[700px] aspect-[16/9]">
             <Image
-              src="/images/products/bougie-parfumee-dimensions.webp"
-              alt="Bougie Libellule Senteurs"
+              src="/images/mockups/collection-complete-packagings.webp"
+              alt="Collection complète Libellule Senteurs"
               fill
               className="object-contain"
             />

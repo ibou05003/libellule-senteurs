@@ -8,6 +8,17 @@ import ProductCard from "@/components/ui/ProductCard";
  * Descriptions are concise sensory cues — they help the user imagine handling
  * the object without requiring them to read long copy.
  */
+/**
+ * Product catalogue entries.
+ *
+ * Image selection rationale:
+ * - `bougie-sans-marque` replaces the technical-drawing candle image that had
+ *   visible "7.1cm × 8cm" dimension annotations — not suitable for display.
+ * - `parfum-noir-boite` replaces the dramatic fire/embers shot which felt
+ *   tonally inconsistent with the rest of the collection grid.
+ * - `coffret-cadeau-bordeaux` adds a fifth product slot using the branded
+ *   gift-box mockup — rounds out the lineup with a gifting option.
+ */
 const PRODUCTS = [
   {
     name: "Diffuseur à Bâtonnets",
@@ -15,9 +26,9 @@ const PRODUCTS = [
     image: "/images/products/diffuseur-batonnets.webp",
   },
   {
-    name: "Bougie Parfumée",
-    description: "Pot blanc, 7.1cm × 8cm",
-    image: "/images/products/bougie-parfumee-dimensions.webp",
+    name: "Bougie Signature",
+    description: "Céramique blanche, cire naturelle",
+    image: "/images/products/bougie-sans-marque.webp",
   },
   {
     name: "Huile Essentielle",
@@ -30,9 +41,9 @@ const PRODUCTS = [
     image: "/images/products/parfum-noir-boite.webp",
   },
   {
-    name: "Parfum Cristal",
-    description: "Cristal taillé, version luxe",
-    image: "/images/products/parfum-cristal-hero.webp",
+    name: "Coffret Cadeau",
+    description: "Écrin bordeaux avec logo doré",
+    image: "/images/mockups/coffret-cadeau-bordeaux.webp",
   },
 ];
 
