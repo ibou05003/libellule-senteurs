@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type ProductCardProps = {
   name: string;
@@ -12,6 +13,10 @@ type ProductCardProps = {
 
 export default function ProductCard({ name, description, image }: ProductCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  // Respect the OS-level "reduce motion" accessibility preference.
+  // When active, we skip the 3D tilt entirely — no mouse handlers, no GSAP
+  // animations — so users who experience vestibular discomfort are unaffected.
+  const reduced = useReducedMotion();
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const card = cardRef.current;
@@ -45,8 +50,8 @@ export default function ProductCard({ name, description, image }: ProductCardPro
       ref={cardRef}
       className="group relative flex-shrink-0 w-[280px] md:w-[320px] cursor-pointer"
       style={{ perspective: "800px", transformStyle: "preserve-3d" }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={reduced ? undefined : handleMouseMove}
+      onMouseLeave={reduced ? undefined : handleMouseLeave}
     >
       <div className="relative aspect-[3/4] overflow-hidden bg-blanc-casse/5 rounded-sm">
         <Image

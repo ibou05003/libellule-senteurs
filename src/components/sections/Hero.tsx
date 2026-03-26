@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import GoldenMist from "@/components/animations/GoldenMist";
 import TextReveal from "@/components/animations/TextReveal";
+import { LOADING_SCREEN } from "@/lib/constants";
 
 /**
  * Full-screen hero section.
@@ -19,8 +20,10 @@ export default function Hero() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Delay hero content appearance to let loading screen finish
-    const timer = setTimeout(() => setVisible(true), 3200);
+    // Delay hero content appearance until the loading screen has fully faded out.
+    // Using LOADING_SCREEN.heroRevealDelay ensures this value stays in sync with
+    // the loading screen animation timing defined in src/lib/constants.ts.
+    const timer = setTimeout(() => setVisible(true), LOADING_SCREEN.heroRevealDelay);
     return () => clearTimeout(timer);
   }, []);
 

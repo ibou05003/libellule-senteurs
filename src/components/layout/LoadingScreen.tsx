@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { LOADING_SCREEN } from "@/lib/constants";
 
 type LoadingScreenProps = {
   onComplete: () => void;
@@ -10,11 +11,13 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [phase, setPhase] = useState<"drawing" | "revealing" | "done">("drawing");
 
   useEffect(() => {
-    const drawTimer = setTimeout(() => setPhase("revealing"), 2000);
+    // drawDuration: time to let the SVG stroke animation finish before fading
+    const drawTimer = setTimeout(() => setPhase("revealing"), LOADING_SCREEN.drawDuration);
+    // totalDuration: draw + fade — after this the overlay is invisible and can unmount
     const doneTimer = setTimeout(() => {
       setPhase("done");
       onComplete();
-    }, 2800);
+    }, LOADING_SCREEN.totalDuration);
 
     return () => {
       clearTimeout(drawTimer);

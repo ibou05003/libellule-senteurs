@@ -51,17 +51,31 @@ export default function GoldenMist({ className }: { className?: string }) {
     const g = parseInt(hex.substring(2, 4), 16);
     const b = parseInt(hex.substring(4, 6), 16);
 
+    // Declare the particle array and dimension helpers before the resize handler
+    // so the handler can safely iterate particles when called on subsequent resizes.
+    const particles: Particle[] = [];
+    const w = () => canvas.offsetWidth;
+    const h = () => canvas.offsetHeight;
+
     const resize = () => {
       canvas.width = canvas.offsetWidth * window.devicePixelRatio;
       canvas.height = canvas.offsetHeight * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      // After a resize the logical canvas dimensions change, so existing particle
+      // coordinates can end up outside the new viewport — producing a visible jump
+      // on the next frame as the out-of-bounds check recycles them one by one.
+      // Resetting all positions here distributes particles uniformly within the
+      // new dimensions immediately, keeping the effect seamless across orientations
+      // and window resizes. The array is empty on the initial call, so this loop
+      // is a safe no-op at startup.
+      for (const p of particles) {
+        p.x = Math.random() * w();
+        p.y = Math.random() * h();
+      }
     };
     resize();
     window.addEventListener("resize", resize);
-
-    const particles: Particle[] = [];
-    const w = () => canvas.offsetWidth;
-    const h = () => canvas.offsetHeight;
 
     const createParticle = (): Particle => ({
       x: Math.random() * w(),
