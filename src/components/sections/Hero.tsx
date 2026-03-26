@@ -85,7 +85,7 @@ export default function Hero() {
             {/* Product image — height capped at 45vh to leave room for headline.
                 New image (diffuseur-batonnets-detour) carries the real brand logo,
                 so no SVG overlay or ghost text is needed. */}
-            <div className="relative mx-auto h-[40vh] md:h-[45vh] aspect-[497/1400]">
+            <div className="relative mx-auto h-[40vh] md:h-[45vh] aspect-[497/1400]" style={{ marginInline: "auto" }}>
               <Image
                 src="/images/products/diffuseur-batonnets-detour.webp"
                 alt="Diffuseur Libellule Senteurs"

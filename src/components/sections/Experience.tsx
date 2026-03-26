@@ -93,7 +93,7 @@ export default function Experience() {
 
         {/* Title panel */}
         <div className="relative flex-shrink-0 w-full md:w-screen h-[60vh] md:h-[85vh] flex items-center justify-center">
-          <div className="text-center max-w-4xl mx-auto" style={{ paddingInline: "2rem" }}>
+          <div className="text-center max-w-4xl mx-auto" style={{ paddingInline: "2rem", marginInline: "auto" }}>
             <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
               Nos parfums dans leur élément
             </p>

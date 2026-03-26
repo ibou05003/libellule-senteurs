@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="bg-noir-profond border-t border-blanc-casse/[0.06]">
-      <div className="max-w-7xl mx-auto" style={{ paddingInline: "clamp(1.5rem, 3vw, 4rem)" }}>
+      <div className="max-w-7xl mx-auto" style={{ paddingInline: "clamp(1.5rem, 3vw, 4rem)", marginInline: "auto" }}>
 
         {/* Main footer content */}
         <div className="py-16 md:py-20 lg:py-24 flex flex-col items-center text-center gap-10">
@@ -11,6 +11,7 @@ export default function Footer() {
             <svg
               viewBox="0 0 36 36"
               className="w-10 h-10 mx-auto mb-4"
+              style={{ display: "block", marginInline: "auto" }}
               fill="none"
               stroke="#C99700"
               strokeWidth="1"

@@ -29,7 +29,7 @@ export default function Contact() {
       className="bg-noir-profond py-24 md:py-32 lg:py-40"
       style={{ paddingInline: "1.5rem" }}
     >
-      <div className="max-w-xl mx-auto" style={{ paddingInline: "1.5rem" }}>
+      <div className="max-w-xl mx-auto" style={{ paddingInline: "1.5rem", marginInline: "auto" }}>
         {/* Section heading — consistent two-line pattern.
             w-full ensures the text-center container spans the full column width
             so the heading is truly centred on all viewports. */}
@@ -55,7 +55,7 @@ export default function Contact() {
               </svg>
             </div>
             <p className="font-heading text-2xl text-blanc-casse">Message envoyé</p>
-            <p className="font-body text-sm text-blanc-casse/50 leading-[1.8] max-w-xs mx-auto">
+            <p className="font-body text-sm text-blanc-casse/50 leading-[1.8] max-w-xs mx-auto" style={{ marginInline: "auto" }}>
               Notre équipe vous répondra avec le soin que mérite chaque détail.
             </p>
           </div>

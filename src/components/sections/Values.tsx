@@ -140,7 +140,7 @@ export default function Values() {
           </h2>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14 md:gap-10 lg:gap-8">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14 md:gap-10 lg:gap-8" style={{ marginInline: "auto" }}>
           {VALUES.map((value, i) => (
             <div
               key={value.name}

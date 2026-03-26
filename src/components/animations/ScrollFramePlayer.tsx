@@ -86,7 +86,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
   if (reduced) {
     return (
       <div className={`relative min-h-screen flex items-center justify-center bg-noir-profond ${className ?? ""}`}>
-        <div className={imageContainer}>
+        <div className={imageContainer} style={{ marginInline: "auto" }}>
           <Image
             src="/images/mockups/collection-complete-packagings.webp"
             alt="Collection complète Libellule Senteurs"
@@ -113,7 +113,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
             brightness ramps from 0.7 to 1.0 so the image lifts as color appears,
             reinforcing the narrative of the brand "breathing life" into the product. */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className={imageContainer}>
+          <div className={imageContainer} style={{ marginInline: "auto" }}>
             <Image
               src="/images/mockups/collection-complete-packagings.webp"
               alt="Collection Libellule Senteurs"
@@ -145,6 +145,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
               className="max-w-lg mx-auto text-center font-heading text-xl md:text-3xl leading-[1.4]"
               style={{
                 paddingInline: "2rem",
+                marginInline: "auto",
                 opacity: 1 - progress / 0.3,
                 color: `rgb(${Math.round(channel * 0.1)}, ${Math.round(channel * 0.1)}, ${Math.round(channel * 0.1)})`,
                 textShadow: progress < 0.15 ? "0 2px 20px rgba(0,0,0,0.12)" : "none",
@@ -158,7 +159,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           {progress > 0.7 && (
             <div
               className="max-w-lg mx-auto text-center space-y-3"
-              style={{ paddingInline: "2rem", opacity: (progress - 0.7) / 0.3 }}
+              style={{ paddingInline: "2rem", opacity: (progress - 0.7) / 0.3, marginInline: "auto" }}
             >
               {/* /60 on a near-black background (#000 at this scroll depth) passes
                   the 4.5:1 threshold for body text and 3:1 for large text */}

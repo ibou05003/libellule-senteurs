@@ -45,7 +45,7 @@ export default function Navigation() {
               ? "min-h-[64px] md:min-h-[68px]"
               : "min-h-[80px] md:min-h-[96px] lg:min-h-[108px]"
           }`}
-          style={{ paddingInline: "clamp(1.5rem, 3vw, 4rem)" }}
+          style={{ paddingInline: "clamp(1.5rem, 3vw, 4rem)", marginInline: "auto" }}
         >
           {/* Logo mark + wordmark */}
           <a
