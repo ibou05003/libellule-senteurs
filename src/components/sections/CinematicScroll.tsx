@@ -536,7 +536,7 @@ export default function CinematicScroll() {
     <section
       ref={outerRef}
       id="histoire"
-      style={{ height: "700vh", position: "relative" }}
+      style={{ height: "900vh", position: "relative" }}
       aria-label="Le Voyage d'un Parfum — exploration de la collection"
     >
       <div
