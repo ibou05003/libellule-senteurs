@@ -26,9 +26,13 @@ const PRODUCTS = [
     image: "/images/products/diffuseur-batonnets.webp",
   },
   {
-    name: "Bougie Signature",
-    description: "Céramique blanche, cire naturelle",
-    image: "/images/products/bougie-sans-marque.webp",
+    // parfum-cristal-hero gives this slot genuine visual variety — the cut-crystal
+    // flacon is tonally distinct from both the diffuser and the dark parfum-noir
+    // shot, while bougie-sans-marque is already the morph start frame and would
+    // read as a duplicate to anyone who scrolled through the ProductMorph section.
+    name: "Parfum Cristal",
+    description: "Cristal taillé, édition prestige",
+    image: "/images/products/parfum-cristal-hero.webp",
   },
   {
     name: "Huile Essentielle",

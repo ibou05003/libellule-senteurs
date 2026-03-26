@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Lenis smooth-scroll baseline styles — must come after tailwind reset so
+   Lenis' own html/body overrides are not wiped by Tailwind's preflight. */
+@import "lenis/dist/lenis.css";
 
 /**
  * Brand design tokens registered as Tailwind utilities via the v4 @theme directive.

@@ -119,7 +119,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
   // ─── Full animated version ────────────────────────────────────────────────
 
   return (
-    <div ref={containerRef} className={`relative ${className ?? ""}`} style={{ height: "300vh" }}>
+    <div ref={containerRef} className={`relative ${className ?? ""}`} style={{ height: "200vh" }}>
       {/*
        * Sticky viewport: stays fixed on screen while the outer container scrolls.
        * All visual layers are absolutely positioned inside this box so they
@@ -181,11 +181,16 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
 
         {/* ── Layer 4: Phase copy ── */}
         <div className="absolute inset-0 flex items-end justify-center pb-24 pointer-events-none">
-          {/* Teaser line — visible in the first 30% of scroll, then fades out */}
+          {/* Teaser line — visible in the first 30% of scroll, then fades out.
+              blanc-cassé base with a dark text-shadow makes it legible against
+              both the light (#F8F8F8) start state and the dark end state. */}
           {progress < 0.3 && (
             <p
-              className="font-heading text-xl md:text-3xl text-noir-profond/60 text-center px-8"
-              style={{ opacity: 1 - progress / 0.3 }}
+              className="font-heading text-xl md:text-3xl text-blanc-casse/70 text-center px-8"
+              style={{
+                opacity: 1 - progress / 0.3,
+                textShadow: "0 0 20px rgba(0,0,0,0.5)",
+              }}
             >
               Un objet. Un espace. Une attente...
             </p>

@@ -53,13 +53,13 @@ export default function Marquee({
   return (
     <div className={`overflow-hidden py-6 ${className}`} aria-hidden="true">
       <div ref={trackRef} className="flex whitespace-nowrap">
-        <span className="font-body text-sm md:text-base text-blanc-casse/20 tracking-[0.3em] uppercase px-4">
+        <span className="font-body text-sm md:text-base text-blanc-casse/30 tracking-[0.3em] uppercase px-4">
           {text}
         </span>
-        <span className="font-body text-sm md:text-base text-blanc-casse/20 tracking-[0.3em] uppercase px-4">
+        <span className="font-body text-sm md:text-base text-blanc-casse/30 tracking-[0.3em] uppercase px-4">
           {text}
         </span>
-        <span className="font-body text-sm md:text-base text-blanc-casse/20 tracking-[0.3em] uppercase px-4">
+        <span className="font-body text-sm md:text-base text-blanc-casse/30 tracking-[0.3em] uppercase px-4">
           {text}
         </span>
       </div>

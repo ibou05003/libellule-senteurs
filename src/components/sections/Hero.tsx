@@ -35,6 +35,12 @@ export default function Hero() {
       {/* Ambient particle canvas — sits at z-0, behind all content */}
       <GoldenMist />
 
+      {/* Glow behind product — soft radial wash lifts the image off the dark
+          background without adding a hard edge or drawing attention itself */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
+        <div className="w-[600px] h-[400px] bg-or-luxe/5 rounded-full blur-3xl" />
+      </div>
+
       {/* Central product image + text block */}
       <div className="relative z-10 flex flex-col items-center gap-8">
         {/*
@@ -76,8 +82,12 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Bottom fade — blends the hero into the section below without a hard cut.
+          z-10 places it above GoldenMist but below the scroll cue at the same z level. */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-noir-profond to-transparent z-10 pointer-events-none" />
+
       {/* Subtle scroll cue — pulsing vertical line with label */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
         <span className="text-blanc-casse/40 text-xs font-body tracking-widest uppercase">
           Découvrir
         </span>

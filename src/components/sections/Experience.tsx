@@ -85,21 +85,27 @@ export default function Experience() {
       id="experience"
       className="bg-noir-profond overflow-hidden"
     >
-      <div className="px-8 py-section">
-        <h2 className="font-heading text-3xl md:text-5xl text-or-luxe text-center mb-4">
-          L&apos;Expérience
-        </h2>
-        <p className="font-body text-blanc-casse/50 text-center text-sm tracking-widest uppercase">
-          Nos parfums dans leur élément
-        </p>
-      </div>
-
       {/* On desktop: flex-nowrap so all panels line up horizontally for GSAP
-          to translate. On mobile: flex-wrap so they stack into a vertical list. */}
+          to translate. On mobile: flex-wrap so they stack into a vertical list.
+          The heading is the first panel in the track so it stays visible while
+          the section is pinned — on desktop it occupies one full screen width
+          before the image panels begin. */}
       <div
         ref={trackRef}
         className="flex md:flex-nowrap flex-wrap"
       >
+        {/* Title panel — first screen on desktop, stacked above images on mobile */}
+        <div className="relative flex-shrink-0 w-full md:w-screen h-[60vh] md:h-[80vh] flex items-center justify-center">
+          <div className="text-center px-8">
+            <h2 className="font-heading text-3xl md:text-5xl text-or-luxe mb-4">
+              L&apos;Expérience
+            </h2>
+            <p className="font-body text-blanc-casse/50 text-sm tracking-widest uppercase">
+              Nos parfums dans leur élément
+            </p>
+          </div>
+        </div>
+
         {EXPERIENCES.map((exp) => (
           <div
             key={exp.title}

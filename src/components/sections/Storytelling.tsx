@@ -53,12 +53,13 @@ export default function Storytelling() {
     <section
       ref={sectionRef}
       id="histoire"
-      className="relative min-h-[200vh] flex items-center justify-center bg-noir-profond py-section px-8"
+      className="relative min-h-[200vh] bg-noir-profond py-section px-8"
     >
-      {/* Dragonfly filigree — purely decorative, hidden from assistive tech */}
+      {/* Dragonfly filigree — sticky so it stays centred as the user scrolls.
+          Purely decorative, hidden from assistive technology. */}
       <svg
         viewBox="0 0 200 200"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-[0.03]"
+        className="sticky top-1/2 -translate-y-1/2 mx-auto w-[500px] h-[500px] opacity-[0.03] pointer-events-none"
         fill="none"
         stroke="#C99700"
         strokeWidth="0.5"
@@ -74,9 +75,12 @@ export default function Storytelling() {
         <path d="M100 100 L100 150" />
       </svg>
 
-      {/* Brand story — each word is an independent span so GSAP can tween
-          individual word colors as they enter the viewport */}
-      <div className="relative z-10 max-w-3xl mx-auto">
+      {/* Brand story — sticky so the text block remains in the viewport centre
+          for the entire scroll distance of the 200 vh section. The negative
+          margin pulls the text up to overlap with the already-rendered filigree
+          rather than pushing it below it. Each word is an independent span so
+          GSAP can tween individual word colours as the user scrolls. */}
+      <div className="sticky top-1/2 -translate-y-1/2 z-10 max-w-3xl mx-auto -mt-[500px]">
         <p className="font-heading text-2xl md:text-4xl lg:text-5xl leading-relaxed md:leading-relaxed lg:leading-relaxed text-center">
           {words.map((word, i) => (
             <span

@@ -22,8 +22,10 @@ import Marquee from "@/components/ui/Marquee";
  */
 function GoldDivider() {
   return (
-    <div className="flex items-center justify-center py-8">
-      <div className="w-16 h-px bg-or-luxe/30" />
+    <div className="flex items-center justify-center py-12">
+      {/* Gradient fade instead of a flat line gives the divider a jewellery-like
+          shimmer — wider and slightly more visible than before. */}
+      <div className="w-24 h-px bg-gradient-to-r from-transparent via-or-luxe/40 to-transparent" />
     </div>
   );
 }
