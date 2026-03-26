@@ -29,8 +29,10 @@ export default function Contact() {
       className="bg-noir-profond py-24 md:py-32 lg:py-40"
     >
       <div className="max-w-xl mx-auto px-6">
-        {/* Section heading — consistent two-line pattern */}
-        <div className="text-center mb-16 md:mb-20">
+        {/* Section heading — consistent two-line pattern.
+            w-full ensures the text-center container spans the full column width
+            so the heading is truly centred on all viewports. */}
+        <div className="w-full text-center mb-16 md:mb-20">
           <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
             Nous écrire
           </p>

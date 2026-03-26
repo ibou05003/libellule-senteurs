@@ -131,6 +131,17 @@ export default function Experience() {
                 {exp.description}
               </p>
             </div>
+
+            {/* Brand watermark — anchors brand identity on lifestyle imagery
+                where the logo may not otherwise appear */}
+            <div className="absolute bottom-12 right-8 md:right-16 opacity-20 pointer-events-none">
+              <svg viewBox="0 0 36 36" className="w-6 h-6" fill="none" stroke="#C99700" strokeWidth="0.8" aria-hidden="true">
+                <circle cx="18" cy="18" r="14" opacity="0.5" />
+                <path d="M18 18 Q10 10 14 4 Q18 10 18 18" fill="#C99700" opacity="0.6" />
+                <path d="M18 18 Q26 10 22 4 Q18 10 18 18" fill="#C99700" opacity="0.4" />
+                <path d="M18 18 L18 28" strokeLinecap="round" opacity="0.5" />
+              </svg>
+            </div>
           </div>
         ))}
       </div>

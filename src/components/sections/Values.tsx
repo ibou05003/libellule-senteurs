@@ -130,8 +130,10 @@ export default function Values() {
       className="bg-noir-profond py-24 md:py-32 lg:py-40"
     >
       <div className="max-w-5xl mx-auto px-6">
-        {/* Consistent section heading pattern: label + title */}
-        <div className="text-center mb-20 md:mb-28">
+        {/* Consistent section heading pattern: label + title.
+            w-full ensures the text-center container spans the full column width
+            on all viewports rather than collapsing to content width. */}
+        <div className="w-full text-center mb-20 md:mb-28">
           <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
             Ce qui nous définit
           </p>

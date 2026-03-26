@@ -13,14 +13,16 @@ type ScrollFramePlayerProps = {
 };
 
 /**
- * Scroll-driven product morph animation.
+ * Scroll-driven product branding reveal animation.
  *
  * Architecture
  * ───────────────────────────────────────────────────────────────────────────
- * Designed to eventually drive a full image-sequence morph (90 pre-rendered
- * PNG frames stored at /public/frames/). While those frames are not available
- * it falls back to a CSS cross-fade between the unbranded candle and the
- * finished collection, giving a representative preview of the final effect.
+ * A single collection image transitions from desaturated/greyscale to full
+ * color as the user scrolls. The background simultaneously shifts from
+ * off-white (#F8F8F8) to true black (#000), and a gold glow emerges in the
+ * second half — reinforcing the luxury brand reveal narrative.
+ *
+ * The story this tells: "Before the brand gave it soul, it was colourless."
  *
  * Scroll behaviour
  * ───────────────────────────────────────────────────────────────────────────
@@ -28,7 +30,7 @@ type ScrollFramePlayerProps = {
  * `position: sticky` so it stays on screen while the outer scrolls.
  * GSAP maps that distance to a `progressRef` value of 0 → 1, which drives:
  *   - Background: off-white (#F8F8F8) → true black (#000)
- *   - Image cross-fade: unbranded → branded collection
+ *   - Image: greyscale + dim → full color + full brightness
  *   - Gold radial glow: fades in after 40% progress
  *   - Phase copy: teaser fades out; brand reveal fades in
  *
@@ -78,7 +80,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
   // Gold glow only appears after 40% to avoid clashing with the light background
   const glowOpacity = progress > 0.4 ? (progress - 0.4) / 0.6 : 0;
 
-  // Shared container dimensions for both morph layers — ensures a clean overlap
+  // Shared container dimensions — consistent framing throughout the transition
   const imageContainer = "relative mx-auto w-[80vw] max-w-[600px] aspect-[3/2]";
 
   if (reduced) {
@@ -106,38 +108,26 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
         className="sticky top-0 h-screen flex items-center justify-center overflow-hidden transition-none"
         style={{ backgroundColor: bgColor }}
       >
-        {/* Layer 1: Unbranded candle — fades out as progress increases */}
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ opacity: 1 - progress }}
-        >
-          <div className={imageContainer}>
-            <Image
-              src="/images/products/bougie-sans-marque.webp"
-              alt=""
-              fill
-              className="object-contain"
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-
-        {/* Layer 2: Branded collection reveal — fades in as progress increases */}
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ opacity: progress }}
-        >
+        {/* Single product image — transitions from greyscale to full color.
+            saturate(progress) at progress=0 gives full desaturation.
+            brightness ramps from 0.7 to 1.0 so the image lifts as color appears,
+            reinforcing the narrative of the brand "breathing life" into the product. */}
+        <div className="absolute inset-0 flex items-center justify-center">
           <div className={imageContainer}>
             <Image
               src="/images/mockups/collection-complete-packagings.webp"
-              alt="Collection complète Libellule Senteurs"
+              alt="Collection Libellule Senteurs"
               fill
               className="object-contain"
+              style={{
+                filter: `saturate(${progress}) brightness(${0.7 + progress * 0.3})`,
+                transition: "filter 0.1s ease-out",
+              }}
             />
           </div>
         </div>
 
-        {/* Layer 3: Gold radial glow — amplifies luxury in the second half */}
+        {/* Layer 2: Gold radial glow — amplifies luxury in the second half */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -145,10 +135,11 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
           }}
         />
 
-        {/* Layer 4: Phase copy */}
+        {/* Layer 3: Phase copy */}
         <div className="absolute inset-0 flex items-end justify-center pb-24 md:pb-28 pointer-events-none">
           {/* Teaser — visible in the first 30% of scroll, then fades out.
-              Text shadow ensures legibility against the off-white background */}
+              Text color inverts with the background: dark text on light bg → invisible on dark bg.
+              Text shadow ensures legibility against the off-white background at low progress. */}
           {progress < 0.3 && (
             <p
               className="max-w-lg mx-auto text-center font-heading text-xl md:text-3xl px-8 leading-[1.4]"
@@ -158,7 +149,7 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
                 textShadow: progress < 0.15 ? "0 2px 20px rgba(0,0,0,0.12)" : "none",
               }}
             >
-              Un simple objet blanc. Sans nom. Sans histoire.
+              Avant d&apos;être un parfum... c&apos;est une vision.
             </p>
           )}
 

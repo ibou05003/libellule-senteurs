@@ -67,6 +67,24 @@ export default function ProductCard({ name, description, image }: ProductCardPro
         />
         {/* Gold light reflection overlay — simulates a specular highlight */}
         <div className="absolute inset-0 bg-gradient-to-br from-or-luxe/0 via-or-luxe/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+        {/* Brand watermark — low-opacity mark in the corner for brand consistency
+            even when product images are viewed in isolation or shared */}
+        <div className="absolute bottom-3 right-3 opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none">
+          <svg
+            viewBox="0 0 36 36"
+            className="w-5 h-5"
+            fill="none"
+            stroke="#C99700"
+            strokeWidth="1"
+            aria-hidden="true"
+          >
+            <circle cx="18" cy="18" r="14" opacity="0.5" />
+            <path d="M18 18 Q10 10 14 4 Q18 10 18 18" fill="#C99700" opacity="0.6" />
+            <path d="M18 18 Q26 10 22 4 Q18 10 18 18" fill="#C99700" opacity="0.4" />
+            <path d="M18 18 L18 28" strokeLinecap="round" opacity="0.5" />
+          </svg>
+        </div>
       </div>
 
       <div className="mt-5 px-1">
