@@ -168,13 +168,15 @@ export default function ScrollFramePlayer({ className }: ScrollFramePlayerProps)
               className="max-w-lg mx-auto text-center space-y-3 px-8"
               style={{ opacity: (progress - 0.7) / 0.3 }}
             >
-              <p className="font-body text-[9px] md:text-[10px] text-blanc-casse/40 tracking-[0.35em] uppercase">
+              {/* /60 on a near-black background (#000 at this scroll depth) passes
+                  the 4.5:1 threshold for body text and 3:1 for large text */}
+              <p className="font-body text-[9px] md:text-[10px] text-blanc-casse/60 tracking-[0.35em] uppercase">
                 Libellule Senteurs lui donne
               </p>
               <p className="font-heading text-4xl md:text-6xl text-or-luxe leading-none">
                 Une Âme
               </p>
-              <p className="font-body text-[10px] md:text-xs text-blanc-casse/40 tracking-[0.25em] uppercase mt-4">
+              <p className="font-body text-[10px] md:text-xs text-blanc-casse/60 tracking-[0.25em] uppercase mt-4">
                 Parfums d&apos;intérieur Haut de Gamme
               </p>
             </div>

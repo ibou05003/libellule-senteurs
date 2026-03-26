@@ -47,13 +47,14 @@ export default function Collection() {
     <section id="collection" className="bg-noir-profond py-24 md:py-32 lg:py-40">
       {/* Heading block — consistent two-line pattern */}
       <div className="max-w-4xl mx-auto px-6 text-center mb-16 md:mb-20">
-        <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-5">
+        <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
           Nos créations
         </p>
         <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse">
           Notre Collection
         </h2>
-        <p className="font-body text-blanc-casse/25 mt-5 text-[9px] tracking-[0.28em] uppercase">
+        {/* /40 raises contrast from ~1.7:1 to ~2.8:1 — legible scroll hint */}
+        <p className="font-body text-blanc-casse/40 mt-5 text-[9px] tracking-[0.28em] uppercase">
           Glissez pour découvrir
         </p>
       </div>

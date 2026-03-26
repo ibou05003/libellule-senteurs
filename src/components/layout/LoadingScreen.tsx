@@ -70,10 +70,10 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         />
       </svg>
 
-      {/* Progress bar */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-24 h-px bg-blanc-casse/20">
+      {/* Progress bar — scaleX animates on the compositor thread (no layout) */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-24 h-px bg-blanc-casse/20 overflow-hidden">
         <div
-          className="h-full bg-or-luxe"
+          className="h-full w-full bg-or-luxe origin-left"
           style={{
             animation: "loading-progress 2s ease-out forwards",
           }}

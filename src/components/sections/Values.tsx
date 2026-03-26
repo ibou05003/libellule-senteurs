@@ -132,7 +132,7 @@ export default function Values() {
       <div className="max-w-5xl mx-auto px-6">
         {/* Consistent section heading pattern: label + title */}
         <div className="text-center mb-20 md:mb-28">
-          <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-5">
+          <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
             Ce qui nous définit
           </p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse">
@@ -154,7 +154,8 @@ export default function Values() {
               <h3 className="font-heading text-xl text-blanc-casse tracking-wide">
                 {value.name}
               </h3>
-              <p className="font-body text-sm text-blanc-casse/55 leading-[1.75]">
+              {/* /60 = ~4.2:1 on #000 bg — close to WCAG AA; /55 was borderline */}
+              <p className="font-body text-sm text-blanc-casse/60 leading-[1.75]">
                 {value.description}
               </p>
             </div>

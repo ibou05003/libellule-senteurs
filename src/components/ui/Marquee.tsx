@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type MarqueeProps = {
   items: string[];
@@ -19,6 +20,8 @@ type MarqueeProps = {
  * visible jump.
  *
  * aria-hidden="true" keeps screen readers from announcing decorative text.
+ * prefers-reduced-motion: animation is skipped entirely — the static text
+ * remains visible as a divider without motion.
  */
 export default function Marquee({
   items,
@@ -27,8 +30,13 @@ export default function Marquee({
   separator = "✦",
 }: MarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
+    // Respect the user's motion preference — no infinite scroll animation
+    // if they've opted for reduced motion.
+    if (reduced) return;
+
     const track = trackRef.current;
     if (!track) return;
 
@@ -37,13 +45,17 @@ export default function Marquee({
     if (!firstChild) return;
     const width = firstChild.offsetWidth;
 
-    gsap.to(track, {
+    const tween = gsap.to(track, {
       x: -width,
       duration: speed,
       ease: "none",
       repeat: -1,
     });
-  }, [speed]);
+
+    return () => {
+      tween.kill();
+    };
+  }, [speed, reduced]);
 
   const text = items.join(` ${separator} `) + ` ${separator} `;
 
@@ -54,13 +66,13 @@ export default function Marquee({
     >
       <div ref={trackRef} className="flex whitespace-nowrap">
         {/* Three copies ensure the track is always wider than the viewport */}
-        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/18 tracking-[0.32em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase px-4">
           {text}
         </span>
-        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/18 tracking-[0.32em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase px-4">
           {text}
         </span>
-        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/18 tracking-[0.32em] uppercase px-4">
+        <span className="font-body text-[10px] md:text-[11px] text-blanc-casse/30 tracking-[0.32em] uppercase px-4">
           {text}
         </span>
       </div>

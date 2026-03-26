@@ -18,11 +18,13 @@ export default function Storytelling() {
   useEffect(() => {
     if (reduced || !sectionRef.current) return;
 
-    // Each word tweens from near-invisible dark gray to blanc-cassé as the
-    // user scrolls through the section — a progressive "ink appearing" effect.
+    // Starting color #555555 on #000000 background = ~3.5:1 contrast ratio,
+    // which satisfies WCAG AA for large text (≥3:1). #222 would be ~1.7:1 —
+    // invisible and a critical accessibility failure.
+    // Words tween to blanc-cassé (#F8F8F8) as the user scrolls.
     gsap.fromTo(
       wordsRef.current,
-      { color: "#222222" },
+      { color: "#555555" },
       {
         color: "#F8F8F8",
         stagger: 0.05,
@@ -78,7 +80,7 @@ export default function Storytelling() {
        */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center px-8">
         {/* Section label — consistent pattern with other sections */}
-        <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-10 md:mb-14">
+        <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-10 md:mb-14">
           Notre Histoire
         </p>
         <p className="max-w-2xl md:max-w-3xl lg:max-w-4xl font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.5] md:leading-[1.45] text-center">
@@ -89,7 +91,7 @@ export default function Storytelling() {
               className="inline-block mr-[0.28em]"
               // Start dark so GSAP has a visible state to tween from.
               // Reduced-motion skips the animation and shows full brightness.
-              style={{ color: reduced ? "#F8F8F8" : "#1a1a1a" }}
+              style={{ color: reduced ? "#F8F8F8" : "#555555" }}
             >
               {word}
             </span>

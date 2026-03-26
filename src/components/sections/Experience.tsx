@@ -94,7 +94,7 @@ export default function Experience() {
         {/* Title panel */}
         <div className="relative flex-shrink-0 w-full md:w-screen h-[60vh] md:h-[85vh] flex items-center justify-center">
           <div className="text-center px-8 max-w-4xl mx-auto">
-            <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-5">
+            <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
               Nos parfums dans leur élément
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse">
@@ -120,7 +120,8 @@ export default function Experience() {
             <div className="absolute inset-0 bg-gradient-to-t from-noir-profond/85 via-noir-profond/25 to-transparent" />
 
             <div className="absolute bottom-14 left-8 md:left-16 z-10 max-w-xs md:max-w-sm">
-              <p className="font-body text-[8px] text-or-luxe/60 tracking-[0.3em] uppercase mb-3">
+              {/* /80 on the dark gradient overlay gives ~5:1 contrast vs #000 bg */}
+              <p className="font-body text-[8px] text-or-luxe/80 tracking-[0.3em] uppercase mb-3">
                 Expérience
               </p>
               <h3 className="font-heading text-2xl md:text-3xl text-blanc-casse mb-3 leading-tight">

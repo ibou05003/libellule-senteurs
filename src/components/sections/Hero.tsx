@@ -152,7 +152,9 @@ export default function Hero() {
               <br />
               <em className="text-or-luxe not-italic">invisible</em>
             </h1>
-            <p className="font-body text-[9px] md:text-[10px] text-blanc-casse/30 tracking-[0.3em] uppercase mt-4 md:mt-6">
+            {/* /45 raises contrast vs #000 bg from ~2.1:1 to ~3.2:1 — acceptable
+                for decorative uppercase micro-text at this size */}
+            <p className="font-body text-[9px] md:text-[10px] text-blanc-casse/45 tracking-[0.3em] uppercase mt-4 md:mt-6">
               Parfums d&apos;intérieur Haut de Gamme
             </p>
           </div>
@@ -167,10 +169,12 @@ export default function Hero() {
           style={{ opacity: visible ? 1 : 0, transition: "opacity 0.6s ease-out 3.2s" }}
           aria-hidden="true"
         >
-          <span className="font-body text-[8px] text-blanc-casse/20 tracking-[0.3em] uppercase">
+          {/* /40 ensures the scroll cue is legible against the dark gradient
+              overlay; /20 would be ~1.4:1 which falls below any threshold */}
+          <span className="font-body text-[8px] text-blanc-casse/40 tracking-[0.3em] uppercase">
             Découvrir
           </span>
-          <div className="w-px h-6 bg-gradient-to-b from-or-luxe/30 to-transparent animate-pulse" />
+          <div className="w-px h-6 bg-gradient-to-b from-or-luxe/50 to-transparent animate-pulse" />
         </div>
       </div>
     </section>

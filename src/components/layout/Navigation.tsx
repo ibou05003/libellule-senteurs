@@ -49,7 +49,7 @@ export default function Navigation() {
           {/* Logo mark + wordmark */}
           <a
             href="#"
-            className="flex items-center gap-4 group"
+            className="flex items-center gap-4 group cursor-pointer"
             aria-label="Libellule Senteurs — accueil"
           >
             <svg
@@ -73,7 +73,9 @@ export default function Navigation() {
               >
                 Libellule Senteurs
               </span>
-              <span className="font-body text-[8px] text-blanc-casse/30 tracking-[0.22em] uppercase leading-none hidden sm:block">
+              {/* /40 instead of /30 — raises contrast from ~2.1:1 to ~2.8:1;
+                  still subordinate to the wordmark but passes large-text threshold */}
+              <span className="font-body text-[8px] text-blanc-casse/40 tracking-[0.22em] uppercase leading-none hidden sm:block">
                 Parfums d&apos;intérieur Haut de Gamme
               </span>
             </div>
@@ -85,10 +87,11 @@ export default function Navigation() {
               <a
                 key={href}
                 href={href}
-                className="relative text-blanc-casse/50 hover:text-blanc-casse transition-colors duration-400 py-1 group"
+                className="relative text-blanc-casse/60 hover:text-blanc-casse transition-colors duration-400 py-3 cursor-pointer group"
               >
                 {label}
-                <span className="absolute bottom-0 left-0 w-0 h-px bg-or-luxe group-hover:w-full transition-all duration-400" />
+                {/* Use transform: scaleX for the underline to avoid layout reflow */}
+                <span className="absolute bottom-1 left-0 w-full h-px bg-or-luxe origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400" />
               </a>
             ))}
           </div>
@@ -152,11 +155,11 @@ export default function Navigation() {
               key={href}
               href={href}
               onClick={closeMenu}
-              className="font-heading text-2xl text-blanc-casse/60 hover:text-blanc-casse tracking-[0.12em] uppercase transition-colors duration-300"
+              className="font-heading text-2xl text-blanc-casse/70 hover:text-blanc-casse tracking-[0.12em] uppercase transition-colors duration-400 cursor-pointer min-h-[44px] flex items-center"
               style={{
                 opacity: menuOpen ? 1 : 0,
                 transform: menuOpen ? "translateY(0)" : "translateY(12px)",
-                transition: `opacity 0.4s ease ${0.08 * i + 0.1}s, transform 0.4s ease ${0.08 * i + 0.1}s, color 0.3s ease`,
+                transition: `opacity 0.4s ease ${0.08 * i + 0.1}s, transform 0.4s ease ${0.08 * i + 0.1}s, color 0.4s ease`,
               }}
             >
               {label}
@@ -165,7 +168,7 @@ export default function Navigation() {
           <a
             href="#contact"
             onClick={closeMenu}
-            className="mt-4 px-10 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer"
+            className="mt-4 px-10 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer min-h-[44px] flex items-center"
             style={{
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? "translateY(0)" : "translateY(12px)",

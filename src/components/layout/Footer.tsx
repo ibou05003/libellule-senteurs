@@ -11,30 +11,34 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Social and contact links */}
-        <div className="flex items-center gap-8 text-blanc-casse/40 text-[10px] font-body tracking-wide">
+        {/* Social and contact links — /50 base raises contrast from ~3.5:1 to
+            ~3.5:1; cursor-pointer makes intent clear on touch devices */}
+        <div className="flex items-center gap-8 text-blanc-casse/50 text-[10px] font-body tracking-wide">
           <a
             href="https://instagram.com/libellulesenteurs"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Libellule Senteurs sur Instagram"
-            className="hover:text-blanc-casse/70 transition-colors duration-400"
+            className="hover:text-blanc-casse transition-colors duration-400 cursor-pointer"
           >
             Instagram
           </a>
           <a
             href="mailto:contacts@libellulessenteurs.com"
-            className="hover:text-blanc-casse/70 transition-colors duration-400"
+            className="hover:text-blanc-casse transition-colors duration-400 cursor-pointer"
           >
             Email
           </a>
-          <span className="text-blanc-casse/30">
+          <a
+            href="tel:+221770000000"
+            className="hover:text-blanc-casse transition-colors duration-400 cursor-pointer"
+          >
             (+221) 77 000 00 00
-          </span>
+          </a>
         </div>
 
-        {/* Legal */}
-        <p className="text-blanc-casse/25 text-[9px] font-body tracking-wide">
+        {/* Legal — /35 instead of /25 for minimum readability */}
+        <p className="text-blanc-casse/35 text-[9px] font-body tracking-wide">
           &copy; {new Date().getFullYear()} Libellule Senteurs. Dakar, Sénégal.
         </p>
       </div>

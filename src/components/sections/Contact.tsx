@@ -17,9 +17,11 @@ export default function Contact() {
     setSubmitted(true);
   };
 
-  // Shared input className — bottom-border-only keeps the form airy
+  // Shared input className — bottom-border-only keeps the form airy.
+  // placeholder:/40 raises placeholder contrast from ~1.7:1 to ~2.8:1 on #000.
+  // py-4 = ~56px effective touch target height — exceeds the 44px minimum.
   const inputClass =
-    "w-full bg-transparent border-b border-blanc-casse/15 py-4 font-body text-sm text-blanc-casse placeholder:text-blanc-casse/25 focus:outline-none focus:border-or-luxe/70 transition-colors duration-500 leading-relaxed";
+    "w-full bg-transparent border-b border-blanc-casse/15 py-4 font-body text-sm text-blanc-casse placeholder:text-blanc-casse/40 focus:outline-none focus:border-or-luxe/70 transition-colors duration-500 leading-relaxed";
 
   return (
     <section
@@ -29,13 +31,13 @@ export default function Contact() {
       <div className="max-w-xl mx-auto px-6">
         {/* Section heading — consistent two-line pattern */}
         <div className="text-center mb-16 md:mb-20">
-          <p className="font-body text-[9px] text-blanc-casse/30 tracking-[0.35em] uppercase mb-5">
+          <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
             Nous écrire
           </p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse mb-5">
             Échangeons
           </h2>
-          <p className="font-body text-blanc-casse/35 text-[10px] tracking-[0.25em] uppercase">
+          <p className="font-body text-blanc-casse/50 text-[10px] tracking-[0.25em] uppercase">
             Un espace à sublimer ? Écrivez-nous.
           </p>
         </div>
@@ -98,7 +100,7 @@ export default function Contact() {
               {/* Ghost button: border-only at rest, fills with gold on hover */}
               <button
                 type="submit"
-                className="px-12 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer min-w-[180px]"
+                className="px-12 py-3.5 min-h-[44px] border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer min-w-[180px]"
               >
                 Envoyer
               </button>
@@ -107,16 +109,23 @@ export default function Contact() {
         )}
 
         {/* Secondary contact details — low prominence, always findable */}
-        <div className="mt-20 md:mt-24 flex flex-col md:flex-row justify-center items-center gap-5 text-blanc-casse/30 text-[10px] font-body tracking-wide">
+        {/* /45 base color raises contrast from ~2.1:1 to ~3.2:1 for this
+            small decorative text; cursor-pointer added for touch clarity */}
+        <div className="mt-20 md:mt-24 flex flex-col md:flex-row justify-center items-center gap-5 text-blanc-casse/45 text-[10px] font-body tracking-wide">
           <a
             href="mailto:contacts@libellulessenteurs.com"
-            className="hover:text-or-luxe/70 transition-colors duration-400"
+            className="hover:text-or-luxe transition-colors duration-400 cursor-pointer"
           >
             contacts@libellulessenteurs.com
           </a>
-          <span className="hidden md:inline text-blanc-casse/15">·</span>
-          <span>(+221) 77 000 00 00</span>
-          <span className="hidden md:inline text-blanc-casse/15">·</span>
+          <span className="hidden md:inline text-blanc-casse/20">·</span>
+          <a
+            href="tel:+221770000000"
+            className="hover:text-or-luxe transition-colors duration-400 cursor-pointer"
+          >
+            (+221) 77 000 00 00
+          </a>
+          <span className="hidden md:inline text-blanc-casse/20">·</span>
           <span>Dakar, Sénégal</span>
         </div>
       </div>

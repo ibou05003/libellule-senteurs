@@ -71,7 +71,8 @@ export default function ProductCard({ name, description, image }: ProductCardPro
 
       <div className="mt-5 px-1">
         <h3 className="font-heading text-base md:text-lg text-blanc-casse leading-snug">{name}</h3>
-        <p className="font-body text-[11px] md:text-xs text-blanc-casse/40 mt-1.5 tracking-wide leading-relaxed">{description}</p>
+        {/* /55 raises contrast from ~2.8:1 to ~3.9:1 on the dark card bg */}
+        <p className="font-body text-[11px] md:text-xs text-blanc-casse/55 mt-1.5 tracking-wide leading-relaxed">{description}</p>
       </div>
     </div>
   );

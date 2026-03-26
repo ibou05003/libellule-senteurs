@@ -86,9 +86,11 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Use transform: scaleX instead of width to avoid layout recalculation
+   on every animation frame — transform is composited on the GPU. */
 @keyframes loading-progress {
-  from { width: 0; }
-  to { width: 100%; }
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 /* Hide scrollbar for carousel — keeps the UI clean while preserving
@@ -96,6 +98,23 @@ h1, h2, h3, h4, h5, h6 {
    -webkit-scrollbar for Chrome/Safari, scrollbarWidth (set inline) for Firefox. */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/**
+ * Remove the 300ms tap delay on iOS by signalling that we handle our own
+ * touch interactions. Applied globally to all interactive elements so we
+ * don't have to add it component-by-component.
+ * `manipulation` (not `none`) still allows pinch-zoom, preserving
+ * accessibility for low-vision users.
+ */
+a,
+button,
+[role="button"],
+input,
+textarea,
+select,
+label[for] {
+  touch-action: manipulation;
 }
 
 /**
