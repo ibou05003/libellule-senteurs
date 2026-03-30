@@ -16,21 +16,22 @@ export default function AmbianceVideo() {
   );
 
   const handleProgress = useCallback((p: number) => {
-    // Text fades in mid-scroll, then out
+    // Tagline fades in around 30% scroll, holds, then fades out before 70%
+    // Adjusted thresholds for the shorter 200vh scroll distance
     if (textRef.current) {
       let opacity = 0;
-      if (p > 0.35 && p < 0.75) {
-        opacity = Math.min(1, (p - 0.35) / 0.15);
-      } else if (p >= 0.75) {
-        opacity = Math.max(0, 1 - (p - 0.75) / 0.15);
+      if (p > 0.3 && p < 0.7) {
+        opacity = Math.min(1, (p - 0.3) / 0.15);
+      } else if (p >= 0.7) {
+        opacity = Math.max(0, 1 - (p - 0.7) / 0.15);
       }
       textRef.current.style.opacity = String(opacity);
       textRef.current.style.transform = `translateY(${10 * (1 - opacity)}px)`;
     }
 
-    // Vignette
+    // Vignette builds up over the first 40% of scroll
     if (vignetteRef.current) {
-      const vigP = Math.min(1, p / 0.3);
+      const vigP = Math.min(1, p / 0.4);
       vignetteRef.current.style.opacity = String(0.3 + 0.4 * vigP);
     }
   }, []);
@@ -40,50 +41,54 @@ export default function AmbianceVideo() {
       <section id="ambiance" className="relative h-screen">
         <Image
           src="/frames/ambiance/frame_0060.webp"
-          alt="Diffuseur dans un hôtel de luxe"
+          alt="Diffuseur dans un intérieur luxueux"
           fill
           style={{ objectFit: "cover" }}
         />
+        <div className="absolute inset-0 flex items-center justify-center bg-noir-profond/40">
+          <p className="max-w-3xl px-4 text-center font-heading text-2xl leading-snug text-or-luxe md:text-4xl">
+            Chaque espace a une âme — nous lui donnons une voix
+          </p>
+        </div>
       </section>
     );
   }
 
   return (
     <div id="ambiance">
-    <ScrollCanvas
-      frameCount={121}
-      framePath={framePath}
-      scrollHeight="250vh"
-      onProgress={handleProgress}
-    >
-      {/* Cinematic vignette */}
-      <div
-        ref={vignetteRef}
-        className="pointer-events-none absolute inset-0"
-        style={{
-          opacity: 0.3,
-          background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)",
-        }}
-      />
-
-      {/* Overlay text */}
-      <div
-        ref={textRef}
-        className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
-        style={{ opacity: 0 }}
+      <ScrollCanvas
+        frameCount={121}
+        framePath={framePath}
+        scrollHeight="200vh"
+        onProgress={handleProgress}
       >
-        <div className="text-center">
-          <p className="font-heading text-xs uppercase tracking-[0.4em] text-or-luxe">
-            Une expérience sensorielle
-          </p>
-          <h2 className="mt-4 font-heading text-xl leading-tight text-blanc-casse md:text-3xl lg:text-5xl">
-            Le parfum qui habite
+        {/* Cinematic vignette — opacity ramps up as user scrolls in */}
+        <div
+          ref={vignetteRef}
+          className="pointer-events-none absolute inset-0"
+          style={{
+            opacity: 0.3,
+            background:
+              "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)",
+          }}
+        />
+
+        {/* Tagline — absorbed from the old standalone Tagline section */}
+        <div
+          ref={textRef}
+          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4"
+          style={{ opacity: 0 }}
+        >
+          <p className="max-w-3xl text-center font-heading text-2xl leading-snug text-or-luxe md:text-5xl lg:text-7xl">
+            Chaque espace a une âme
             <br />
-            vos espaces
-          </h2>
+            <span className="text-blanc-casse">— nous lui donnons une voix</span>
+          </p>
         </div>
-      </div>
-    </ScrollCanvas>
+
+        {/* Bottom gradient: dark → blanc-casse, bridges to the next section */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-b from-transparent to-blanc-casse" />
+      </ScrollCanvas>
     </div>
   );
 }
