@@ -93,7 +93,7 @@ function BlocA({ reducedMotion }: { reducedMotion: boolean }) {
   return (
     <div
       ref={sectionRef}
-      className="relative bg-blanc-casse text-noir-profond px-4 py-20 md:px-12 md:py-28 lg:px-20 lg:py-36"
+      className="relative bg-blanc-casse text-noir-profond px-4 pt-20 pb-8 md:px-12 md:pt-28 md:pb-12 lg:px-20 lg:pt-36 lg:pb-16"
     >
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 md:flex-row md:gap-0">
         {/* Image — 58% on desktop, full width on mobile */}
