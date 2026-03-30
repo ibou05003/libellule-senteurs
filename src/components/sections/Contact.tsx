@@ -51,7 +51,12 @@ export default function Contact() {
       className="bg-noir-profond py-24 md:py-32 lg:py-40"
       style={{ paddingInline: "1.5rem" }}
     >
-      <div className="max-w-5xl mx-auto" style={{ paddingInline: "1.5rem", marginInline: "auto" }}>
+      {/*
+       * No extra paddingInline here — the section already applies 1.5rem on
+       * both sides via its own style. Adding another 1.5rem would give 3rem
+       * total side padding, shrinking the content to ~279px on a 375px phone.
+       */}
+      <div className="max-w-5xl mx-auto">
         {/* Section heading — consistent two-line pattern.
             w-full ensures the text-center container spans the full column width
             so the heading is truly centred on all viewports. */}

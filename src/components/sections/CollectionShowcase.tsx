@@ -13,11 +13,14 @@ gsap.registerPlugin(ScrollTrigger);
 // Shared CTA button helper — ghost style, light or dark variant
 // ---------------------------------------------------------------------------
 function ProductCTA({ dark = false }: { dark?: boolean }) {
+  // min-h-[44px] ensures the touch target meets the 44px minimum on mobile
+  // per WCAG 2.5.5. inline-flex + items-center keeps text vertically centred
+  // when py alone would produce a shorter button at small font sizes.
   return (
     <a
       href="#contact"
       className={[
-        "mt-6 inline-block border py-2.5 text-xs uppercase tracking-[0.2em] font-body transition-all duration-500 cursor-pointer",
+        "mt-6 inline-flex items-center justify-center min-h-[44px] border text-xs uppercase tracking-[0.2em] font-body transition-all duration-500 cursor-pointer",
         dark
           ? "border-or-luxe/40 text-or-luxe hover:bg-or-luxe hover:text-noir-profond"
           : "border-noir-profond/30 text-noir-profond hover:bg-noir-profond hover:text-blanc-casse",
@@ -205,14 +208,17 @@ function ProductCard({
   const subColor = dark ? "text-blanc-casse/60" : "text-noir-profond/60";
   const separatorColor = dark ? "bg-or-luxe/40" : "bg-or-luxe";
 
+  // featured: scale-105 is applied only at lg+ (1024px+) where column width
+  // is wide enough to absorb the 5% expansion without causing grid overflow.
+  // At md (768px) each column is ~360px; scale-105 would push it to ~378px,
+  // which overflows the grid — so we defer the scale to lg breakpoint only.
   return (
     <div
       ref={cardRef}
       data-card
       className={[
         "flex flex-col",
-        // Featured Cristal: slightly larger on desktop, anchored at top
-        featured ? "md:scale-105 md:origin-top" : "",
+        featured ? "lg:scale-105 lg:origin-top" : "",
       ].join(" ")}
       style={{ opacity: reducedMotion ? 1 : 0 }}
     >

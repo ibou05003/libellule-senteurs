@@ -222,18 +222,26 @@ export default function Univers() {
           No animation — these are purely decorative anchors at the bottom
           of the section.
       =================================================================== */}
+      {/*
+       * Values strip — flex-wrap so items stack on narrow viewports.
+       * On mobile: gap-x-6 between items (no middot, just spacing).
+       * On md+: gap-x-0 on the outer container because the gap is baked into
+       * each inner span (label + middot + implied spacing via md:gap-x-8).
+       * The inner span only applies gap-x-8 on md+ so the hidden middot on
+       * mobile does not leave a phantom gap between the label and nothing.
+       */}
       <div className="border-t border-blanc-casse/10 px-4 py-12 md:py-16">
-        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-8 gap-y-4 md:gap-x-12">
+        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-6 gap-y-4 md:gap-x-0">
           {VALUES.map((value, index) => (
-            <span key={value} className="flex items-center gap-x-8 md:gap-x-12">
+            <span key={value} className="flex items-center md:gap-x-8 lg:gap-x-12">
               <span className="font-heading text-sm tracking-[0.15em] text-or-luxe md:text-base">
                 {value}
               </span>
-              {/* Middot separator — hidden on mobile, shown between items
-                  (but not after the last one) on md+ screens. */}
+              {/* Middot separator — hidden on mobile to avoid phantom spacing,
+                  shown between items (but not after the last one) on md+. */}
               {index < VALUES.length - 1 && (
                 <span
-                  className="hidden text-or-luxe/30 md:inline"
+                  className="hidden text-or-luxe/30 md:inline md:ml-8 lg:ml-12"
                   aria-hidden="true"
                 >
                   &middot;
