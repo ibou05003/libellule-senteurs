@@ -34,13 +34,13 @@ export default function Contact() {
             w-full ensures the text-center container spans the full column width
             so the heading is truly centred on all viewports. */}
         <div className="w-full text-center mb-16 md:mb-20">
-          <p className="font-body text-[9px] text-blanc-casse/45 tracking-[0.35em] uppercase mb-5">
+          <p className="font-body text-xs text-blanc-casse/60 tracking-[0.35em] uppercase mb-5">
             Nous écrire
           </p>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-blanc-casse mb-5">
             Échangeons
           </h2>
-          <p className="font-body text-blanc-casse/50 text-[10px] tracking-[0.25em] uppercase">
+          <p className="font-body text-blanc-casse/60 text-xs tracking-[0.25em] uppercase">
             Un espace à sublimer ? Écrivez-nous.
           </p>
         </div>
@@ -115,21 +115,14 @@ export default function Contact() {
         {/* Secondary contact details — low prominence, always findable */}
         {/* /45 base color raises contrast from ~2.1:1 to ~3.2:1 for this
             small decorative text; cursor-pointer added for touch clarity */}
-        <div className="mt-20 md:mt-24 flex flex-col md:flex-row justify-center items-center gap-5 text-blanc-casse/45 text-[10px] font-body tracking-wide">
+        <div className="mt-20 md:mt-24 flex flex-col md:flex-row justify-center items-center gap-5 text-blanc-casse/60 text-xs font-body tracking-wide">
           <a
             href="mailto:contacts@libellulessenteurs.com"
             className="hover:text-or-luxe transition-colors duration-400 cursor-pointer"
           >
             contacts@libellulessenteurs.com
           </a>
-          <span className="hidden md:inline text-blanc-casse/20">·</span>
-          <a
-            href="tel:+221770000000"
-            className="hover:text-or-luxe transition-colors duration-400 cursor-pointer"
-          >
-            (+221) 77 000 00 00
-          </a>
-          <span className="hidden md:inline text-blanc-casse/20">·</span>
+          <span className="hidden md:inline text-blanc-casse/30">·</span>
           <span>Dakar, Sénégal</span>
         </div>
       </div>

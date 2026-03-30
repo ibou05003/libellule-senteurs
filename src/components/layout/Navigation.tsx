@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 const NAV_LINKS = [
   { href: "#histoire", label: "Notre Histoire" },
   { href: "#collection", label: "Collection" },
-  { href: "#experience", label: "Expérience" },
+  { href: "#ambiance", label: "Expérience" },
   { href: "#contact", label: "Contact" },
 ] as const;
 
@@ -76,7 +76,7 @@ export default function Navigation() {
               </span>
               {/* /40 instead of /30 — raises contrast from ~2.1:1 to ~2.8:1;
                   still subordinate to the wordmark but passes large-text threshold */}
-              <span className="font-body text-[8px] text-blanc-casse/40 tracking-[0.22em] uppercase leading-none hidden sm:block">
+              <span className="font-body text-[11px] text-blanc-casse/60 tracking-[0.22em] uppercase leading-none hidden sm:block">
                 Parfums d&apos;intérieur Haut de Gamme
               </span>
             </div>
@@ -88,7 +88,7 @@ export default function Navigation() {
               <a
                 key={href}
                 href={href}
-                className="relative text-blanc-casse/60 hover:text-blanc-casse transition-colors duration-400 py-3 cursor-pointer group"
+                className="relative text-blanc-casse/70 hover:text-blanc-casse transition-colors duration-400 py-3 cursor-pointer group"
               >
                 {label}
                 {/* Use transform: scaleX for the underline to avoid layout reflow */}

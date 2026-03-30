@@ -114,7 +114,7 @@ export default function HeroConvergence() {
   }
 
   return (
-    <section ref={containerRef} style={{ height: "300vh" }} className="relative">
+    <section ref={containerRef} style={{ height: "200vh" }} className="relative">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-noir-profond">
 
         {/* Golden particles — always visible behind everything */}
@@ -165,7 +165,7 @@ export default function HeroConvergence() {
               className="mx-auto my-4 h-px w-20 bg-or-luxe md:my-5 md:w-28"
               style={{ transform: "scaleX(0)", transformOrigin: "center" }}
             />
-            <p className="font-body text-[9px] md:text-xs uppercase tracking-[0.3em] text-blanc-casse/40">
+            <p className="font-body text-xs uppercase tracking-[0.3em] text-blanc-casse/60">
               Parfums d&apos;intérieur haut de gamme
             </p>
           </div>

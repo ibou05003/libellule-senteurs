@@ -70,7 +70,7 @@ export default function ValuesCounters() {
   return (
     <section ref={sectionRef} className="relative bg-noir-profond px-4 py-16 md:px-8 md:py-28 lg:py-36">
       {/* Subtle top border */}
-      <div className="mx-auto mb-16 h-px w-24 bg-or-luxe/30" />
+      <div className="mx-auto mb-16 h-px w-24 bg-or-luxe/40" />
 
       <div className="mx-auto grid w-full max-w-5xl grid-cols-2 gap-y-8 md:gap-y-12 lg:grid-cols-4">
         {VALUES.map((val, i) => (
@@ -89,7 +89,7 @@ export default function ValuesCounters() {
             <span className="mt-2 block font-body text-xs uppercase tracking-[0.2em] text-blanc-casse/70 md:text-sm">
               {val.label}
             </span>
-            <span className="mt-1 block font-body text-xs text-blanc-casse/40">
+            <span className="mt-1 block font-body text-xs text-blanc-casse/50">
               {val.sublabel}
             </span>
           </div>
@@ -97,7 +97,7 @@ export default function ValuesCounters() {
       </div>
 
       {/* Subtle bottom border */}
-      <div className="mx-auto mt-16 h-px w-24 bg-or-luxe/30" />
+      <div className="mx-auto mt-16 h-px w-24 bg-or-luxe/40" />
     </section>
   );
 }

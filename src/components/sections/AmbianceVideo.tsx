@@ -37,7 +37,7 @@ export default function AmbianceVideo() {
 
   if (reducedMotion) {
     return (
-      <section className="relative h-screen">
+      <section id="ambiance" className="relative h-screen">
         <Image
           src="/frames/ambiance/frame_0060.webp"
           alt="Diffuseur dans un hôtel de luxe"
@@ -49,10 +49,11 @@ export default function AmbianceVideo() {
   }
 
   return (
+    <div id="ambiance">
     <ScrollCanvas
       frameCount={121}
       framePath={framePath}
-      scrollHeight="400vh"
+      scrollHeight="250vh"
       onProgress={handleProgress}
     >
       {/* Cinematic vignette */}
@@ -72,7 +73,7 @@ export default function AmbianceVideo() {
         style={{ opacity: 0 }}
       >
         <div className="text-center">
-          <p className="font-heading text-[10px] uppercase tracking-[0.4em] text-or-luxe md:text-xs">
+          <p className="font-heading text-xs uppercase tracking-[0.4em] text-or-luxe">
             Une expérience sensorielle
           </p>
           <h2 className="mt-4 font-heading text-xl leading-tight text-blanc-casse md:text-3xl lg:text-5xl">
@@ -83,5 +84,6 @@ export default function AmbianceVideo() {
         </div>
       </div>
     </ScrollCanvas>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-noir-profond border-t border-blanc-casse/[0.06]">
+    <footer className="bg-noir-profond border-t border-blanc-casse/10">
       <div className="max-w-7xl mx-auto" style={{ paddingInline: "clamp(1.5rem, 3vw, 4rem)", marginInline: "auto" }}>
 
         {/* Main footer content */}
@@ -25,13 +25,13 @@ export default function Footer() {
             <p className="font-heading text-lg text-blanc-casse/80 tracking-wide">
               Libellule Senteurs
             </p>
-            <p className="font-body text-[9px] text-blanc-casse/35 tracking-[0.25em] uppercase mt-2">
+            <p className="font-body text-xs text-blanc-casse/50 tracking-[0.25em] uppercase mt-2">
               Parfums d&apos;intérieur Haut de Gamme
             </p>
           </div>
 
           {/* Navigation links */}
-          <div className="flex flex-wrap justify-center gap-8 md:gap-12 font-body text-[10px] tracking-[0.2em] uppercase text-blanc-casse/40">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-12 font-body text-xs tracking-[0.2em] uppercase text-blanc-casse/60">
             <a href="#histoire" className="hover:text-blanc-casse/70 transition-colors duration-400 cursor-pointer">Notre Histoire</a>
             <a href="#collection" className="hover:text-blanc-casse/70 transition-colors duration-400 cursor-pointer">Collection</a>
             <a href="#experience" className="hover:text-blanc-casse/70 transition-colors duration-400 cursor-pointer">Expérience</a>
@@ -39,15 +39,11 @@ export default function Footer() {
           </div>
 
           {/* Contact info */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 font-body text-[10px] text-blanc-casse/35 tracking-wide">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 font-body text-xs text-blanc-casse/50 tracking-wide">
             <a href="mailto:contacts@libellulessenteurs.com" className="hover:text-blanc-casse/60 transition-colors duration-400 cursor-pointer">
               contacts@libellulessenteurs.com
             </a>
-            <span className="hidden sm:inline text-blanc-casse/15">|</span>
-            <a href="tel:+221770000000" className="hover:text-blanc-casse/60 transition-colors duration-400 cursor-pointer">
-              (+221) 77 000 00 00
-            </a>
-            <span className="hidden sm:inline text-blanc-casse/15">|</span>
+            <span className="hidden sm:inline text-blanc-casse/30">|</span>
             <span>Dakar, Sénégal</span>
           </div>
 
@@ -57,7 +53,7 @@ export default function Footer() {
               href="https://instagram.com/libellulesenteurs"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-body text-[10px] text-blanc-casse/35 tracking-[0.2em] uppercase hover:text-or-luxe/70 transition-colors duration-400 cursor-pointer"
+              className="font-body text-xs text-blanc-casse/50 tracking-[0.2em] uppercase hover:text-or-luxe/70 transition-colors duration-400 cursor-pointer"
             >
               Instagram
             </a>
@@ -65,8 +61,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-blanc-casse/[0.06] py-6 text-center">
-          <p className="font-body text-[9px] text-blanc-casse/25 tracking-wide">
+        <div className="border-t border-blanc-casse/10 py-6 text-center">
+          <p className="font-body text-xs text-blanc-casse/50 tracking-wide">
             &copy; {new Date().getFullYear()} Libellule Senteurs. Tous droits réservés.
           </p>
         </div>
