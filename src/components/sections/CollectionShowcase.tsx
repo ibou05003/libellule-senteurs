@@ -411,18 +411,12 @@ export default function CollectionShowcase() {
       {/* Bloc B: bougie + huile — 2-column grid, blanc-casse */}
       <BlocB reducedMotion={reducedMotion} />
 
-      {/*
-       * Gradient transition: blanc-casse → noir-profond
-       * This visually bridges the light duo section and the dark showcase below
-       * without an abrupt background cut.
-       */}
-      <div
-        aria-hidden="true"
-        className="h-24 md:h-32"
-        style={{
-          background: "linear-gradient(to bottom, #F8F8F8, #000000)",
-        }}
-      />
+      {/* Transition: blanc-casse fades to noir-profond via two stacked halves
+           to avoid a visible gray band in the middle */}
+      <div aria-hidden="true" className="relative h-24 md:h-32">
+        <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-blanc-casse to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-noir-profond to-transparent" />
+      </div>
 
       {/* Bloc C: parfum noir + cristal — dark theme */}
       <BlocC reducedMotion={reducedMotion} />
