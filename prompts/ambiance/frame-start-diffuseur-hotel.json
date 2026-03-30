@@ -1,0 +1,17 @@
+{
+  "prompt": "Ultra-realistic luxury hotel room interior photography. A white ceramic reed diffuser bottle with a round base coaster sits on a dark marble side table next to a plush bed. The diffuser has a gold dragonfly logo and 'Libellule Senteurs' text in elegant gold script on its front. 5-6 natural wooden reed sticks protrude from the bottle opening. The hotel room is dimly lit with warm ambient lighting — a bedside lamp casts a soft golden glow. Behind the diffuser, a luxurious king-size bed with crisp white linen sheets and plump pillows is partially visible. Sheer curtains filter soft evening light from a window. The atmosphere is intimate, calm, high-end hospitality. The reed sticks are perfectly still, no visible smoke or mist yet — this is the calm before the fragrance diffuses. The marble table surface shows subtle natural veining. Shot with a 50mm lens, f/2.8, ISO 400. Shallow depth of field with the diffuser tack-sharp and the bed softly blurred behind. Warm color temperature around 3200K. The gold logo catches a subtle gleam from the ambient light. Natural material textures visible — ceramic matte finish, wood grain on reed sticks, marble polished surface. Do not add text overlays. Do not alter product proportions. This is editorial hospitality photography for a luxury hotel magazine.",
+  "negative_prompt": "plastic products, CGI rendering, 3D render, oversaturated, harsh flash lighting, studio setup visible, product mockup floating, digital art, illustration, cartoon, low resolution, blurry product, distorted logo text, multiple diffusers, cluttered scene, cheap hotel room, bright overhead lighting, fluorescent light, stock photo watermark, generic branding",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1K",
+    "style": "editorial luxury hospitality photography, boutique hotel aesthetic",
+    "lighting": "warm ambient bedside lamp, soft filtered window light, 3200K color temperature",
+    "camera_angle": "eye-level, slight 15-degree angle from the right",
+    "depth_of_field": "shallow, diffuser sharp, background softly blurred",
+    "quality": "high detail, visible material textures, readable gold branding"
+  }
+}
