@@ -32,9 +32,8 @@ export default function Footer() {
 
           {/* Navigation links */}
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 font-body text-xs tracking-[0.2em] uppercase text-blanc-casse/60">
-            <a href="#histoire" className="hover:text-blanc-casse/70 transition-colors duration-400 cursor-pointer">Notre Histoire</a>
             <a href="#collection" className="hover:text-blanc-casse/70 transition-colors duration-400 cursor-pointer">Collection</a>
-            <a href="#ambiance" className="hover:text-blanc-casse/70 transition-colors duration-400 cursor-pointer">Expérience</a>
+            <a href="#univers" className="hover:text-blanc-casse/70 transition-colors duration-400 cursor-pointer">Notre Univers</a>
             <a href="#contact" className="hover:text-blanc-casse/70 transition-colors duration-400 cursor-pointer">Contact</a>
           </div>
 

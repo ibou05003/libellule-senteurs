@@ -3,9 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 
 const NAV_LINKS = [
-  { href: "#histoire", label: "Notre Histoire" },
   { href: "#collection", label: "Collection" },
-  { href: "#ambiance", label: "Expérience" },
+  { href: "#univers", label: "Notre Univers" },
   { href: "#contact", label: "Contact" },
 ] as const;
 
