@@ -297,7 +297,7 @@ function BlocB({ reducedMotion }: { reducedMotion: boolean }) {
   return (
     <div
       ref={sectionRef}
-      className="relative bg-blanc-casse text-noir-profond px-4 py-16 md:px-12 md:py-28 lg:px-20 lg:py-36"
+      className="relative bg-blanc-casse text-noir-profond px-4 pb-20 md:px-12 md:pb-28 lg:px-20 lg:pb-36"
     >
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:grid-cols-2 md:gap-16 lg:gap-20">
         <ProductCard
