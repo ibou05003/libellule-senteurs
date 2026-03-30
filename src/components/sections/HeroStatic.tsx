@@ -45,9 +45,15 @@ export default function HeroStatic() {
         sizes="100vw"
       />
 
-      {/* ── 2. Gradient overlay — improves text contrast on any viewport ── */}
+      {/* ── 2. Gradient overlays — ensure text contrast on any viewport ── */}
+      {/* Main overlay: strong at bottom, medium in center for brand text */}
       <div
-        className="absolute inset-0 bg-gradient-to-t from-noir-profond/80 via-noir-profond/30 to-noir-profond/20"
+        className="absolute inset-0 bg-gradient-to-t from-noir-profond/90 via-noir-profond/60 to-noir-profond/40"
+        aria-hidden="true"
+      />
+      {/* Top overlay: darkens nav area so header text is always readable */}
+      <div
+        className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-noir-profond/70 to-transparent"
         aria-hidden="true"
       />
 
