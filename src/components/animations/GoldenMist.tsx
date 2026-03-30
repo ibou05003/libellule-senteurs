@@ -52,7 +52,10 @@ export default function GoldenMist({ className }: { className?: string }) {
 
     let animationId: number;
     const isMobile = window.innerWidth < BREAKPOINTS.mobile;
-    const particleCount = isMobile ? 30 : 100;
+    // Reduced counts: 40 desktop / 20 mobile keeps the effect present while
+    // halving GPU/CPU pressure — the canvas is always composited separately,
+    // so fewer draw calls directly translates to better frame budget headroom.
+    const particleCount = isMobile ? 20 : 40;
 
     // Extract RGB components once so we can construct rgba() strings at draw time
     // without redundant hex-to-rgb conversion on every frame.
@@ -165,11 +168,16 @@ export default function GoldenMist({ className }: { className?: string }) {
         ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha})`;
         ctx.fill();
 
-        // Glow halo — 3× radius, 10% of core opacity for a soft bloom effect
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha * 0.1})`;
-        ctx.fill();
+        // Glow halo — 3× radius, 10% of core opacity for a soft bloom effect.
+        // Skipped on mobile: each halo is an extra beginPath+arc+fill call per
+        // particle per frame. On 60fps with 20 particles that is 1200 extra
+        // canvas operations/second — measurable on mid-range phones.
+        if (!isMobile) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha * 0.1})`;
+          ctx.fill();
+        }
       }
 
       animationId = requestAnimationFrame(animate);
