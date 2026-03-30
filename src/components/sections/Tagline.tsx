@@ -45,7 +45,7 @@ export default function Tagline({ text = "L'essence du raffinement invisible" }:
   }, [reducedMotion, words.length]);
 
   return (
-    <section ref={containerRef} style={{ height: "150vh" }} className="relative">
+    <section ref={containerRef} style={{ height: "100vh" }} className="relative">
       <div className="sticky top-0 flex h-screen w-full items-center justify-center bg-noir-profond px-4 md:px-8">
         <p className="max-w-4xl text-center font-heading text-2xl leading-snug text-or-luxe md:text-5xl lg:text-7xl">
           {words.map((word, i) => (
