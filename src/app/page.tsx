@@ -3,11 +3,14 @@
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import Navigation from "@/components/layout/Navigation";
 import CustomCursor from "@/components/layout/CustomCursor";
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import HeroConvergence from "@/components/sections/HeroConvergence";
 import Tagline from "@/components/sections/Tagline";
 import ProductSection from "@/components/sections/ProductSection";
 import AmbianceVideo from "@/components/sections/AmbianceVideo";
 import ProductDuo from "@/components/sections/ProductDuo";
+import NotreHistoire from "@/components/sections/NotreHistoire";
+import CollectionGrid from "@/components/sections/CollectionGrid";
 import BrandMarquee from "@/components/sections/BrandMarquee";
 import ValuesCounters from "@/components/sections/ValuesCounters";
 import Contact from "@/components/sections/Contact";
@@ -20,6 +23,7 @@ export default function Home() {
     <>
       <CustomCursor />
       <Navigation />
+      <WhatsAppButton />
 
       <main>
         {/* ══════════════════════════════════════════════
@@ -29,7 +33,7 @@ export default function Home() {
         {/* 1. Hero — Brand reveal + collection photo reveal */}
         <HeroConvergence />
 
-        {/* 2. Philosophy — Different text than hero, brand story */}
+        {/* 2. Philosophy — Brand story word-by-word */}
         <Tagline text="Chaque espace a une âme — nous lui donnons une voix" />
 
         {/* ══════════════════════════════════════════════
@@ -78,13 +82,23 @@ export default function Home() {
         />
 
         {/* ══════════════════════════════════════════════
+            STORY + COLLECTION
+            ══════════════════════════════════════════════ */}
+
+        {/* 6. Notre Histoire — Brand storytelling */}
+        <NotreHistoire />
+
+        {/* 7. Collection — Product overview grid */}
+        <CollectionGrid />
+
+        {/* ══════════════════════════════════════════════
             BASE NOTES — Lasting Impression (Dark)
             ══════════════════════════════════════════════ */}
 
-        {/* 6. Marquee — Double-line brand scroll */}
+        {/* 8. Marquee — Double-line brand scroll */}
         <BrandMarquee />
 
-        {/* 7. Parfum Noir — Dark elegance */}
+        {/* 9. Parfum Noir — Dark elegance */}
         <ProductSection
           id="parfum-noir"
           label="Le Parfum d'Ambiance"
@@ -97,10 +111,10 @@ export default function Home() {
           theme="dark"
         />
 
-        {/* 8. Values — Brand DNA */}
+        {/* 10. Values — Brand DNA */}
         <ValuesCounters />
 
-        {/* 9. Cristal — Climax, centered, dramatic */}
+        {/* 11. Cristal — Climax, centered, dramatic */}
         <ProductSection
           id="cristal"
           label="Le Cristal"
@@ -113,7 +127,7 @@ export default function Home() {
           theme="dark"
         />
 
-        {/* 10. Contact */}
+        {/* 12. Contact — Functional form */}
         <Contact />
       </main>
 
