@@ -3,9 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 
 const NAV_LINKS = [
-  { href: "#histoire", label: "Notre Histoire" },
   { href: "#collection", label: "Collection" },
-  { href: "#experience", label: "Expérience" },
+  { href: "#univers", label: "Notre Univers" },
   { href: "#contact", label: "Contact" },
 ] as const;
 
@@ -76,19 +75,19 @@ export default function Navigation() {
               </span>
               {/* /40 instead of /30 — raises contrast from ~2.1:1 to ~2.8:1;
                   still subordinate to the wordmark but passes large-text threshold */}
-              <span className="font-body text-[8px] text-blanc-casse/40 tracking-[0.22em] uppercase leading-none hidden sm:block">
+              <span className="font-body text-[11px] text-blanc-casse/60 tracking-[0.22em] uppercase leading-none hidden sm:block">
                 Parfums d&apos;intérieur Haut de Gamme
               </span>
             </div>
           </a>
 
           {/* Desktop navigation links */}
-          <div className="hidden md:flex items-center gap-10 font-body text-[10px] tracking-[0.22em] uppercase">
+          <div className="hidden md:flex items-center gap-10 font-body text-xs tracking-[0.22em] uppercase">
             {NAV_LINKS.map(({ href, label }) => (
               <a
                 key={href}
                 href={href}
-                className="relative text-blanc-casse/60 hover:text-blanc-casse transition-colors duration-400 py-3 cursor-pointer group"
+                className="relative text-blanc-casse/70 hover:text-blanc-casse transition-colors duration-400 py-3 cursor-pointer group"
               >
                 {label}
                 {/* Use transform: scaleX for the underline to avoid layout reflow */}
@@ -100,7 +99,7 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center justify-center min-w-[180px] py-3.5 bg-or-luxe text-noir-profond text-[10px] tracking-[0.25em] uppercase font-body font-medium hover:bg-or-luxe/90 active:bg-or-luxe/80 transition-all duration-500 cursor-pointer"
+            className="hidden md:inline-flex items-center justify-center min-w-[180px] py-3.5 bg-or-luxe text-noir-profond text-xs tracking-[0.25em] uppercase font-body font-medium hover:bg-or-luxe/90 active:bg-or-luxe/80 transition-all duration-500 cursor-pointer"
             style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
           >
             Nous contacter
@@ -170,7 +169,7 @@ export default function Navigation() {
           <a
             href="#contact"
             onClick={closeMenu}
-            className="mt-4 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer min-h-[44px] flex items-center"
+            className="mt-4 py-3.5 border border-or-luxe/40 text-or-luxe text-xs tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer min-h-[44px] flex items-center"
             style={{
               paddingLeft: "2.5rem",
               paddingRight: "2.5rem",

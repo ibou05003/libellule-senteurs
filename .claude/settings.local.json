@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"/Users/ibrahima/Downloads/SKILL.md\" /Users/ibrahima/Projects/libellule-senteurs/.claude/skills/frontend-design.md)",
+      "Bash(cp \"/Users/ibrahima/Downloads/SKILL \\(1\\).md\" /Users/ibrahima/Projects/libellule-senteurs/.claude/skills/video-to-website.md)"
+    ]
+  }
+}

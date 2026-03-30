@@ -1,0 +1,17 @@
+{
+  "prompt": "Ultra-realistic premium product photography of a luxury home fragrance collection by 'Libellule Senteurs'. Four white ceramic products spread apart on a light cream-colored wooden surface with generous spacing between each item, approximately 15-20cm gaps. Thin wisps of golden-tinted atmospheric fog weave between the products, creating a dreamy luxury ambiance. The products from left to right: 1) A white ceramic reed diffuser bottle with a round base/coaster, featuring a gold dragonfly logo and 'Libellule Senteurs' text in gold script, with 5-6 natural wooden reed sticks protruding from the top. 2) A frosted glass essential oil dropper bottle, smaller than the diffuser, with a gold metallic cap and black rubber dropper top, 'Libellule Senteurs' gold text on the front. 3) A white cylindrical ceramic candle vessel, the largest piece, with the gold dragonfly logo and 'Libellule Senteurs' branding, showing a cream-colored wax surface at the top. 4) A white ceramic arch-shaped candle burner with a small removable bowl on top and a lit tea light candle at the base, casting a warm soft glow through the arch opening. The background is soft warm cream/beige, slightly out of focus. The golden mist creates depth and atmosphere between the spread-apart products. Shot with a 90mm macro lens, f/4.0, ISO 200. Soft diffused natural window light from the left side, creating gentle shadows and warm highlights on the white ceramic surfaces. The light catches the gold text and logos, making them subtly gleam. No artificial studio flash. The scene feels like an editorial luxury magazine spread for a high-end home fragrance brand. Do not add any text overlays. Do not alter product proportions. Maintain exact ceramic white matte finish with subtle surface texture visible at this resolution.",
+  "negative_prompt": "plastic looking products, CGI rendering, 3D render, oversaturated colors, harsh shadows, studio flash, product mockup, digital art, illustration, cartoon, anime, low resolution, blurry text on products, distorted logos, extra products, missing products, cluttered composition, products touching each other, no fog, no mist, stock photo watermark, generic branding, overexposed, underexposed, chromatic aberration, lens flare, vignetting",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "2K",
+    "style": "editorial luxury product photography, high-end magazine aesthetic",
+    "lighting": "soft diffused natural window light from left, warm golden ambient, no direct flash",
+    "camera_angle": "eye-level front-facing, slight 10-degree elevated angle",
+    "depth_of_field": "medium depth of field, products sharp, background softly blurred",
+    "quality": "ultra high detail, visible ceramic texture, readable gold text on products"
+  }
+}
