@@ -18,6 +18,8 @@ interface ProductSectionProps {
   imageAspect?: string;
   imageSide?: "left" | "right" | "center";
   theme?: "light" | "dark";
+  ctaLabel?: string;
+  ctaHref?: string;
 }
 
 export default function ProductSection({
@@ -30,6 +32,8 @@ export default function ProductSection({
   imageAspect = "3/4",
   imageSide = "right",
   theme = "dark",
+  ctaLabel = "En savoir plus",
+  ctaHref = "#contact",
 }: ProductSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -122,6 +126,17 @@ export default function ProductSection({
           <div ref={lineRef} className={`mx-auto my-4 h-px w-16 ${lineColor}`} style={{ transformOrigin: "center" }} />
           <h2 className={`font-heading text-2xl leading-tight md:text-4xl lg:text-5xl ${textColor}`}>{title}</h2>
           {description && <p className={`mx-auto mt-5 max-w-lg font-body text-lg leading-relaxed ${subTextColor}`}>{description}</p>}
+          <a
+            href={ctaHref}
+            className={`mt-8 inline-block border py-2.5 text-xs uppercase tracking-[0.2em] font-body transition-all duration-500 cursor-pointer ${
+              isDark
+                ? "border-or-luxe/40 text-or-luxe hover:bg-or-luxe hover:text-noir-profond"
+                : "border-noir-profond/30 text-noir-profond hover:bg-noir-profond hover:text-blanc-casse"
+            }`}
+            style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
+          >
+            {ctaLabel}
+          </a>
         </div>
       </section>
     );
@@ -163,6 +178,17 @@ export default function ProductSection({
               {description}
             </p>
           )}
+          <a
+            href={ctaHref}
+            className={`mt-8 inline-block border py-2.5 text-xs uppercase tracking-[0.2em] font-body transition-all duration-500 cursor-pointer ${
+              isDark
+                ? "border-or-luxe/40 text-or-luxe hover:bg-or-luxe hover:text-noir-profond"
+                : "border-noir-profond/30 text-noir-profond hover:bg-noir-profond hover:text-blanc-casse"
+            }`}
+            style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
+          >
+            {ctaLabel}
+          </a>
         </div>
       </div>
     </section>

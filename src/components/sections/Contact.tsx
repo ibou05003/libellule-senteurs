@@ -2,19 +2,41 @@
 
 import { useState } from "react";
 
-/**
- * Minimal contact form with gold border animation on focus.
- *
- * No backend integration — the form captures intent and demonstrates
- * interaction quality. The confirmation state provides immediate feedback
- * without a page reload, preserving the luxury single-page feel.
- */
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      message: formData.get("message") as string,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setError(result.errors?.[0] || "Une erreur est survenue.");
+      }
+    } catch {
+      setError("Impossible d'envoyer le message. Vérifiez votre connexion.");
+    } finally {
+      setSending(false);
+    }
   };
 
   // Shared input className — bottom-border-only keeps the form airy.
@@ -100,13 +122,17 @@ export default function Contact() {
             </div>
 
             <div className="text-center pt-4">
+              {error && (
+                <p className="text-center font-body text-sm text-red-400">{error}</p>
+              )}
               {/* Ghost button: border-only at rest, fills with gold on hover */}
               <button
                 type="submit"
-                className="py-3.5 min-h-[44px] border border-or-luxe/40 text-or-luxe text-xs tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer min-w-[180px]"
+                disabled={sending}
+                className="py-3.5 min-h-[44px] border border-or-luxe/40 text-or-luxe text-xs tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer min-w-[180px] disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ paddingLeft: "3rem", paddingRight: "3rem" }}
               >
-                Envoyer
+                {sending ? "Envoi en cours\u2026" : "Envoyer"}
               </button>
             </div>
           </form>

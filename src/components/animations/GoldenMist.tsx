@@ -39,6 +39,17 @@ export default function GoldenMist({ className }: { className?: string }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let isVisible = true;
+
+    // Pause the rAF loop when the canvas is scrolled out of the viewport to avoid
+    // burning GPU/CPU cycles on particles the user cannot see. threshold:0 means
+    // any single pixel being visible counts as "intersecting".
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisible = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
     let animationId: number;
     const isMobile = window.innerWidth < BREAKPOINTS.mobile;
     const particleCount = isMobile ? 30 : 100;
@@ -101,6 +112,12 @@ export default function GoldenMist({ className }: { className?: string }) {
     let time = 0;
 
     const animate = () => {
+      // Skip all draw work when off-screen; just re-queue so the loop resumes
+      // automatically the moment the canvas re-enters the viewport.
+      if (!isVisible) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
       time += 0.01;
       ctx.clearRect(0, 0, w(), h());
 
@@ -163,6 +180,7 @@ export default function GoldenMist({ className }: { className?: string }) {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", resize);
+      observer.disconnect();
     };
   }, [reduced]);
 
