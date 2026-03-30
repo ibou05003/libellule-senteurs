@@ -103,7 +103,7 @@ export default function Contact() {
               {/* Ghost button: border-only at rest, fills with gold on hover */}
               <button
                 type="submit"
-                className="py-3.5 min-h-[44px] border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer min-w-[180px]"
+                className="py-3.5 min-h-[44px] border border-or-luxe/40 text-or-luxe text-xs tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond hover:border-or-luxe transition-all duration-500 cursor-pointer min-w-[180px]"
                 style={{ paddingLeft: "3rem", paddingRight: "3rem" }}
               >
                 Envoyer

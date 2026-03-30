@@ -83,7 +83,7 @@ export default function Navigation() {
           </a>
 
           {/* Desktop navigation links */}
-          <div className="hidden md:flex items-center gap-10 font-body text-[10px] tracking-[0.22em] uppercase">
+          <div className="hidden md:flex items-center gap-10 font-body text-xs tracking-[0.22em] uppercase">
             {NAV_LINKS.map(({ href, label }) => (
               <a
                 key={href}
@@ -100,7 +100,7 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center justify-center min-w-[180px] py-3.5 bg-or-luxe text-noir-profond text-[10px] tracking-[0.25em] uppercase font-body font-medium hover:bg-or-luxe/90 active:bg-or-luxe/80 transition-all duration-500 cursor-pointer"
+            className="hidden md:inline-flex items-center justify-center min-w-[180px] py-3.5 bg-or-luxe text-noir-profond text-xs tracking-[0.25em] uppercase font-body font-medium hover:bg-or-luxe/90 active:bg-or-luxe/80 transition-all duration-500 cursor-pointer"
             style={{ paddingLeft: "2rem", paddingRight: "2rem" }}
           >
             Nous contacter
@@ -170,7 +170,7 @@ export default function Navigation() {
           <a
             href="#contact"
             onClick={closeMenu}
-            className="mt-4 py-3.5 border border-or-luxe/40 text-or-luxe text-[9px] tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer min-h-[44px] flex items-center"
+            className="mt-4 py-3.5 border border-or-luxe/40 text-or-luxe text-xs tracking-[0.28em] uppercase font-body hover:bg-or-luxe hover:text-noir-profond transition-all duration-500 cursor-pointer min-h-[44px] flex items-center"
             style={{
               paddingLeft: "2.5rem",
               paddingRight: "2.5rem",
